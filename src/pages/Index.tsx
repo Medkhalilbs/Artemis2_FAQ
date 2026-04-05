@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroImage from "@/assets/hero-space.jpg";
 import FAQSection from "@/components/FAQSection";
 import CrewCard from "@/components/CrewCard";
@@ -9,52 +10,56 @@ import SearchBar from "@/components/SearchBar";
 import OrionSpacecraft from "@/components/OrionSpacecraft";
 import OrionModel3D from "@/components/OrionModel3D";
 import StarfieldBackground from "@/components/StarfieldBackground";
+import MissionDashboard from "@/components/MissionDashboard";
+import videoFile from "@/assets/artemis2_full_2160p60.mp4";
+import { Globe } from "lucide-react";
 
 import { basesItems, vieABordItems, imagesItems, diversItems } from "@/data/faqData";
+import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN } from "@/data/faqDataEN";
 
-const crewMembers = [
+const getCrewMembers = (lang: string) => [
   {
     name: "Reid Wiseman",
-    role: "Commandant",
-    birthDate: "11 novembre 1975",
+    role: lang === 'fr' ? "Commandant" : "Commander",
+    birthDate: lang === 'fr' ? "11 novembre 1975" : "November 11, 1975",
     age: 50,
-    nationality: "Américain",
-    formation: "Ingénieur, pilote d'essais (F-35, F-18, US Navy)",
+    nationality: lang === 'fr' ? "Américain" : "American",
+    formation: lang === 'fr' ? "Ingénieur, pilote d'essais (F-35, F-18, US Navy)" : "Engineer, test pilot (F-35, F-18, US Navy)",
     experience: "1 mission (ISS, 2014)",
     agency: "NASA",
     flag: "🇺🇸",
   },
   {
     name: "Victor Glover",
-    role: "Pilote",
-    birthDate: "30 avril 1976",
+    role: lang === 'fr' ? "Pilote" : "Pilot",
+    birthDate: lang === 'fr' ? "30 avril 1976" : "April 30, 1976",
     age: 49,
-    nationality: "Américain",
-    formation: "Pilote de chasse (US Navy)",
+    nationality: lang === 'fr' ? "Américain" : "American",
+    formation: lang === 'fr' ? "Pilote de chasse (US Navy)" : "Fighter pilot (US Navy)",
     experience: "1 mission (Crew-1, 2020)",
     agency: "NASA",
     flag: "🇺🇸",
   },
   {
     name: "Christina Koch",
-    role: "Spécialiste de mission",
-    birthDate: "29 janvier 1979",
+    role: lang === 'fr' ? "Spécialiste de mission" : "Mission Specialist",
+    birthDate: lang === 'fr' ? "29 janvier 1979" : "January 29, 1979",
     age: 47,
-    nationality: "Américaine",
-    formation: "Ingénieure",
-    experience: "328 jours ISS (record féminin), 6 EVA",
+    nationality: lang === 'fr' ? "Américaine" : "American",
+    formation: lang === 'fr' ? "Ingénieure" : "Engineer",
+    experience: lang === 'fr' ? "328 jours ISS (record féminin), 6 EVA" : "328 days ISS (female record), 6 EVAs",
     agency: "NASA",
     flag: "🇺🇸",
   },
   {
     name: "Jeremy Hansen",
-    role: "Spécialiste de mission",
-    birthDate: "27 janvier 1976",
+    role: lang === 'fr' ? "Spécialiste de mission" : "Mission Specialist",
+    birthDate: lang === 'fr' ? "27 janvier 1976" : "January 27, 1976",
     age: 50,
-    nationality: "Canadien",
-    formation: "Pilote de chasse (CF-18, armée canadienne)",
-    experience: "Première mission",
-    agency: "Agence spatiale canadienne (ASC)",
+    nationality: lang === 'fr' ? "Canadien" : "Canadian",
+    formation: lang === 'fr' ? "Pilote de chasse (CF-18, armée canadienne)" : "Fighter pilot (CF-18, Canadian forces)",
+    experience: lang === 'fr' ? "Première mission" : "First mission",
+    agency: lang === 'fr' ? "Agence spatiale canadienne (ASC)" : "Canadian Space Agency (CSA)",
     flag: "🇨🇦",
   },
 ];
@@ -100,17 +105,29 @@ function filterItems(items: { question: string; answer: string | React.ReactNode
 }
 
 const Index = () => {
+  const { language, toggleLanguage } = useLanguage();
   const [search, setSearch] = useState("");
 
-  const filteredBases = useMemo(() => filterItems(basesItems, search), [search]);
-  const filteredVie = useMemo(() => filterItems(vieABordItems, search), [search]);
-  const filteredImages = useMemo(() => filterItems(imagesItems, search), [search]);
-  const filteredDivers = useMemo(() => filterItems(diversItems, search), [search]);
+  const filteredBases = useMemo(() => filterItems(language === 'fr' ? basesItems : basesItemsEN, search), [search, language]);
+  const filteredVie = useMemo(() => filterItems(language === 'fr' ? vieABordItems : vieABordItemsEN, search), [search, language]);
+  const filteredImages = useMemo(() => filterItems(language === 'fr' ? imagesItems : imagesItemsEN, search), [search, language]);
+  const filteredDivers = useMemo(() => filterItems(language === 'fr' ? diversItems : diversItemsEN, search), [search, language]);
   const isSearching = search.trim().length > 0;
+
+  const crewMembers = getCrewMembers(language);
 
   return (
     <div className="min-h-screen text-foreground relative bg-background">
       <SideNav />
+
+      {/* Language Toggle */}
+      <button 
+        onClick={toggleLanguage}
+        className="fixed top-4 right-4 z-50 bg-background/50 backdrop-blur border border-white/10 px-4 py-2 flex items-center justify-center gap-2 rounded-full text-white font-bold hover:bg-primary/20 hover:text-primary transition-all glow-border uppercase text-xs tracking-widest"
+        title={language === 'fr' ? "Switch to English" : "Passer en Français"}
+      >
+        <Globe size={14} /> {language}
+      </button>
 
       {/* Hero */}
       <header className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -125,16 +142,21 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
         <div className="relative z-10 text-center px-6 max-w-3xl">
           <p className="text-primary font-heading font-medium tracking-widest uppercase text-sm mb-4">
-            NASA · Programme Artemis
+            {language === 'fr' ? 'NASA · Programme Artemis' : 'NASA · Artemis Program'}
           </p>
           <h1 className="text-5xl md:text-7xl font-heading font-bold text-gradient-hero mb-4 leading-tight">
             Artemis II
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 font-body leading-relaxed">
-            Foire aux questions — Tout comprendre sur la première mission habitée vers la Lune depuis 1972
+            {language === 'fr' 
+              ? 'Foire aux questions — Tout comprendre sur la première mission habitée vers la Lune depuis 1972' 
+              : 'Frequently Asked Questions — Learn everything about the first crewed lunar mission since 1972'}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {["Les bases", "Modèle 3D", "Vaisseau", "Équipage", "Vie à bord", "Images", "Divers", "Planning"].map((label, i) => {
+            {(language === 'fr' 
+              ? ["Les bases", "Modèle 3D", "Vaisseau", "Équipage", "Vie à bord", "Images", "Divers", "Planning"]
+              : ["Basics", "3D Model", "Spacecraft", "Crew", "Life aboard", "Media", "Misc", "Timeline"]
+            ).map((label, i) => {
               const ids = ["bases", "modele-3d", "vaisseau", "equipage", "vie-a-bord", "images", "divers", "planning"];
               return (
                 <a
@@ -150,6 +172,9 @@ const Index = () => {
         </div>
       </header>
 
+      {/* Mission Dashboard Live */}
+      {!isSearching && <MissionDashboard />}
+
       {/* Content */}
       <main className="max-w-3xl mx-auto px-6 py-16 space-y-20">
         {/* Search */}
@@ -160,7 +185,30 @@ const Index = () => {
 
         {(!isSearching || filteredBases.length > 0) && (
           <AnimatedSection>
-            <FAQSection id="bases" title="Les bases de la mission" icon={rocketIcon} items={isSearching ? filteredBases : basesItems} />
+            <FAQSection id="bases" title={language === 'fr' ? "Les bases de la mission" : "Mission Basics"} icon={rocketIcon} items={isSearching ? filteredBases : (language === 'fr' ? basesItems : basesItemsEN)} />
+          </AnimatedSection>
+        )}
+        
+        {/* Orbit Map */}
+        {!isSearching && (
+          <AnimatedSection className="my-16">
+            <div className="bg-glass rounded-xl p-1 glow-border">
+              <div className="px-5 py-4 border-b border-white/5">
+                 <h3 className="text-xl font-heading font-bold text-foreground">{language === 'fr' ? 'Vidéo de la Mission' : 'Mission Video Feed'}</h3>
+                 <p className="text-sm text-muted-foreground mt-1">{language === 'fr' ? 'Artemis II — Images officielles de la NASA (Haute Résolution)' : 'Artemis II — Official NASA Feed (High Resolution)'}</p>
+              </div>
+              <div className="w-full rounded-b-xl overflow-hidden pointer-events-auto bg-[#040914]">
+                <video 
+                  src={videoFile} 
+                  controls 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-auto aspect-video object-cover" 
+                />
+              </div>
+            </div>
           </AnimatedSection>
         )}
 
@@ -189,7 +237,7 @@ const Index = () => {
                   </svg>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-                  Équipage
+                  {language === 'fr' ? "Équipage" : "Crew"}
                 </h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -203,19 +251,19 @@ const Index = () => {
 
         {(!isSearching || filteredVie.length > 0) && (
           <AnimatedSection>
-            <FAQSection id="vie-a-bord" title="Vie à bord" icon={homeIcon} items={isSearching ? filteredVie : vieABordItems} />
+            <FAQSection id="vie-a-bord" title={language === 'fr' ? "Vie à bord" : "Life Aboard"} icon={homeIcon} items={isSearching ? filteredVie : (language === 'fr' ? vieABordItems : vieABordItemsEN)} />
           </AnimatedSection>
         )}
 
         {(!isSearching || filteredImages.length > 0) && (
           <AnimatedSection>
-            <FAQSection id="images" title="Images & Son" icon={cameraIcon} items={isSearching ? filteredImages : imagesItems} />
+            <FAQSection id="images" title={language === 'fr' ? "Images & Son" : "Media"} icon={cameraIcon} items={isSearching ? filteredImages : (language === 'fr' ? imagesItems : imagesItemsEN)} />
           </AnimatedSection>
         )}
 
         {(!isSearching || filteredDivers.length > 0) && (
           <AnimatedSection>
-            <FAQSection id="divers" title="Divers" icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} items={isSearching ? filteredDivers : diversItems} />
+            <FAQSection id="divers" title={language === 'fr' ? "Divers" : "Miscellaneous"} icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} items={isSearching ? filteredDivers : (language === 'fr' ? diversItems : diversItemsEN)} />
           </AnimatedSection>
         )}
 
@@ -228,15 +276,15 @@ const Index = () => {
         {/* No results */}
         {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p className="text-lg">Aucune question trouvée pour « {search} »</p>
-            <p className="text-sm mt-2">Essayez d'autres termes de recherche</p>
+            <p className="text-lg">{language === 'fr' ? `Aucune question trouvée pour « ${search} »` : `No answers found for "${search}"`}</p>
+            <p className="text-sm mt-2">{language === 'fr' ? "Essayez d'autres termes de recherche" : "Try different keywords"}</p>
           </div>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-8 text-center text-xs text-muted-foreground">
-        <p>FAQ non-officielle · Données issues de sources publiques NASA & Stardust</p>
+      <footer className="border-t border-border/50 py-8 text-center text-xs text-muted-foreground px-4">
+        <p>{language === 'fr' ? 'FAQ non-officielle · Données issues de sources publiques NASA & Stardust' : 'Unofficial FAQ · Data from NASA and Stardust public sources'}</p>
       </footer>
     </div>
   );

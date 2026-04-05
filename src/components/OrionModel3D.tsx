@@ -2,6 +2,7 @@ import { useState, useRef, useMemo, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Html, Stars } from "@react-three/drei";
 import * as THREE from "three";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PartInfo {
   label: string;
@@ -10,44 +11,44 @@ interface PartInfo {
   country: string;
 }
 
-const partData: Record<string, PartInfo> = {
+const getPartData = (lang: string): Record<string, PartInfo> => ({
   crew: {
-    label: "Module d'équipage",
-    description: "Capsule pressurisée abritant les 4 astronautes. Volume habitable de 9 m³. Contient les systèmes de contrôle, sièges et survie.",
+    label: lang === 'fr' ? "Module d'équipage" : "Crew Module",
+    description: lang === 'fr' ? "Capsule pressurisée abritant les 4 astronautes. Volume habitable de 9 m³. Contient les systèmes de contrôle, sièges et survie." : "Pressurized capsule housing the 4 astronauts. Habitable volume of 9 m³. Contains control systems, seats and life support.",
     manufacturer: "Lockheed Martin",
-    country: "🇺🇸 États-Unis",
+    country: lang === 'fr' ? "🇺🇸 États-Unis" : "🇺🇸 United States",
   },
   heatshield: {
-    label: "Bouclier thermique",
-    description: "5 m de diamètre, en AVCOAT ablatif. Résiste à 2 760°C lors de la rentrée atmosphérique à 40 000 km/h.",
+    label: lang === 'fr' ? "Bouclier thermique" : "Heat Shield",
+    description: lang === 'fr' ? "5 m de diamètre, en AVCOAT ablatif. Résiste à 2 760°C lors de la rentrée atmosphérique à 40 000 km/h." : "5m in diameter, made of ablative AVCOAT. Withstands 2,760°C during atmospheric reentry at 40,000 km/h.",
     manufacturer: "Lockheed Martin",
-    country: "🇺🇸 États-Unis",
+    country: lang === 'fr' ? "🇺🇸 États-Unis" : "🇺🇸 United States",
   },
   adapter: {
-    label: "Adaptateur (CMA)",
-    description: "Connecte le module d'équipage au module de service. Contient l'électronique de puissance et les propulseurs de réaction.",
+    label: lang === 'fr' ? "Adaptateur (CMA)" : "Adapter (CMA)",
+    description: lang === 'fr' ? "Connecte le module d'équipage au module de service. Contient l'électronique de puissance et les propulseurs de réaction." : "Connects the crew module to the service module. Contains power electronics and reaction thrusters.",
     manufacturer: "Lockheed Martin",
-    country: "🇺🇸 États-Unis",
+    country: lang === 'fr' ? "🇺🇸 États-Unis" : "🇺🇸 United States",
   },
   service: {
-    label: "Module de service (ESM)",
-    description: "Fournit propulsion, électricité (11 kW), eau, oxygène et contrôle thermique. Largué avant la rentrée.",
+    label: lang === 'fr' ? "Module de service (ESM)" : "Service Module (ESM)",
+    description: lang === 'fr' ? "Fournit propulsion, électricité (11 kW), eau, oxygène et contrôle thermique. Largué avant la rentrée." : "Provides propulsion, electricity (11 kW), water, oxygen and thermal control. Jettisoned before reentry.",
     manufacturer: "Airbus Defence & Space",
-    country: "🇪🇺 Europe (Brême, 🇩🇪)",
+    country: lang === 'fr' ? "🇪🇺 Europe (Brême, 🇩🇪)" : "🇪🇺 Europe (Bremen, 🇩🇪)",
   },
   engine: {
-    label: "Moteur OMS-E",
-    description: "Moteur recyclé de la navette spatiale. 26,7 kN de poussée pour les corrections de trajectoire majeures.",
+    label: lang === 'fr' ? "Moteur OMS-E" : "OMS-E Engine",
+    description: lang === 'fr' ? "Moteur recyclé de la navette spatiale. 26,7 kN de poussée pour les corrections de trajectoire majeures." : "Recycled Space Shuttle engine. 26.7 kN of thrust for major trajectory corrections.",
     manufacturer: "Aerojet Rocketdyne",
-    country: "🇺🇸 États-Unis",
+    country: lang === 'fr' ? "🇺🇸 États-Unis" : "🇺🇸 United States",
   },
   solar: {
-    label: "Panneaux solaires",
-    description: "4 ailes de 7 m chacune produisant 11,1 kW. Portent des caméras GoPro à leurs extrémités.",
+    label: lang === 'fr' ? "Panneaux solaires" : "Solar Arrays",
+    description: lang === 'fr' ? "4 ailes de 7 m chacune produisant 11,1 kW. Portent des caméras GoPro à leurs extrémités." : "4 wings measuring 7m each, producing 11.1 kW. They carry GoPro cameras on their tips.",
     manufacturer: "Airbus Defence & Space",
-    country: "🇪🇺 Europe (🇳🇱 Pays-Bas)",
+    country: lang === 'fr' ? "🇪🇺 Europe (🇳🇱 Pays-Bas)" : "🇪🇺 Europe (🇳🇱 Netherlands)",
   },
-};
+});
 
 const partColors: Record<string, string> = {
   crew: "#d4d4d8",
@@ -239,6 +240,8 @@ function InteractivePart({
   metalness?: number;
   roughness?: number;
 }) {
+  const { language } = useLanguage();
+  const partData = getPartData(language);
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   const isActive = activePart === partKey;
@@ -300,8 +303,8 @@ function InteractivePart({
               </div>
               <p className="text-muted-foreground text-xs leading-relaxed mb-3">{partData[partKey].description}</p>
               <div className="text-[10px] text-foreground/60 space-y-1 border-t border-border/30 pt-2">
-                <p><span className="text-foreground/80 font-medium">Fabricant:</span> {partData[partKey].manufacturer}</p>
-                <p><span className="text-foreground/80 font-medium">Pays:</span> {partData[partKey].country}</p>
+                <p><span className="text-foreground/80 font-medium">{language === 'fr' ? 'Fabricant:' : 'Manufacturer:'}</span> {partData[partKey].manufacturer}</p>
+                <p><span className="text-foreground/80 font-medium">{language === 'fr' ? 'Pays:' : 'Country:'}</span> {partData[partKey].country}</p>
               </div>
             </div>
           </Html>
@@ -521,6 +524,8 @@ function OrionScene() {
 /* ── Component ─────────────────────────────── */
 
 const OrionModel3D = () => {
+  const { language } = useLanguage();
+  const partData = getPartData(language);
   return (
     <section id="modele-3d" className="scroll-mt-24">
       <div className="flex items-center gap-3 mb-6">
@@ -530,12 +535,14 @@ const OrionModel3D = () => {
           </svg>
         </div>
         <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-          Modèle 3D — Vaisseau Orion
+          {language === 'fr' ? 'Modèle 3D — Vaisseau Orion' : '3D Model — Orion Spacecraft'}
         </h2>
       </div>
 
       <p className="text-muted-foreground mb-4 text-[14px] leading-relaxed">
-        Cliquez sur chaque partie du vaisseau pour découvrir son rôle, son fabricant et son pays d'origine. Faites glisser pour tourner, scrollez pour zoomer.
+        {language === 'fr' 
+          ? "Cliquez sur chaque partie du vaisseau pour découvrir son rôle, son fabricant et son pays d'origine. Faites glisser pour tourner, scrollez pour zoomer."
+          : "Click on each part of the spacecraft to discover its role, manufacturer, and country of origin. Drag to rotate, scroll to zoom."}
       </p>
 
       <div className="bg-glass rounded-xl glow-border overflow-hidden">
@@ -567,7 +574,9 @@ const OrionModel3D = () => {
 
         {/* Legend */}
         <div className="border-t border-border/30 p-4 bg-background/50">
-          <p className="text-[10px] text-muted-foreground/60 mb-2 uppercase tracking-wider font-medium">Légende — Cliquez sur une pièce</p>
+          <p className="text-[10px] text-muted-foreground/60 mb-2 uppercase tracking-wider font-medium">
+            {language === 'fr' ? 'Légende — Cliquez sur une pièce' : 'Legend — Click on a part'}
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
             {Object.entries(partData).map(([key, info]) => (
               <div key={key} className="flex items-center gap-2 text-muted-foreground">
