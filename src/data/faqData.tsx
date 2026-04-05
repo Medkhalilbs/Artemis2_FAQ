@@ -33,7 +33,7 @@ export const basesItems = [
   },
   {
     question: "Pourquoi ils ne remettent pas un coup de moteur pour y arriver plus vite ?",
-    answer: "Même si un voyage plus rapide serait possible, il consommerait plus de carburant et nécessiterait de freiner à l'arrivée, ce qui serait dangereux en cas de problème moteurs. Dans tous les cas, même si le choix avait été fait d'aller plus vite, ils auraient seulement fait une poussée initiale plus forte. Des poussées subséquentes seraient inhérentement moins efficientes.",
+    answer: "Même si un voyage plus rapide serait possible, il consommerait plus de carburant et nécessiterait de freiner à l'arrivée, ce qui serait dangereux en cas de problème moteur. Dans tous les cas, même si le choix avait été fait d'aller plus vite, ils auraient seulement fait une poussée initiale plus forte. Des poussées subséquentes seraient inhérentement moins efficientes.",
   },
   {
     question: "Quels sont les plus grands risques de la mission ? Est-il possible que ça se passe mal ?",
@@ -74,6 +74,33 @@ export const basesItems = [
     question: "Est-ce qu'on peut voir Artemis depuis la Terre ?",
     answer: "Non, même avec un télescope.",
   },
+  {
+    question: "Pourquoi leur tenue est-elle orange ?",
+    answer: "Pour qu'on puisse les repérer facilement lorsqu'ils atterrissent dans l'eau. Ils possèdent également des petites bouées pour leur sécurité et peuvent activer leur petit radeau personnel. Nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage.",
+  },
+  {
+    question: "Pourquoi la capsule n'a pas visé la lune dès le départ ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Il y a plusieurs raisons. Comme il s'agit d'une mission de test, la première étape fut de faire deux orbites autour de la Terre : une première à \"basse\" altitude, puis une seconde en montant jusqu'à 70 000 km après avoir réalisé une première poussée. Celle-ci a permis d'une part de prendre de la vitesse, et d'autre part d'avoir une journée pour réaliser différents tests et s'assurer que tout fonctionne correctement avant de partir vers la Lune. L'injection translunaire a ensuite eu lieu lorsque le vaisseau s'est retrouvé au point le plus bas de cette seconde orbite, point où l'accélération est la plus efficace (effet Oberth).</p>
+        <p>Mais même au moment de cette poussée, le vaisseau ne pointait pas droit vers la Lune ! Pourquoi ? Et bien pour deux raisons principalement : en mécanique orbitale, quand on accélère, on modifie la trajectoire de l'autre côté de l'orbite ; il faut que l'on s'assure que le point d'arrivée de la trajectoire soit non pas là où la lune se trouve, mais là où elle sera lorsqu'on y arrivera ! Et oui, la Lune aussi est en orbite autour de la Terre et se déplace !</p>
+      </div>
+    ),
+  },
+  {
+    question: "Comment la capsule se localise ?",
+    answer: (
+      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+        <li>Elle est équipée d'une centrale inertielle. Il s'agit d'un ensemble de capteurs qui mesurent les accélérations dans toutes les directions (comme sur un smartphone, mais en beaucoup plus précis), et qui, en connaissant son point de départ, est capable de dire où la capsule se trouve.</li>
+        <li>Par GPS : à nouveau comme sur un smartphone, mais à cette distance la précision n'est pas très bonne. Mais il n'est pas nécessaire d'avoir la même précision que sur Terre pour un vol spatial de ce type.</li>
+        <li>Par... les maths ! Et oui, la mécanique orbitale est quelque chose de très bien maîtrisé, et on est capable de calculer avec précision la position de la capsule à un instant donné, juste en connaissant sa vitesse à un autre endroit et un autre instant.</li>
+      </ul>
+    ),
+  },
+  {
+    question: "Comment va se passer la coupure de communication avec Orion ?",
+    answer: "Quand Orion passera derrière la Lune, la capsule sera coupée des communications avec Houston pour la raison suivante : il y aura la Lune entre elle et la Terre. Il y aura approximativement 40 min voire 1h de coupure.",
+  },
 ];
 
 export const vieABordItems: { question: string; answer: string | React.ReactNode }[] = [
@@ -112,6 +139,10 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
         <p>Quand il est l'heure de se réveiller, la tradition veut que Houston passe une musique à la radio, choisie selon l'occasion par les équipes au sol ou les familles des astronautes. Pour leur premier réveil sur cette mission, la musique était <em>"Green Light"</em> par John Legend — choix de circonstance sachant que ce jour-là a eu lieu la poussée pour partir vers la Lune.</p>
       </div>
     ),
+  },
+  {
+    question: "Comment les astronautes bougent/se dégourdissent ?",
+    answer: "Pour Artemis, il y a une sorte de rameur que les astronautes utilisent pour faire 30 min de sport par jour. Pour ce qui est de l'ISS, c'est 2h30 de sport par jour en guise de comparaison.",
   },
 ];
 
@@ -195,44 +226,45 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     answer: "\"Copy\" veut tout simplement dire \"bien reçu\".",
   },
   {
-    question: "Pourquoi c'est écrit en Miles ?",
+    question: "Pourquoi les distances sont-elles en miles ?",
     answer: (
       <div className="space-y-2">
-        <p>Les données provenant de la NASA, une agence américaine, ils communiquent en utilisant le système impérial. On entend aussi parfois des valeurs en psi.</p>
+        <p>Comme les données proviennent de la NASA (agence américaine), elles sont communiquées au public en utilisant le système impérial. On entend aussi parfois des valeurs en psi.</p>
         <p className="font-mono text-xs bg-secondary/50 p-2 rounded">1 mile = 1.609 km · 1 bar = 14.5 psi = pression au niveau du sol terrestre</p>
       </div>
     ),
   },
   {
-    question: "Où puis-je trouver des photos/vidéos en HD de la mission ?",
+    question: "Pourquoi on dit \"Houston\" ?",
+    answer: "Parce que c'est ici à Houston (Texas) que se trouve le centre de commande de mission spatial, le \"Lyndon B. Johnson Space Center\". On y retrouve notamment le CAPCOM et d'autres techniciens/ingénieurs qui surveillent le bon déroulement de la mission.",
+  },
+  {
+    question: "Pourquoi certaines photos de la Terre sont-elles beaucoup plus sombres que celles d'Apollo ?",
     answer: (
-      <p>
-        Tout est ici :{" "}
-        <a href="https://www.wikiarchives.space/index.php?/category/1869" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-          wikiarchives.space
-        </a>{" "}
-        (faites un don, c'est un site tenu bénévolement)
-      </p>
+      <div className="space-y-2">
+        <p>En raison de la position actuelle des astres, le début du voyage vers la Lune s'est déroulé dans l'ombre de la Terre. La face visible par l'équipage, et donc celle sur les photos, est le côté \"nuit\" de la Terre !</p>
+        <p>Eh oui, c'est surprenant, mais il s'agit bien de photos prises de nuit, avec le Soleil derrière la Terre. Plusieurs éléments permettent de distinguer notre planète sur ces clichés : un temps d'exposition élevé, un réglage ISO très élevé (d'où les artefacts numériques), et surtout une source de lumière. Mais laquelle puisque le Soleil est derrière la Terre ? Eh bien... La Pleine Lune ! Elle reflète la lumière du Soleil et permet d'apporter une luminosité suffisante pour ces clichés.</p>
+        <p>On peut ainsi distinguer sur cette photo les aurores boréales aux deux pôles, l'atmosphère éclairée par le Soleil sur le pourtour, les étoiles autour, et... les éclairages publics dans les zones habitées du globe, puisqu'il y fait nuit !</p>
+      </div>
     ),
   },
 ];
 
 export const diversItems: { question: string; answer: string | React.ReactNode }[] = [
   {
-    question: "D'où viennent les maquettes ?",
-    answer: (
-      <div className="space-y-2">
-        <p>La maquette d'Artemis vient d'Amazon : il vous suffit de taper « SLS Artemis AMT » dans la barre de recherche du site.</p>
-        <p>Pour le module Orion :{" "}
-          <a href="https://www.etsy.com/fr/shop/Bohimsoshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-            Bohimsoshop sur Etsy
-          </a>
-        </p>
-      </div>
-    ),
+    question: "Quelle est la peluche que l'on voit de temps en temps ?",
+    answer: "La peluche, Rise, est à la fois la mascotte de la mission mais aussi un témoin d'apesanteur lors des différentes phases de la mission.",
   },
   {
-    question: "C'est quoi ce chien ?",
-    answer: "Un golden retriever nommé Kibo, 7 ans.",
+    question: "Est-ce que l'espace est politique ?",
+    answer: "Oui et ce, depuis ses débuts. Il suffit de voir comment la conquête spatiale était un moyen de prouver sa puissance technologique pendant la guerre froide. Aujourd'hui, Artemis reste un enjeu très politique impliquant de nombreuses parties prenantes et des budgets astronomiques votés par les décideurs.",
+  },
+  {
+    question: "Quelle montre est en dotation pour l'équipage d'Artemis 2 ?",
+    answer: "Chaque membre de l'équipage d'Artemis 2 emporte avec lui une Omega Speedmaster X-33.",
+  },
+  {
+    question: "Quel sera le prochain astronaute européen à voler sur Artemis ?",
+    answer: "Le spatial fonctionne sur un système d'échange de services entre agences spatiales : en échange de matériel, les astronautes de l'agence peuvent voler sur les missions. L'ESA n'arriverait qu'en troisième position après les Canadiens et les Japonais. Le vol d'un astronaute européen n'aurait pas lieu avant Artemis IV (Thomas Pesquet étant en reconversion, il ne sera probablement plus astronaute au moment de cette mission).",
   },
 ];

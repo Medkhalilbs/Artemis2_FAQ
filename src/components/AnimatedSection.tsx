@@ -14,8 +14,8 @@ const AnimatedSection = ({ children, className, delay = 0 }: AnimatedSectionProp
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-700 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+        "transition-all duration-1000 ease-out",
+        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95",
         className
       )}
       style={{ transitionDelay: `${delay}ms` }}

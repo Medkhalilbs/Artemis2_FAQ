@@ -1,111 +1,116 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 interface TimelineDay {
   date: string;
   events: { time: string; label: string; highlight?: boolean }[];
 }
 
-const timelineData: TimelineDay[] = [
+const getTimelineData = (lang: string): TimelineDay[] => [
   {
-    date: "4 Avril 2026",
+    date: lang === 'fr' ? "4 Avril 2026" : "April 4, 2026",
     events: [
       { time: "00:32", label: "OTC-1 BURN" },
       { time: "02:44", label: "NASA PAO EVENT (SAW CAMERA \"SELFIE\")" },
       { time: "05:00", label: "LUNAR FLYBY CABIN CONFIGURATION" },
       { time: "06:59", label: "CSA PAO EVENT" },
-      { time: "09:54", label: "Fin de journée des astronautes 🌙" },
-      { time: "18:24", label: "Réveil des astronautes ☀️" },
+      { time: "09:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "18:24", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
       { time: "20:49", label: "NASA PAO EVENT" },
       { time: "22:34", label: "NASA PAO EVENT" },
       { time: "23:15", label: "MISSION STATUS BRIEFING" },
     ],
   },
   {
-    date: "5 Avril 2026",
+    date: lang === 'fr' ? "5 Avril 2026" : "April 5, 2026",
     events: [
       { time: "01:32", label: "OTC-2 BURN" },
       { time: "02:59", label: "MANUAL PILOTING FLIGHT TEST" },
       { time: "03:29", label: "LUNAR IMAGING REVIEW" },
       { time: "06:14", label: "CSA VIP Call" },
-      { time: "09:09", label: "Fin de journée des astronautes 🌙" },
-      { time: "17:39", label: "Réveil des astronautes ☀️" },
+      { time: "09:09", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "17:39", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
       { time: "20:09", label: "OCSS SUIT FLIGHT TEST" },
       { time: "21:30", label: "MISSION STATUS BRIEFING" },
     ],
   },
   {
-    date: "6 Avril 2026",
+    date: lang === 'fr' ? "6 Avril 2026" : "April 6, 2026",
     events: [
       { time: "04:53", label: "OTC-3 BURN" },
-      { time: "06:30", label: "INTEGRITY ENTRE DANS LA SPHÈRE D'INFLUENCE LUNAIRE", highlight: true },
-      { time: "08:09", label: "Fin de journée des astronautes 🌙" },
-      { time: "16:39", label: "Réveil des astronautes ☀️" },
-      { time: "19:45", label: "DÉPASSE LE RECORD DE DISTANCE D'APOLLO 13", highlight: true },
-      { time: "20:04", label: "CONFIGURATION CABINE POUR SURVOL" },
-      { time: "20:34", label: "DÉBUT OBSERVATION LUNAIRE (SURVOL)", highlight: true },
+      { time: "06:30", label: lang === 'fr' ? "INTEGRITY ENTRE DANS LA SPHÈRE D'INFLUENCE LUNAIRE" : "INTEGRITY ENTERS LUNAR SPHERE OF INFLUENCE", highlight: true },
+      { time: "08:09", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "16:39", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
+      { time: "19:45", label: lang === 'fr' ? "DÉPASSE LE RECORD DE DISTANCE D'APOLLO 13" : "BREAKS APOLLO 13 DISTANCE RECORD", highlight: true },
+      { time: "20:04", label: lang === 'fr' ? "CONFIGURATION CABINE POUR SURVOL" : "FLYBY CABIN CONFIGURATION" },
+      { time: "20:34", label: lang === 'fr' ? "DÉBUT OBSERVATION LUNAIRE (SURVOL)" : "LUNAR OBSERVATION BEGINS (FLYBY)", highlight: true },
     ],
   },
   {
-    date: "7 Avril 2026",
+    date: lang === 'fr' ? "7 Avril 2026" : "April 7, 2026",
     events: [
-      { time: "00:36", label: "PERTE DE COMMUNICATION (DERRIÈRE LA LUNE)", highlight: true },
-      { time: "00:54", label: "APPROCHE MINIMALE DE LA LUNE 🌕", highlight: true },
-      { time: "00:58", label: "DISTANCE MAXIMALE DE LA TERRE", highlight: true },
-      { time: "01:16", label: "ACQUISITION DU SIGNAL" },
-      { time: "01:24", label: "VUES INTÉRIEURES DE L'ÉQUIPAGE" },
-      { time: "03:30", label: "FIN DE L'OBSERVATION LUNAIRE" },
-      { time: "07:54", label: "Fin de journée des astronautes 🌙" },
-      { time: "17:24", label: "Réveil des astronautes ☀️" },
-      { time: "19:17", label: "SORTIE DE LA SPHÈRE LUNAIRE", highlight: true },
+      { time: "00:36", label: lang === 'fr' ? "PERTE DE COMMUNICATION (DERRIÈRE LA LUNE)" : "LOSS OF SIGNAL (BEHIND THE MOON)", highlight: true },
+      { time: "00:54", label: lang === 'fr' ? "APPROCHE MINIMALE DE LA LUNE 🌕" : "CLOSEST APPROACH OVER THE MOON 🌕", highlight: true },
+      { time: "00:58", label: lang === 'fr' ? "DISTANCE MAXIMALE DE LA TERRE" : "MAXIMUM DISTANCE FROM EARTH", highlight: true },
+      { time: "01:16", label: lang === 'fr' ? "ACQUISITION DU SIGNAL" : "ACQUISITION OF SIGNAL" },
+      { time: "01:24", label: lang === 'fr' ? "VUES INTÉRIEURES DE L'ÉQUIPAGE" : "CREW INTERIOR VIEWS" },
+      { time: "03:30", label: lang === 'fr' ? "FIN DE L'OBSERVATION LUNAIRE" : "LUNAR OBSERVATION ENDS" },
+      { time: "07:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "17:24", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
+      { time: "19:17", label: lang === 'fr' ? "SORTIE DE LA SPHÈRE LUNAIRE" : "EXIT LUNAR SPHERE", highlight: true },
       { time: "20:29", label: "APPEL ISS SHIP-TO-SHIP" },
-      { time: "21:19", label: "DÉBUT PÉRIODE DE REPOS" },
+      { time: "21:19", label: lang === 'fr' ? "DÉBUT PÉRIODE DE REPOS" : "REST PERIOD BEGINS" },
     ],
   },
   {
-    date: "8 Avril 2026",
+    date: lang === 'fr' ? "8 Avril 2026" : "April 8, 2026",
     events: [
       { time: "04:39", label: "NASA PAO EVENT" },
-      { time: "08:54", label: "Fin de journée des astronautes 🌙" },
-      { time: "17:24", label: "Réveil des astronautes ☀️" },
+      { time: "08:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "17:24", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
       { time: "21:30", label: "MISSION STATUS BRIEFING" },
       { time: "23:09", label: "CSA PAO EVENT" },
     ],
   },
   {
-    date: "9 Avril 2026",
+    date: lang === 'fr' ? "9 Avril 2026" : "April 9, 2026",
     events: [
-      { time: "00:04", label: "DÉMONSTRATION BLINDAGE RADIATION" },
+      { time: "00:04", label: lang === 'fr' ? "DÉMONSTRATION BLINDAGE RADIATION" : "RADIATION SHIELD DEMONSTRATION" },
       { time: "02:44", label: "MANUAL PILOTING FLIGHT TEST" },
-      { time: "08:54", label: "Fin de journée des astronautes 🌙" },
-      { time: "17:24", label: "Réveil des astronautes ☀️" },
+      { time: "08:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "17:24", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
       { time: "21:30", label: "MISSION STATUS BRIEFING" },
-      { time: "23:59", label: "CONFÉRENCE DE PRESSE ÉQUIPAGE" },
+      { time: "23:59", label: lang === 'fr' ? "CONFÉRENCE DE PRESSE ÉQUIPAGE" : "CREW NEWS CONFERENCE" },
     ],
   },
   {
-    date: "10 Avril 2026",
+    date: lang === 'fr' ? "10 Avril 2026" : "April 10, 2026",
     events: [
       { time: "01:54", label: "NASA PAO EVENT" },
       { time: "04:53", label: "RTC-2 BURN" },
-      { time: "08:54", label: "Fin de journée des astronautes 🌙" },
-      { time: "17:24", label: "Réveil des astronautes ☀️" },
-      { time: "19:39", label: "CONFIGURATION CABINE POUR RENTRÉE" },
+      { time: "08:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },
+      { time: "17:24", label: lang === 'fr' ? "Réveil des astronautes ☀️" : "Crew wake up ☀️" },
+      { time: "19:39", label: lang === 'fr' ? "CONFIGURATION CABINE POUR RENTRÉE" : "REENTRY CABIN CONFIGURATION" },
       { time: "20:53", label: "RTC-3 BURN" },
-      { time: "22:54", label: "CHECKLIST DE RENTRÉE" },
+      { time: "22:54", label: lang === 'fr' ? "CHECKLIST DE RENTRÉE" : "REENTRY CHECKLIST" },
     ],
   },
   {
-    date: "11 Avril 2026",
+    date: lang === 'fr' ? "11 Avril 2026" : "April 11, 2026",
     events: [
-      { time: "01:33", label: "SÉPARATION MODULE ÉQUIPAGE / SERVICE" },
-      { time: "01:53", label: "INTERFACE DE RENTRÉE", highlight: true },
-      { time: "02:06", label: "AMERRISSAGE 🎉", highlight: true },
-      { time: "03:05", label: "EXTRACTION DE L'ÉQUIPAGE" },
-      { time: "03:35", label: "ÉQUIPAGE SUR LE NAVIRE DE RÉCUPÉRATION" },
-      { time: "04:35", label: "CONFÉRENCE DE PRESSE POST-AMERRISSAGE" },
+      { time: "01:33", label: lang === 'fr' ? "SÉPARATION MODULE ÉQUIPAGE / SERVICE" : "CREW/SERVICE MODULE SEPARATION" },
+      { time: "01:53", label: lang === 'fr' ? "INTERFACE DE RENTRÉE" : "ENTRY INTERFACE", highlight: true },
+      { time: "02:06", label: lang === 'fr' ? "AMERRISSAGE 🎉" : "SPLASHDOWN 🎉", highlight: true },
+      { time: "03:05", label: lang === 'fr' ? "EXTRACTION DE L'ÉQUIPAGE" : "CREW EXTRACTION" },
+      { time: "03:35", label: lang === 'fr' ? "ÉQUIPAGE SUR LE NAVIRE DE RÉCUPÉRATION" : "CREW ON RECOVERY SHIP" },
+      { time: "04:35", label: lang === 'fr' ? "CONFÉRENCE DE PRESSE POST-AMERRISSAGE" : "POST-SPLASHDOWN NEWS CONFERENCE" },
     ],
   },
 ];
 
 const MissionTimeline = () => {
+  const { language } = useLanguage();
+  const timelineData = getTimelineData(language);
+
   return (
     <section id="planning" className="scroll-mt-24">
       <div className="flex items-center gap-3 mb-6">
@@ -115,12 +120,13 @@ const MissionTimeline = () => {
           </svg>
         </div>
         <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-          Planning de mission
+          {language === 'fr' ? "Planning de mission" : "Mission Timeline"}
         </h2>
       </div>
       <p className="text-sm text-muted-foreground mb-6">
-        Horaires en heure de France métropolitaine. Pour le Québec, retirez 6 heures.
-        Les horaires peuvent varier.
+        {language === 'fr' 
+          ? "Horaires en heure de France métropolitaine. Pour le Québec, retirez 6 heures. Les horaires peuvent varier."
+          : "Times shown in Central European Time (CET). For EDT, subtract 6 hours. Times are subject to change."}
       </p>
       <div className="space-y-6">
         {timelineData.map((day, dayIndex) => (
