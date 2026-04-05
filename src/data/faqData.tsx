@@ -74,6 +74,10 @@ export const basesItems = [
     question: "Est-ce qu'on peut voir Artemis depuis la Terre ?",
     answer: "Non, même avec un télescope.",
   },
+  {
+    question: "Pourquoi leur tenue est elle orange?",
+    answer: "Pour qu'on puisse les repérer facilement lorsqu'ils atterrissent dans l'eau. Ils possèdent également des petites bouées pour leur sécurité et peuvent activer leur petit radeau personnel. Nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage.",
+  },
 ];
 
 export const vieABordItems: { question: string; answer: string | React.ReactNode }[] = [
@@ -215,6 +219,10 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
       </p>
     ),
   },
+  {
+    question: "Pourquoi on dit \"Houston\" ?",
+    answer: "Parce que c'est ici à Houston (Texas) que se trouve le centre de commande de mission spatial, le \"Lyndon B. Johnson Space Center\". On y retrouve notamment le CAPCOM et d'autres techniciens/ingénieurs qui surveillent le bon déroulement de la mission.",
+  },
 ];
 
 export const diversItems: { question: string; answer: string | React.ReactNode }[] = [
@@ -234,5 +242,9 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   {
     question: "C'est quoi ce chien ?",
     answer: "Un golden retriever nommé Kibo, 7 ans.",
+  },
+  {
+    question: "Quel est la peluche que l'on voit de temps en temps ?",
+    answer: "La peluche, Rise, est à la fois la mascotte de la mission mais aussi un témoin d'apesanteur lors des différentes phases de la mission.",
   },
 ];

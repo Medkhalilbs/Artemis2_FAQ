@@ -116,7 +116,7 @@ const Index = () => {
         <img
           src={heroImage}
           alt="La Lune et la Terre vues depuis l'espace"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-40 animate-zoom-pan"
           width={1920}
           height={800}
         />
