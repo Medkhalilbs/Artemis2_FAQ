@@ -8,6 +8,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import SearchBar from "@/components/SearchBar";
 import OrionSpacecraft from "@/components/OrionSpacecraft";
 import OrionModel3D from "@/components/OrionModel3D";
+import StarfieldBackground from "@/components/StarfieldBackground";
 
 import { basesItems, vieABordItems, imagesItems, diversItems } from "@/data/faqData";
 
@@ -108,19 +109,20 @@ const Index = () => {
   const isSearching = search.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen text-foreground relative bg-background">
       <SideNav />
 
       {/* Hero */}
       <header className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <StarfieldBackground />
         <img
           src={heroImage}
           alt="La Lune et la Terre vues depuis l'espace"
-          className="absolute inset-0 w-full h-full object-cover opacity-40 animate-zoom-pan"
+          className="absolute inset-0 w-full h-full object-cover opacity-80 animate-zoom-pan"
           width={1920}
           height={800}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
         <div className="relative z-10 text-center px-6 max-w-3xl">
           <p className="text-primary font-heading font-medium tracking-widest uppercase text-sm mb-4">
             NASA · Programme Artemis

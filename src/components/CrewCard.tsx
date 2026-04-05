@@ -12,7 +12,7 @@ interface CrewMember {
 
 const CrewCard = ({ member }: { member: CrewMember }) => {
   return (
-    <div className="bg-glass rounded-lg p-5 glow-border hover:scale-[1.02] transition-transform duration-300">
+    <div className="bg-glass rounded-lg p-5 glow-border hover:glow-border-active hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300">
       <div className="flex items-start justify-between mb-3">
         <div>
           <h4 className="font-heading font-bold text-foreground text-lg">{member.name}</h4>
