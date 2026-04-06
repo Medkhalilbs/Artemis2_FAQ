@@ -159,13 +159,16 @@ const Index = () => {
             ).map((label, i) => {
               const ids = ["bases", "modele-3d", "vaisseau", "equipage", "vie-a-bord", "images", "divers", "planning"];
               return (
-                <a
+                <button
                   key={label}
-                  href={`#${ids[i]}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById(ids[i])?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   className="px-4 py-2 rounded-full text-sm font-medium bg-secondary/60 text-secondary-foreground hover:bg-primary/20 hover:text-primary transition-colors border border-border/50"
                 >
                   {label}
-                </a>
+                </button>
               );
             })}
           </div>
