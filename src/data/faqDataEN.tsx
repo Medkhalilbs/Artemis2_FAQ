@@ -15,7 +15,7 @@ export const basesItemsEN = [
   },
   {
     question: "Will the astronauts walk on the Moon this time?",
-    answer: "No. They will fly over the far side of the Moon and return to Earth. The landing (walking on the lunar soil) is reserved for the Artemis 4 mission, scheduled for a few years later. (Subject to changes, the program is heavily revised from month to month)",
+    answer: "No. They will fly over the far side of the Moon and return to Earth. The landing (walking on the lunar soil) is currently planned for the Artemis 4 mission, scheduled for a few years later. (Subject to changes, the program is heavily revised from month to month)",
   },
   {
     question: "Why simply fly around the Moon instead of landing directly?",
@@ -59,10 +59,10 @@ export const basesItemsEN = [
       <div className="space-y-2">
         <p>No major issues have occurred since the start of the mission. Overall, the European service module is of very high quality according to NASA (better than expected). A few minor hitches have been noted:</p>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-          <li>After liftoff, the main water valve didn't open but was resolved by Houston by resetting the valve. As a precaution, the astronauts filled water bags.</li>
-          <li>The toilet exhaust didn't work immediately because the nozzle was clogged by crystallized ejecta. The area was pointed towards the Sun to unclog it.</li>
-          <li>A slight burning smell in the capsule — a harmless surplus of hydrogen.</li>
-          <li>Interior humidity wasn't stabilized: the astronauts used wet towels to compensate.</li>
+          <li>After liftoff on April 2nd, when opening the water cylinders, the main valve did not open. This problem was resolved remotely by Houston resetting the opening valve. Just in case, the astronauts filled water pouches.</li>
+          <li>The toilet exhaust didn't work immediately because the exhaust nozzle was clogged by crystallizing ejecta. The exhaust area was turned towards the sun, which cleared the nozzle.</li>
+          <li>There was a slight burning smell in the capsule, which was only due to a surplus of hydrogen.</li>
+          <li>The humidity inside the capsule was not stabilized; the astronauts used wet towels to compensate for the lack of humidity.</li>
         </ul>
       </div>
     ),
@@ -105,7 +105,28 @@ export const basesItemsEN = [
   },
   {
     question: "How will the communications blackout with Orion play out?",
-    answer: "When Orion passes behind the Moon, the capsule will be cut off from Houston because the Moon will be between it and Earth. There will be roughly 40 minutes to an hour of blackout.",
+    answer: "When Orion passes behind the Moon, the capsule will be cut off from Houston because the Moon will be between it and Earth. Since communications happen via radio waves, a line of sight is necessary. There will be roughly 40 minutes to an hour of blackout.",
+  },
+  {
+    question: "Why are the solar arrays mobile?",
+    answer: (
+      <div className="space-y-2">
+        <p>The panels are mobile on the capsule for 2 main reasons:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>To orient themselves optimally to capture maximum sunlight and generate more electrical energy to sustain the capsule.</li>
+          <li>To allow the panels to fold against the service module during engine burns, reducing the mechanical stress they must endure.</li>
+        </ul>
+        <p>This mobility also allowed for an astronaut selfie by pointing the boom-mounted cameras towards the capsule.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Do the astronauts feel changes in speed?",
+    answer: "Only during engine burns. The rest of the time, the spacecraft and the astronauts are in freefall in exactly the same way. They are therefore in zero gravity at all times and feel no force, even when the trajectory is curved. During a burn, a force is applied and the spacecraft is no longer in freefall: the astronauts can thus feel this force. Apart from liftoff and atmospheric reentry (where the capsule is severely decelerated by the atmosphere), the forces are not very intense. The astronauts are therefore not crushed into their seats during maneuvers in space.",
+  },
+  {
+    question: "How does the capsule orient itself in space without air?",
+    answer: "The capsule orients, accelerates, and decelerates using its thrusters. Creating a 'thrust' does not require air—this is a common misconception propagated by non-specialized media. The gas jets produced by the engines create, under the effect of expelling the gas, a reaction where the capsule moves in the opposite direction. It is simply the principle of Action/Reaction (in other words, Newton's 3rd Law).",
   },
 ];
 
@@ -269,6 +290,20 @@ export const imagesItemsEN: { question: string; answer: string | React.ReactNode
     question: "What is this ghostly sun?",
     answer: "A light source like the sun or the moon causes a reflection on the camera sensor in the form of a halo or a luminous circle.",
   },
+  {
+    question: "Why does the Moon look smaller in space than from Earth?",
+    answer: "It's an optical illusion. The Moon appears larger on Earth when seen 'close' to reference points like trees or houses. It can also be influenced by camera zoom effects.",
+  },
+  {
+    question: "Will the crew be able to photograph the American flags and modules?",
+    answer: (
+      <div className="space-y-2">
+        <p>No, for several reasons. Primarily, they won't pass over them: all Apollo missions landed on the near side of the Moon, while the flyby happens over the far side.</p>
+        <p>Even if they flew over, they would be too far away and the left-behind Apollo gear is too small.</p>
+        <p>However, the Lunar Reconnaissance Orbiter has completed detailed mapping of the Moon; when zooming in on Apollo landing sites, you can actually spot the descent stage of the LEM left behind, along with its shadow!</p>
+      </div>
+    ),
+  },
 ];
 
 export const diversItemsEN: { question: string; answer: string | React.ReactNode }[] = [
@@ -286,10 +321,16 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
   },
   {
     question: "Who will be the next European astronaut to fly on Artemis?",
-    answer: "Spaceflight runs on a barter system between agencies. In exchange for hardware, agency astronauts fly. ESA is in third priority behind Canadians and Japanese. A European flight won't happen until Artemis IV at the earliest.",
+    answer: (
+      <div className="space-y-2">
+        <p>Spaceflight runs on a barter system between agencies. In exchange for hardware, agency astronauts fly on missions. ESA would come in third priority behind Canadians and Japanese. Within ESA, Germans will likely be prioritized as they are the biggest contributors.</p>
+        <p>A European astronaut flight wouldn't happen until Artemis IV at the earliest. Thomas Pesquet is in "retraining", so he likely won't be an astronaut by the time these missions occur. The same applies to Sophie Adenot.</p>
+        <p>However, you can rejoice just as much if a non-French European is selected, because your taxes pay the salaries of all European astronauts, and they represent all of you.</p>
+      </div>
+    )
   },
   {
     question: "Do rockets pollute a lot?",
-    answer: "The SLS rocket uses a core stage powered by hydrogen + oxygen, which primarily emits water vapor (clouds). Once they fall back into the ocean, the boosters and stages become inert and act as an excellent base for reef development, much like shipwrecks. The Cape Canaveral base is also very careful to disturb the local ecosystem as little as possible. However, this isn't true for all rockets, as some use kerosene (e.g., SpaceX's Falcon 9). Energy consumption and pollution due to the production of the rocket and its fuel remain frequent points of criticism.",
-  },
+    answer: "The SLS rocket uses a core stage powered by hydrogen + oxygen, which primarily emits water vapor (clouds). Once they fall back into the ocean, the boosters and stages become inert and form excellent foundations for reef development, much like shipwrecks. The Kennedy Space Center is also very careful to disturb the local ecosystem as little as possible. However, this isn't true for all rockets, as some use kerosene (e.g., SpaceX's Falcon 9). Energy consumption and pollution due to the production of the rocket and its fuel remain frequent points of criticism.",
+  }
 ];

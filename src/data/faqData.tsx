@@ -13,7 +13,7 @@ export const basesItems = [
   },
   {
     question: "Est-ce que les astronautes vont marcher sur la Lune cette fois-ci ?",
-    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'atterrissage (marcher sur le sol lunaire) est réservé à la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois)",
+    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'atterrissage (marcher sur le sol lunaire) est pour l’instant planifié pour la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois)",
   },
   {
     question: "Pourquoi font-ils simplement le tour de la Lune au lieu de s'y poser directement ?",
@@ -57,10 +57,10 @@ export const basesItems = [
       <div className="space-y-2">
         <p>Aucun problème majeur ne s'est produit depuis le début de la mission. Globalement, le module de service (européen) est de très bonne qualité selon la NASA (mieux qu'espéré). Quelques petits soucis ont été constatés :</p>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-          <li>Après le décollage, la vanne principale d'eau ne s'est pas ouverte mais a été résolue par Houston en réinitialisant la vanne. Par précaution, les astronautes ont rempli des sacs d'eau.</li>
-          <li>L'évacuation des toilettes n'a pas fonctionné de suite car la buse était bouchée par des éjectats cristallisés. La zone a été tournée vers le Soleil pour déboucher la buse.</li>
-          <li>Une petite odeur de brûlé dans la capsule — un surplus d'hydrogène, sans danger.</li>
-          <li>L'humidité intérieure n'était pas stabilisée : les astronautes ont utilisé des serviettes mouillées pour compenser.</li>
+          <li>Après le décollage le 02 avril, au moment d'ouvrir les cylindres d'eau, la vanne principale ne s'est pas ouverte. Ce problème a été résolu à distance par Houston en réinitialisant la vanne d'ouverture. Au cas où, les astronautes ont rempli des poches d'eau.</li>
+          <li>L'évacuation des toilettes n'a pas fonctionné de suite car la buse d'évacuation était bouchée par les éjectats qui se cristallisaient. La zone d'évacuation a été tournée vers le soleil, ce qui a permis de déboucher la buse.</li>
+          <li>Il y a eu une petite odeur de brûlé dans la capsule, qui n’était due qu’à un surplus d'hydrogène dans la capsule.</li>
+          <li>L'humidité à l'intérieur de la capsule n'était pas stabilisée, les astronautes ont utilisé des serviettes mouillés pour compenser le manque d'humidité.</li>
         </ul>
       </div>
     ),
@@ -103,7 +103,28 @@ export const basesItems = [
   },
   {
     question: "Comment va se passer la coupure de communication avec Orion ?",
-    answer: "Quand Orion passera derrière la Lune, la capsule sera coupée des communications avec Houston pour la raison suivante : il y aura la Lune entre elle et la Terre. Il y aura approximativement 40 min voire 1h de coupure.",
+    answer: "Quand Orion passera derrière la Lune, la capsule sera coupée des communications avec Houston pour la raison suivante : il y aura la Lune entre elle et la Terre. Les communications se faisant par ondes radios, il est en effet nécessaire d’avoir une ligne de vue. Il y aura donc approximativement 40 minutes, voire 1h, de coupure.",
+  },
+  {
+    question: "Pourquoi les panneaux solaires sont-ils mobiles ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Les panneaux sont mobiles sur la capsule pour 2 raisons principales :</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>S'orienter au mieux pour capter un maximum de soleil et créer plus d'énergie électrique pour maintenir l'énergie de la capsule.</li>
+          <li>Permettre le repliement des panneaux contre le module de service lors des poussées, afin de réduire les contraintes mécaniques qu’ils doivent supporter.</li>
+        </ul>
+        <p>Cette mobilité a aussi permis de faire un selfie des astronautes en orientant les caméras fixées sur le bout des panneaux vers la capsule.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Les astronautes ressentent-ils les changements de vitesse ?",
+    answer: "Uniquement lors des poussées. Le reste du temps, le vaisseau et les astronautes sont en chute libre exactement de la même manière. Ils sont donc tout le temps en apesanteur et ne ressentent aucune force, même lorsque la trajectoire est courbée. Lors des poussées, une force s'applique et le vaisseau n'est donc plus en chute libre : les astronautes peuvent donc ressentir cette force. En dehors du décollage et de la rentrée atmosphérique (où la capsule est fortement freinée par l'atmosphère), les forces ne sont pas très intenses. Les astronautes ne sont donc pas écrasés dans leur siège lors des manœuvres dans l'espace.",
+  },
+  {
+    question: "Comment la capsule fait-elle pour s'orienter dans l'espace sans support d'air ?",
+    answer: "La capsule s'oriente, accélère et décélère grâce à ses moteurs. Pour créer une 'poussée' il n'y a pas besoin d'air, il s'agit d'une idée reçue propagée par les médias non spécialisés. Les jets de gaz effectués par les moteurs créent, sous l'effet de l'action d'expulsion du gaz, une réaction de la capsule qui part alors dans le sens opposé à celui de l'expulsion des gaz. Il s'agit simplement du principe d'Action/Réaction (autrement dit, la 3ème loi de Newton).",
   },
 ];
 
@@ -268,6 +289,20 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     question: "C'est quoi ce soleil fantômatique ?",
     answer: "Une source de lumière comme le soleil ou la lune provoque sur le capteur photo, un reflet sous la forme d'un halo ou d'un cercle lumineux.",
   },
+  {
+    question: "Pourquoi la Lune paraît plus petite dans l’espace que sur Terre ?",
+    answer: "C’est une illusion d’optique. La Lune nous paraît plus grande sur Terre si on la voit 'proche' de points de références comme des arbres, des maisons, etc. Ou alors ce sont des effets de zoom photo-vidéo.",
+  },
+  {
+    question: "L'équipage pourra-t-il photographier les drapeaux et modules américains ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Non, et pour plusieurs raisons. La première étant qu'ils ne passeront pas au-dessus : toutes les missions Apollo se sont posées sur la face visible de la Lune, et le survol se fera du côté de la face cachée.</p>
+        <p>Même s'ils passaient au-dessus, ils seraient trop loin et les équipements laissés par Apollo sont trop petits.</p>
+        <p>Le Lunar Reconnaissance Orbiter a cependant réalisé une cartographie détaillée de la Lune, et même si on ne peut pas voir les détails, en zoomant sur les sites d'atterrissage des missions Apollo, on peut distinguer la portion du LEM laissée derrière lors du départ et son ombre !</p>
+      </div>
+    ),
+  },
 ];
 
 export const diversItems: { question: string; answer: string | React.ReactNode }[] = [
@@ -285,10 +320,16 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   },
   {
     question: "Quel sera le prochain astronaute européen à voler sur Artemis ?",
-    answer: "Le spatial fonctionne sur un système d'échange de services entre agences spatiales : en échange de matériel, les astronautes de l'agence peuvent voler sur les missions. L'ESA n'arriverait qu'en troisième position après les Canadiens et les Japonais. Le vol d'un astronaute européen n'aurait pas lieu avant Artemis IV (Thomas Pesquet étant en reconversion, il ne sera probablement plus astronaute au moment de cette mission).",
+    answer: (
+      <div className="space-y-2">
+        <p>Le spatial fonctionne sur un système d'échange de service entre agences spatiales : En échange de matériel, les astronautes de l'agence peuvent voler sur les missions. L'ESA n'arriverait qu'en troisième position après les canadiens et les japonais. Au sein de l’ESA, les allemands seront sûrement prioritaires car ce sont les plus gros contributeurs.</p>
+        <p>Le vol d'un astronaute Européen n'aurait pas lieu avant Artemis IV. Thomas Pesquet est en "reconversion", donc il ne sera sûrement plus astronaute au moment de ces missions. Concernant Sophie Adenot, même problème.</p>
+        <p>Vous pouvez cependant vous réjouir tout autant si un·e européen·ne non français·e est sélectionné·e car vos impôts paient les salaires de tou·te·s les astronautes européen·ne·s, et iels vous représentent tou·te·s.</p>
+      </div>
+    )
   },
   {
     question: "Les fusées polluent énormément, non ?",
-    answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. La base de cap canaveral est également très attentive à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toute les fusées, certaines utilisant du kérosène (p.ex la facon9 de spaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
+    answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. Le Kennedy Space Center est également très attentif à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toutes les fusées, certaines utilisant du kérosène (p.ex la Falcon 9 de SpaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
   },
 ];

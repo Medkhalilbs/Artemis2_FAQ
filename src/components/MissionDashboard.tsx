@@ -3,11 +3,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import AnimatedSection from "./AnimatedSection";
 
 // User-provided real NASA metrics as anchor
-const ANCHOR_TIMESTAMP = new Date("2026-04-05T23:14:14+01:00").getTime();
-const ANCHOR_ELAPSED_SEC = 3 * 86400 + 23 * 60 + 38; // 3 days, 23 min, 38 sec
-const ANCHOR_VELOCITY_MPH = 1502;
-const ANCHOR_DISTANCE_EARTH = 223687;
-const ANCHOR_DISTANCE_MOON = 52887;
+const ANCHOR_TIMESTAMP = new Date("2026-04-06T19:22:04+01:00").getTime();
+const ANCHOR_ELAPSED_SEC = 4 * 86400 + 19 * 3600 + 44 * 60; // 4 days, 19 hrs, 44 min, 0 sec
+const ANCHOR_VELOCITY_MPH = 1073;
+const ANCHOR_DISTANCE_EARTH = 249069;
+const ANCHOR_DISTANCE_MOON = 11493;
 
 function formatNumber(num: number): string {
   return new Intl.NumberFormat("fr-FR").format(Math.floor(num));
@@ -16,22 +16,22 @@ function formatNumber(num: number): string {
 const MissionDashboard = () => {
   const { language } = useLanguage();
   const [now, setNow] = useState(Date.now());
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(Date.now());
-    }, 100); 
+    }, 100);
     return () => clearInterval(interval);
   }, []);
 
   const deltaSecs = (now - ANCHOR_TIMESTAMP) / 1000;
-  
+
   // Current elapsed time
   const totalElapsedSecs = ANCHOR_ELAPSED_SEC + deltaSecs;
 
   // Velocity is around 1502 mph. That's about 0.4172 miles per second.
   const velocityMps = ANCHOR_VELOCITY_MPH / 3600;
-  
+
   // Real-time extrapolated distances
   const distanceEarth = ANCHOR_DISTANCE_EARTH + (deltaSecs * velocityMps);
   const distanceMoon = ANCHOR_DISTANCE_MOON - (deltaSecs * velocityMps);
@@ -41,7 +41,7 @@ const MissionDashboard = () => {
   const hours = Math.floor((totalElapsedSecs % 86400) / 3600);
   const minutes = Math.floor((totalElapsedSecs % 3600) / 60);
   const seconds = Math.floor(totalElapsedSecs % 60);
-  
+
   const missionTimeStr = `T+ ${days}${language === 'fr' ? 'j' : 'd'} ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
 
   // Convert to Metric (EU) scale if French
@@ -78,7 +78,7 @@ const MissionDashboard = () => {
               {formatNumber(velocityDisp)} <span className="text-lg text-muted-foreground">{language === 'fr' ? 'km/h' : 'mph'}</span>
             </p>
           </div>
-          
+
           <div className="space-y-1">
             <p className="text-muted-foreground text-xs uppercase tracking-widest">{language === 'fr' ? 'Distance de la Terre' : 'Distance from Earth'}</p>
             <p className="text-3xl font-heading font-bold text-foreground">
@@ -101,7 +101,7 @@ const MissionDashboard = () => {
             <span>{language === 'fr' ? 'Lune' : 'Moon'}</span>
           </div>
           <div className="relative h-1 bg-white/10 rounded-full overflow-hidden">
-            <div 
+            <div
               className="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-100 linear"
               style={{ width: `${progress * 100}%` }}
             />
@@ -110,12 +110,12 @@ const MissionDashboard = () => {
 
         <div className="mt-6 border-t border-white/10 pt-4 text-center">
           <p className="text-[11px] text-muted-foreground/80 leading-relaxed">
-            {language === 'fr' 
+            {language === 'fr'
               ? <>Ces valeurs sont une estimation mathématique basée sur des points de repère NASA.{" "}<br className="hidden sm:block" /> Pour la télémétrie exacte certifiée en temps réel, consultez la plateforme officielle :{" "}</>
               : <>These values are mathematical estimations based on NASA raw data points.{" "}<br className="hidden sm:block" /> For exact certified real-time telemetry, check the official platform:{" "}</>
             }
-            <a 
-              href="https://www.nasa.gov/missions/artemis-ii/arow" 
+            <a
+              href="https://www.nasa.gov/missions/artemis-ii/arow"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline hover:text-primary/80 transition-colors inline-block mt-1"
