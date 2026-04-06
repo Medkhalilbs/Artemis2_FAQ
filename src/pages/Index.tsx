@@ -11,11 +11,12 @@ import OrionSpacecraft from "@/components/OrionSpacecraft";
 import OrionModel3D from "@/components/OrionModel3D";
 import StarfieldBackground from "@/components/StarfieldBackground";
 import MissionDashboard from "@/components/MissionDashboard";
+import PlanningSection from "@/components/PlanningSection";
 import videoFile from "@/assets/artemis2_full_2160p60.mp4";
-import { Globe } from "lucide-react";
+import { Globe, Book, Landmark, Moon } from "lucide-react";
 
-import { basesItems, vieABordItems, imagesItems, diversItems } from "@/data/faqData";
-import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN } from "@/data/faqDataEN";
+import { basesItems, vieABordItems, imagesItems, diversItems, survolItems, lexiqueItems } from "@/data/faqData";
+import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN, survolItemsEN, lexiqueItemsEN } from "@/data/faqDataEN";
 
 const getCrewMembers = (lang: string) => [
   {
@@ -112,9 +113,34 @@ const Index = () => {
   const filteredVie = useMemo(() => filterItems(language === 'fr' ? vieABordItems : vieABordItemsEN, search), [search, language]);
   const filteredImages = useMemo(() => filterItems(language === 'fr' ? imagesItems : imagesItemsEN, search), [search, language]);
   const filteredDivers = useMemo(() => filterItems(language === 'fr' ? diversItems : diversItemsEN, search), [search, language]);
+  const filteredSurvol = useMemo(() => filterItems(language === 'fr' ? survolItems : survolItemsEN, search), [search, language]);
+  const filteredLexique = useMemo(() => filterItems(language === 'fr' ? lexiqueItems : lexiqueItemsEN, search), [search, language]);
+  
   const isSearching = search.trim().length > 0;
-
   const crewMembers = getCrewMembers(language);
+
+  const menuItems = useMemo(() => {
+    if (language === 'fr') {
+      return [
+        { label: "Bases", id: "bases" },
+        { label: "Survol", id: "survol" },
+        { label: "Équipage", id: "equipage" },
+        { label: "Vie à bord", id: "vie-a-bord" },
+        { label: "Media", id: "images" },
+        { label: "Planning", id: "planning" },
+        { label: "Lexique", id: "lexique" },
+      ];
+    }
+    return [
+      { label: "Basics", id: "bases" },
+      { label: "Flyby", id: "survol" },
+      { label: "Crew", id: "equipage" },
+      { label: "Life", id: "vie-a-bord" },
+      { label: "Media", id: "images" },
+      { label: "Schedule", id: "planning" },
+      { label: "Lexicon", id: "lexique" },
+    ];
+  }, [language]);
 
   return (
     <div className="min-h-screen text-foreground relative bg-background">
@@ -136,41 +162,33 @@ const Index = () => {
           src={heroImage}
           alt="La Lune et la Terre vues depuis l'espace"
           className="absolute inset-0 w-full h-full object-cover opacity-80 animate-zoom-pan"
-          width={1920}
-          height={800}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
-        <div className="relative z-10 text-center px-6 max-w-3xl">
+        <div className="relative z-10 text-center px-6 max-w-4xl">
           <p className="text-primary font-heading font-medium tracking-widest uppercase text-sm mb-4">
             {language === 'fr' ? 'NASA · Programme Artemis' : 'NASA · Artemis Program'}
           </p>
           <h1 className="text-5xl md:text-7xl font-heading font-bold text-gradient-hero mb-4 leading-tight">
             Artemis II
           </h1>
-          <p className="text-lg md:text-xl text-foreground/70 font-body leading-relaxed">
+          <p className="text-lg md:text-xl text-foreground/70 font-body leading-relaxed max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Foire aux questions — Tout comprendre sur la première mission habitée vers la Lune depuis 1972' 
               : 'Frequently Asked Questions — Learn everything about the first crewed lunar mission since 1972'}
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {(language === 'fr' 
-              ? ["Les bases", "Modèle 3D", "Vaisseau", "Équipage", "Vie à bord", "Images", "Divers", "Planning"]
-              : ["Basics", "3D Model", "Spacecraft", "Crew", "Life aboard", "Media", "Misc", "Timeline"]
-            ).map((label, i) => {
-              const ids = ["bases", "modele-3d", "vaisseau", "equipage", "vie-a-bord", "images", "divers", "planning"];
-              return (
-                <button
-                  key={label}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById(ids[i])?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="px-4 py-2 rounded-full text-sm font-medium bg-secondary/60 text-secondary-foreground hover:bg-primary/20 hover:text-primary transition-colors border border-border/50"
-                >
-                  {label}
-                </button>
-              );
-            })}
+          <div className="mt-8 flex flex-wrap justify-center gap-2">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-4 py-2 rounded-full text-xs font-bold bg-secondary/80 text-secondary-foreground hover:bg-primary/20 hover:text-primary transition-all border border-border/50 uppercase tracking-tighter"
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
         </div>
       </header>
@@ -185,22 +203,32 @@ const Index = () => {
           <SearchBar value={search} onChange={setSearch} />
         </AnimatedSection>
 
-
         {(!isSearching || filteredBases.length > 0) && (
           <AnimatedSection>
             <FAQSection id="bases" title={language === 'fr' ? "Les bases de la mission" : "Mission Basics"} icon={rocketIcon} items={isSearching ? filteredBases : (language === 'fr' ? basesItems : basesItemsEN)} />
           </AnimatedSection>
         )}
         
+        {(!isSearching || filteredSurvol.length > 0) && (
+          <AnimatedSection>
+            <FAQSection 
+              id="survol" 
+              title={language === 'fr' ? "Le survol de la Lune (6-7 avril)" : "Lunar Flyby (April 6-7)"} 
+              icon={<Moon size={20} />} 
+              items={isSearching ? filteredSurvol : (language === 'fr' ? survolItems : survolItemsEN)} 
+            />
+          </AnimatedSection>
+        )}
+
         {/* Orbit Map */}
         {!isSearching && (
           <AnimatedSection className="my-16">
-            <div className="bg-glass rounded-xl p-1 glow-border">
-              <div className="px-5 py-4 border-b border-white/5">
+            <div className="bg-glass rounded-xl p-1 glow-border shadow-2xl">
+              <div className="px-5 py-4 border-b border-white/5 bg-white/5">
                  <h3 className="text-xl font-heading font-bold text-foreground">{language === 'fr' ? 'Vidéo de la Mission' : 'Mission Video Feed'}</h3>
                  <p className="text-sm text-muted-foreground mt-1">{language === 'fr' ? 'Artemis II — Images officielles de la NASA (Haute Résolution)' : 'Artemis II — Official NASA Feed (High Resolution)'}</p>
               </div>
-              <div className="w-full rounded-b-xl overflow-hidden pointer-events-auto bg-[#040914]">
+              <div className="w-full rounded-b-xl overflow-hidden pointer-events-auto bg-black">
                 <video 
                   src={videoFile} 
                   controls 
@@ -272,13 +300,36 @@ const Index = () => {
 
         {!isSearching && (
           <AnimatedSection>
-            <MissionTimeline />
+            <PlanningSection language={language} />
+          </AnimatedSection>
+        )}
+
+        {(!isSearching || filteredLexique.length > 0) && (
+          <AnimatedSection>
+            <FAQSection 
+              id="lexique" 
+              title={language === 'fr' ? "Lexique" : "Lexicon"} 
+              icon={<Book size={20} />} 
+              items={isSearching ? filteredLexique : (language === 'fr' ? lexiqueItems : lexiqueItemsEN)} 
+            />
+          </AnimatedSection>
+        )}
+
+        {!isSearching && (
+          <AnimatedSection>
+            <section className="scroll-mt-24">
+              <div className="flex items-center gap-3 mb-6 font-heading font-bold text-2xl md:text-3xl">
+                <Landmark size={24} className="text-primary" />
+                <h2>{language === 'fr' ? 'Chronologie Globale' : 'Global Timeline'}</h2>
+              </div>
+              <MissionTimeline />
+            </section>
           </AnimatedSection>
         )}
 
         {/* No results */}
-        {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
+        {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && filteredSurvol.length === 0 && filteredLexique.length === 0 && (
+          <div className="text-center py-12 text-muted-foreground bg-secondary/10 rounded-2xl border border-dashed border-white/10">
             <p className="text-lg">{language === 'fr' ? `Aucune question trouvée pour « ${search} »` : `No answers found for "${search}"`}</p>
             <p className="text-sm mt-2">{language === 'fr' ? "Essayez d'autres termes de recherche" : "Try different keywords"}</p>
           </div>
@@ -286,8 +337,16 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-8 text-center text-xs text-muted-foreground px-4">
-        <p>{language === 'fr' ? 'FAQ non-officielle · Données issues de sources publiques NASA & Stardust' : 'Unofficial FAQ · Data from NASA and Stardust public sources'}</p>
+      <footer className="border-t border-border/50 py-12 text-center text-xs text-muted-foreground px-4 bg-muted/30">
+        <div className="max-w-3xl mx-auto space-y-4">
+          <p className="font-bold tracking-widest uppercase">NASA · ARTEMIS II FAQ</p>
+          <p>{language === 'fr' ? 'FAQ non-officielle · Données issues de sources publiques NASA & Stardust' : 'Unofficial FAQ · Data from NASA and Stardust public sources'}</p>
+          <div className="flex justify-center gap-4 text-[10px] uppercase tracking-tighter opacity-50">
+            <span>2026 Artemis Mission Guide</span>
+            <span>·</span>
+            <span>Community Project</span>
+          </div>
+        </div>
       </footer>
     </div>
   );

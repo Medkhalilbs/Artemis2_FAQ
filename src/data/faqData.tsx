@@ -1,7 +1,13 @@
+import React from "react";
+
 export const basesItems = [
   {
     question: "C'est quoi exactement \"Artemis 2\" ?",
     answer: "C'est la première mission habitée du programme Artemis. Après le succès d'Artemis 1 (qui était un vol de test sans personne à bord en 2022), cette mission va envoyer quatre astronautes faire le tour de la Lune.",
+  },
+  {
+    question: "Est-ce que Artémis I et Artémis II ont exactement la même trajectoire mais avec des humains dedans ?",
+    answer: "Les trajectoires sont différentes vu que lors d'Artémis I la capsule a fait une orbite autour de la lune avant de revenir sur Terre alors que lors de cette mission (Artémis II), il y a un simple survol de la lune puis un retour sur Terre.",
   },
   {
     question: "Pourquoi l'appelle-t-on \"Artemis\" et quel est le lien avec les missions \"Apollo\" ?",
@@ -20,12 +26,16 @@ export const basesItems = [
     answer: "C'est une question de sécurité. Avant de risquer un atterrissage complexe, la NASA veut vérifier que le vaisseau Orion est capable de maintenir un équipage en vie dans l'espace lointain et de revenir en toute sécurité.",
   },
   {
+    question: "Combien coûte le programme Artemis ?",
+    answer: "Pour répondre à cette question il faut distinguer le coût du matériel (la fusée, les combinaisons, le carburant) des coûts connexes comme le personnel. Pour simplifier, le NASA Office of Inspector General - un organe américain officiel - évalue actuellement le coût total du programme comme étant un peu supérieur à 90 milliards de dollars fin 2025. Pour donner une idée de ce que couvre cette somme, une fusée (capsule + lanceur) demande à elle seule 2 à 2,5 milliards de dollars pour être fabriquée, auxquels il faut ajouter environ 1,5 milliards de dollars supplémentaires pour conduire la mission en elle-même, soit un coût total de plus ou moins 4 milliards de dollars par lancement. Il convient de rappeler que c’est un projet de longue haleine et la NASA n’est pas bénéficiaire d’une aussi grosse partie du budget américain (moins de 1%) comparé à la NASA du temps d’Apollo (plus de 1%), même si le budget américain à évoluer entre-temps.",
+  },
+  {
     question: "Que se passe-t-il s'il y a une panne moteur derrière la Lune ?",
     answer: "La trajectoire d'Artemis 2 est appelée \"trajectoire de retour libre\". Cela signifie que la gravité de la Lune ramènera naturellement la capsule vers la Terre, même si le moteur principal tombe en panne.",
   },
   {
     question: "Pourquoi la vitesse diminue sur le trajet vers la Lune ?",
-    answer: "Le vaisseau est attiré par la gravité terrestre, et ralentit petit à petit, jusqu'à ce qu'il s'approche suffisamment de la Lune pour que celle-ci l'attire plus que la Terre : le vaisseau va alors accélérer à nouveau, passer derrière la Lune, et on aura ensuite le phénomène inverse sur le trajet retour.",
+    answer: "Le vaisseau est attiré par la gravité terrestre, et ralentit petit à petit, jusqu'à ce qu'il s'approche suffisamment de la Lune pour que celle-ci l'attire plus que la Terre : le vaisseau va alors accélérer à nouveau, passer derrière la lune, et on aura ensuite le phénomène inverse sur le trajet retour. Attention cependant : la télémétrie transmise par la NASA donne la vitesse par rapport à la Terre, et non pas par rapport à la Lune, qui se déplace elle aussi avec une vitesse. On ne verra donc pas nécessairement la vitesse augmenter sur la télémétrie, même si par rapport à la Lune, le vaisseau accélère.",
   },
   {
     question: "Artemis 2 va-t-il battre le record de l'humain le plus loin de la Terre établi par Apollo 13 ? De combien ?",
@@ -126,6 +136,10 @@ export const basesItems = [
     question: "Comment la capsule fait-elle pour s'orienter dans l'espace sans support d'air ?",
     answer: "La capsule s'oriente, accélère et décélère grâce à ses moteurs. Pour créer une 'poussée' il n'y a pas besoin d'air, il s'agit d'une idée reçue propagée par les médias non spécialisés. Les jets de gaz effectués par les moteurs créent, sous l'effet de l'action d'expulsion du gaz, une réaction de la capsule qui part alors dans le sens opposé à celui de l'expulsion des gaz. Il s'agit simplement du principe d'Action/Réaction (autrement dit, la 3ème loi de Newton).",
   },
+  {
+    question: "La capsule peut-elle être endommagée par des astéroïdes ?",
+    answer: "Non, il y a plus de chances de gagner 3 fois au loto que Orion se prenne un astéroïde.",
+  },
 ];
 
 export const vieABordItems: { question: string; answer: string | React.ReactNode }[] = [
@@ -172,6 +186,10 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
   {
     question: "Pourquoi les sièges ne sont-ils pas visibles ?",
     answer: "Les sièges des astronautes dans la capsule sont repliables tout comme les écrans de commande afin de laisser plus de place aux astronautes pour se déplacer lorsqu'ils ne doivent pas être assis ou s'attacher.",
+  },
+  {
+    question: "Pourquoi fait-il sombre dans la capsule ?",
+    answer: "Lorsque les astronautes doivent faire des observations scientifiques, il est prévu que les lumière dans la capsule soient éteintes avant les observations c'est pour laisser le temps à leurs yeux de s'habituer et pendant les observations c'est pour éviter que des reflets viennent polluer les observations. Pour se repérer un minimum ils peuvent allumer des lumières vertes/rouges comme pour les engins militaires.",
   },
   {
     question: "Pourquoi les combinaisons sont oranges ? Pourquoi elles ne sont pas portées tout le temps ?",
@@ -312,7 +330,7 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   },
   {
     question: "Est-ce que l'espace est politique ?",
-    answer: "Oui et ce, depuis ses débuts. Il suffit de voir comment la conquête spatiale était un moyen de prouver sa puissance technologique pendant la guerre froide. Aujourd'hui, Artemis reste un enjeu très politique impliquant de nombreuses parties prenantes et des budgets astronomiques votés par les décideurs.",
+    answer: "Oui et ce, depuis ses débuts. Il suffit de voir comment la conquête spatiale était un moyen de montrer qui a la plus grosse notamment pendant la guerre froide, car si je peux atteindre l'espace, je peux aussi t'envoyer des missiles sur toi. Artemis en particulier est 100% politique. On rappelle qu'il y a quelques jours, Trump a dit vouloir enlever quasiment un quart du financement de la NASA pour financer ses panpans. De plus, le président actuel de la NASA, Jared Isaacman, a été nommé non pas pour ses compétences mais car Elon Musk a demandé à Trump de le nommer.",
   },
   {
     question: "Quelle montre est en dotation pour l'équipage d'Artemis 2 ?",
@@ -331,5 +349,141 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   {
     question: "Les fusées polluent énormément, non ?",
     answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. Le Kennedy Space Center est également très attentif à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toutes les fusées, certaines utilisant du kérosène (p.ex la Falcon 9 de SpaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
+  }
+];
+export const survolItems: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Pourquoi font-ils une description détaillée des cratères alors qu’on connaît bien la Lune ?",
+    answer: "Au contraire, on ne connaît pas très bien la lune. Par exemple, en début de soirée, Reid Wiseman a nommé deux cratères de la Lune (Integrity et Carroll). Aussi, l'œil humain distingue des choses imperceptibles à la caméra/photo comme les couleurs ou la profondeur. Pour finir, les caméras utilisées pour l'observation aujourd'hui sont de meilleure qualité par rapport à Apollo.",
   },
+  {
+    question: "Pourquoi c'est eux qui sont allés le plus loin alors qu'ils ne sont même pas allés sur la lune ?",
+    answer: "Ils ont battu le record parce qu'ils sont sur une orbite autour de la lune bien plus éloignée que les trajectoires permettant aux missions Apollos d'atterrir sur la Lune.",
+  },
+  {
+    question: "C’est quoi les cratères sur la Lune ?",
+    answer: "Les cratères lunaires sont des trous formés par des impacts de météorites, astéroïdes ou comètes. Comme la Lune n’a ni atmosphère (donc rien pour brûler les objets) ni vent ou pluie, les impacts restent visibles pendant des millions, voire des milliards d’années.",
+  },
+  {
+    question: "Quel est le type de sol présent sur la Lune ? Peut-on le comparer à de l’argile ?",
+    answer: "Le sol lunaire, appelé régolithe, n’est pas de l’argile. Il s’agit d’une fine poussière formée par des milliards d’années d’impacts de météorites qui ont broyé la roche. Contrairement à l’argile terrestre, il ne contient pas d’eau et ses particules sont très abrasives et irrégulières. En résumé, c’est une sorte de poudre minérale sèche, bien différente des sols que l’on trouve sur Terre.",
+  },
+  {
+    question: "De combien la capsule va-t-elle passer au plus proche de la Lune ?",
+    answer: "La capsule va passer au plus proche de la Lune avec une altitude d’environ 6 500 km pour une moyenne lors du survol d’environ 8 000 km.",
+  },
+  {
+    question: "Pourquoi dit-on \"mer\" pour nommer certains endroits de la lune ?",
+    answer: "Parce qu'avant, on les a confondus avec des mers car ces zones paraissent plus sombres.",
+  },
+];
+
+export const lexiqueItems: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Terminateur",
+    answer: "Le terminateur est la frontière jour/nuit sur un astre. Hélas rien à voir avec le cinéma. On peut le voir sur la Terre en regardant du côté nuit et voir l'ombre de la nuit progresser.",
+  },
+  {
+    question: "Albédo",
+    answer: "L'albédo est une mesure comprise entre 1 et 0 et sans unité permettant de mesurer la réflectivité d'un objet par rapport à la lumière qu'elle reçoit. Par exemple, une surface blanche a un plus grand albédo qu'une surface noire.",
+  },
+];
+
+export const planningEvents = [
+  {
+    date: "4 AVRIL 2026", events: [
+      { time: "00:32", desc: "OTC-1 BURN" },
+      { time: "02:44", desc: "NASA Conférence depuis la capsule (SAW CAMERA \"SELFIE\")" },
+      { time: "05:00", desc: "LUNAR FLYBY CABIN CONFIGURATION" },
+      { time: "06:59", desc: "CSA Conférence depuis la capsule" },
+      { time: "09:54", desc: "Fin de journée des astronautes" },
+      { time: "18:24", desc: "Réveil des astronautes" },
+      { time: "20:49", desc: "NASA Conférence depuis la capsule" },
+      { time: "22:34", desc: "NASA Conférence depuis la capsule" },
+      { time: "23:15", desc: "Conférence depuis Houston" }
+    ]
+  },
+  {
+    date: "5 AVRIL 2026", events: [
+      { time: "01:32", desc: "OTC-2 BURN" },
+      { time: "02:59", desc: "MANUAL PILOTING DETAILED FLIGHT TEST OBJECTIVE" },
+      { time: "03:29", desc: "LUNAR IMAGING REVIEW FOR FLYBY OPERATIONS" },
+      { time: "06:14", desc: "CSA VIP Call" },
+      { time: "09:09", desc: "Fin de journée des astronautes" },
+      { time: "17:39", desc: "Réveil des astronautes" },
+      { time: "20:09", desc: "OBJECTIFS DÉTAILLÉS DES TESTS EN VOL DE LA COMBINAISON OCSS" },
+      { time: "21:30", desc: "Conférence depuis Houston" }
+    ]
+  },
+  {
+    date: "6 AVRIL 2026", events: [
+      { time: "04:34", desc: "Correction de trajectoire 3" },
+      { time: "06:30", desc: "INTEGRITY ENTRE DANS LA SPHÈRE D'INFLUENCE LUNAIRE" },
+      { time: "08:09", desc: "Fin de journée des astronautes" },
+      { time: "16:39", desc: "Réveil des astronautes" },
+      { time: "19:45", desc: "INTEGRITY DÉPASSE LE RECORD DE DISTANCE D'APOLLO 13" },
+      { time: "19:59", desc: "L'ÉQUIPAGE RECONNAÎT LE RECORD DE DISTANCE D'APOLLO 13 (AUDIO SEULEMENT)" },
+      { time: "20:04", desc: "L'ÉQUIPAGE CONFIGURE LA CABINE D'INTEGRITY POUR LES OPÉRATIONS DE SURVOL" },
+      { time: "20:34", desc: "PÉRIODE D'OBSERVATION LUNAIRE (SURVOL) COMMENCE" }
+    ]
+  },
+  {
+    date: "7 AVRIL 2026", events: [
+      { time: "00:36", desc: "PERTE DE COMMUNICATION PRÉVUE (DERRIÈRE LA LUNE)" },
+      { time: "00:54", desc: "INTEGRITY EFFECTUE SON APPROCHE LA PLUS PROCHE DE LA LUNE" },
+      { time: "00:58", desc: "INTEGRITY ATTEINT SA DISTANCE MAXIMALE DE LA TERRE" },
+      { time: "01:16", desc: "ACQUISITION DE SIGNAL PRÉVUE AVEC INTEGRITY" },
+      { time: "01:24", desc: "VUES INTÉRIEURES DE L'ÉQUIPAGE PENDANT LE SURVOL LUNAIRE" },
+      { time: "01:30", desc: "PÉRIODE D'OBSERVATION LUNAIRE (SURVOL) SE TERMINE" },
+      { time: "07:54", desc: "Fin de journée des astronautes" },
+      { time: "17:24", desc: "Réveil des astronautes" },
+      { time: "19:17", desc: "INTEGRITY QUITTE LA SPHÈRE D'INFLUENCE LUNAIRE ET SE DIRIGE VERS LA TERRE" },
+      { time: "20:29", desc: "ÉVÉNEMENT DU BUREAU DES AFFAIRES PUBLIQUES DE LA NASA - APPEL DE VÉHICULE À VÉHICULE ENTRE L'INTÉGRITÉ ET L'ISS (AUDIO SEULEMENT)" },
+      { time: "20:49", desc: "DÉBRIEFING DE L'ÉQUIPAGE APRÈS LE SURVOL AVEC DES RESPONSABLES SCIENTIFIQUES" },
+      { time: "21:19", desc: "L'ÉQUIPAGE COMMENCE SA PÉRIODE DE REPOS" }
+    ]
+  },
+  {
+    date: "8 AVRIL 2026", events: [
+      { time: "04:39", desc: "NASA Conférence depuis la capsule" },
+      { time: "08:54", desc: "Fin de journée des astronautes" },
+      { time: "17:24", desc: "Réveil des astronautes" },
+      { time: "21:30", desc: "Conférence depuis Houston" },
+      { time: "23:09", desc: "CSA Conférence depuis la capsule" }
+    ]
+  },
+  {
+    date: "9 AVRIL 2026", events: [
+      { time: "00:04", desc: "DÉMONSTRATION DU DÉPLOIEMENT DU BLINDAGE ANTI-RADIATION" },
+      { time: "02:44", desc: "OBJECTIF DÉTAILLÉ DU TEST EN VOL DE PILOTAGE MANUEL" },
+      { time: "08:54", desc: "Fin de journée des astronautes" },
+      { time: "17:24", desc: "Réveil des astronautes" },
+      { time: "21:30", desc: "Conférence depuis Houston" },
+      { time: "23:59", desc: "Conférence depuis la capsule" }
+    ]
+  },
+  {
+    date: "10 AVRIL 2026", events: [
+      { time: "01:54", desc: "NASA Conférence depuis la capsule" },
+      { time: "04:53", desc: "Correction de trajectoire RTC-2 BURN" },
+      { time: "08:54", desc: "Fin de journée des astronautes" },
+      { time: "17:24", desc: "Réveil des astronautes" },
+      { time: "19:39", desc: "CONFIGURATION DE LA CABINE POUR L'ENTRÉE COMMENCE" },
+      { time: "20:53", desc: "Correction de trajectoire RTC-3 BURN" },
+      { time: "21:09", desc: "L'ÉQUIPAGE CONTINUE DE CONFIGURER LA CABINE D'INTEGRITY EN VUE DE L'ENTRÉE" },
+      { time: "22:54", desc: "L'ÉQUIPAGE PASSE À SA CHECKLIST D'ENTRÉE" }
+    ]
+  },
+  {
+    date: "11 AVRIL 2026", events: [
+      { time: "01:33", desc: "SÉPARATION DU MODULE DE COMMANDE ET DU MODULE DE SERVICE" },
+      { time: "01:36", desc: "MANŒUVRE D'ÉLÉVATION DU MODULE DE COMMANDE (CREW MODULE RAISE BURN)" },
+      { time: "01:53", desc: "INTERFACE D'ENTRÉE ATMOSPHÉRIQUE" },
+      { time: "02:06", desc: "AMERRISSAGE" },
+      { time: "02:21", desc: "COUPURE DE L'ALIMENTATION" },
+      { time: "03:05", desc: "HEURE CIBLÉE POUR L'EXTRACTION DE L'ÉQUIPAGE" },
+      { time: "03:35", desc: "ARRIVÉE DE L'ÉQUIPAGE SUR LE NAVIRE DE RÉCUPÉRATION" },
+      { time: "04:35", desc: "CONFÉRENCE DE PRESSE POST-AMERRISSAGE (JSC)" }
+    ]
+  }
 ];

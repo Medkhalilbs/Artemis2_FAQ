@@ -2,6 +2,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const getSections = (lang: string) => [
   { id: "bases", label: lang === 'fr' ? "Les bases" : "Basics", icon: "🚀" },
+  { id: "survol", label: lang === 'fr' ? "Survol" : "Flyby", icon: "🌕" },
   { id: "modele-3d", label: lang === 'fr' ? "Modèle 3D" : "3D Model", icon: "🛰️" },
   { id: "vaisseau", label: lang === 'fr' ? "Vaisseau" : "Spacecraft", icon: "🛸" },
   { id: "equipage", label: lang === 'fr' ? "Équipage" : "Crew", icon: "👨‍🚀" },
@@ -9,6 +10,7 @@ const getSections = (lang: string) => [
   { id: "images", label: lang === 'fr' ? "Images" : "Media", icon: "📷" },
   { id: "divers", label: lang === 'fr' ? "Divers" : "Misc", icon: "❓" },
   { id: "planning", label: lang === 'fr' ? "Planning" : "Timeline", icon: "📅" },
+  { id: "lexique", label: lang === 'fr' ? "Lexique" : "Lexicon", icon: "📖" },
 ];
 
 const SideNav = () => {

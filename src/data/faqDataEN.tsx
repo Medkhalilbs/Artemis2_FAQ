@@ -6,6 +6,10 @@ export const basesItemsEN = [
     answer: "It is the first crewed mission of the Artemis program. Following the success of Artemis 1 (an uncrewed test flight in 2022), this mission will send four astronauts to fly around the Moon.",
   },
   {
+    question: "Are Artemis I and Artemis II the same trajectory, just with humans inside?",
+    answer: "The trajectories are different because Artemis I orbited the Moon before returning to Earth, whereas Artemis II is a simple flyby of the Moon followed by an immediate return to Earth.",
+  },
+  {
     question: "Why is it called \"Artemis\" and what is the link with the \"Apollo\" missions?",
     answer: "In Greek mythology, Artemis is the twin sister of Apollo and the goddess of the Moon. This name symbolizes humanity's return to the Moon with a modern and inclusive approach.",
   },
@@ -22,12 +26,16 @@ export const basesItemsEN = [
     answer: "It is a matter of safety. Before risking a complex landing, NASA wants to verify that the Orion spacecraft is capable of keeping a crew alive in deep space and returning safely.",
   },
   {
+    question: "How much does the Artemis program cost?",
+    answer: "To answer this, one must distinguish hardware costs (rocket, suits, fuel) from related costs like personnel. The NASA Office of Inspector General currently estimates the total program cost at just over $90 billion through late 2025. To give you an idea, a single rocket (capsule + launcher) costs $2 to $2.5 billion to manufacture, plus about $1.5 billion to conduct the mission itself, totaling roughly $4 billion per launch. Remember, this is a long-term project and NASA's budget is less than 1% of US federal spending, compared to over 4% during the Apollo era.",
+  },
+  {
     question: "What happens if there is an engine failure behind the Moon?",
     answer: "The trajectory of Artemis 2 is called a \"free-return trajectory\". This means the Moon's gravity will naturally guide the capsule back to Earth, even if the main engine fails.",
   },
   {
     question: "Why does the speed decrease on the way to the Moon?",
-    answer: "The spacecraft is pulled by Earth's gravity, gradually slowing down until it gets close enough to the Moon for lunar gravity to pull harder than Earth's: the spacecraft will then accelerate again, pass behind the Moon, and undergo the reverse phenomenon on the way back.",
+    answer: "The spacecraft is pulled by Earth's gravity, gradually slowing down until it gets close enough to the Moon for lunar gravity to pull harder than Earth's. Note: NASA telemetry usually gives speed relative to Earth, not the Moon, so you might not see an increase in speed on the dashboard even as the spacecraft technically accelerates toward the Moon.",
   },
   {
     question: "Will Artemis 2 break the human distance record set by Apollo 13? By how much?",
@@ -128,6 +136,10 @@ export const basesItemsEN = [
     question: "How does the capsule orient itself in space without air?",
     answer: "The capsule orients, accelerates, and decelerates using its thrusters. Creating a 'thrust' does not require air—this is a common misconception propagated by non-specialized media. The gas jets produced by the engines create, under the effect of expelling the gas, a reaction where the capsule moves in the opposite direction. It is simply the principle of Action/Reaction (in other words, Newton's 3rd Law).",
   },
+  {
+    question: "Can the capsule be damaged by asteroids?",
+    answer: "No, you have a better chance of winning the lottery 3 times than Orion being hit by an asteroid.",
+  },
 ];
 
 export const vieABordItemsEN: { question: string; answer: string | React.ReactNode }[] = [
@@ -142,6 +154,7 @@ export const vieABordItemsEN: { question: string; answer: string | React.ReactNo
         <p>Two measurements must be distinguished:</p>
         <p>The <strong className="text-foreground/80">total pressurized interior volume</strong> is about 20 m³, but it's largely filled by seats, screens, and equipment.</p>
         <p>The <strong className="text-foreground/80">habitable volume</strong> (free space to move) is only 9 m³. That's equivalent to a small bathroom for four adults living 24/7 for 10 days. The astronauts being in zero gravity makes this a comfortable volume given the constraints of spaceflight.</p>
+        <p>In comparison, for Apollo missions, total pressurized volume was 10.4 m³, for 5.9 m³ habitable. Artemis has twice the total volume and 12.5% more space per astronaut!</p>
       </div>
     ),
   },
@@ -173,6 +186,10 @@ export const vieABordItemsEN: { question: string; answer: string | React.ReactNo
   {
     question: "Why are the seats not visible?",
     answer: "The astronaut seats inside the capsule, as well as the command screens, are foldable. This gives the astronauts more space to move around when they don't need to be seated or strapped in.",
+  },
+  {
+    question: "Why is it dark in the capsule?",
+    answer: "When astronauts perform scientific observations, the lights are dimmed to allow their eyes to adjust and to prevent reflections from polluting the data. They use red/green utility lights to find their way around, similar to military craft.",
   },
   {
     question: "Why are the spacesuits orange? Why aren't they worn all the time?",
@@ -313,7 +330,7 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
   },
   {
     question: "Is space political?",
-    answer: "Yes, and it always has been. The space race was a way to prove technological supremacy during the Cold War. Today, Artemis remains highly political, involving many stakeholders and enormous budgets approved by policymakers.",
+    answer: "Yes, and it always has been. From the Cold War to today, space remains highly political. Recent administrative changes and funding debates impact NASA's direction constantly. For example, the current NASA administrator was appointed recently under a new political climate.",
   },
   {
     question: "Which watch is issued to the Artemis 2 crew?",
@@ -323,14 +340,150 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
     question: "Who will be the next European astronaut to fly on Artemis?",
     answer: (
       <div className="space-y-2">
-        <p>Spaceflight runs on a barter system between agencies. In exchange for hardware, agency astronauts fly on missions. ESA would come in third priority behind Canadians and Japanese. Within ESA, Germans will likely be prioritized as they are the biggest contributors.</p>
-        <p>A European astronaut flight wouldn't happen until Artemis IV at the earliest. Thomas Pesquet is in "retraining", so he likely won't be an astronaut by the time these missions occur. The same applies to Sophie Adenot.</p>
-        <p>However, you can rejoice just as much if a non-French European is selected, because your taxes pay the salaries of all European astronauts, and they represent all of you.</p>
+        <p>Spaceflight runs on a barter system between agencies. In exchange for hardware (like the Service Module), agency astronauts fly on missions. ESA would come in after Canadians and Japanese. Within ESA, major contributors like Germany or France often have engineers/astronauts prioritized.</p>
+        <p>A European astronaut flight likely won't happen until Artemis IV at the earliest. Famous astronauts like Thomas Pesquet or Sophie Adenot are in the selection pool but mission assignments are not yet fixed.</p>
       </div>
     )
   },
   {
     question: "Do rockets pollute a lot?",
-    answer: "The SLS rocket uses a core stage powered by hydrogen + oxygen, which primarily emits water vapor (clouds). Once they fall back into the ocean, the boosters and stages become inert and form excellent foundations for reef development, much like shipwrecks. The Kennedy Space Center is also very careful to disturb the local ecosystem as little as possible. However, this isn't true for all rockets, as some use kerosene (e.g., SpaceX's Falcon 9). Energy consumption and pollution due to the production of the rocket and its fuel remain frequent points of criticism.",
+    answer: "The SLS rocket core stage uses hydrogen + oxygen, emitting primarily water vapor. Boosters fall into the ocean and often form foundations for reefs. While production and toxic fuel in some components are concerns, modern space programs are increasingly attentive to environmental impact.",
+  },
+];
+
+export const survolItemsEN: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Why describe craters in detail when we know the Moon well?",
+    answer: "Actually, we don't know the moon that well. For example, Reid Wiseman recently named two craters (Integrity and Carroll). The human eye distinguishes depth and color better than many cameras. Also, modern sensors are far superior to those from the Apollo era.",
+  },
+  {
+    question: "Why are they the ones who went the furthest without landing?",
+    answer: "They broke the record because they are on an orbit around the moon that is much farther out than the trajectories used for Apollo landings.",
+  },
+  {
+    question: "What are the craters on the Moon?",
+    answer: "Lunar craters are holes formed by meteorite or asteroid impacts. Without an atmosphere to burn them up or wind/rain to erode them, impacts remain visible for billions of years.",
+  },
+  {
+    question: "What type of soil is on the Moon? Is it like clay?",
+    answer: "Lunar soil (regolith) is fine dust formed by billions of years of impacts. It contains no water and is extremely abrasive—very different from Earth's clay.",
+  },
+  {
+    question: "How close will the capsule pass to the Moon?",
+    answer: "The closest approach (perilune) is approximately 6,500 km altitude.",
+  },
+  {
+    question: "Why say \"sea\" for places on the Moon?",
+    answer: "Early astronomers mistook these dark, lava-filled plains for bodies of water.",
+  },
+];
+
+export const lexiqueItemsEN: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Terminator",
+    answer: "The terminator is the moving line between the light and dark sides of a planet or moon.",
+  },
+  {
+    question: "Albedo",
+    answer: "Albedo is a measure of how much light a surface reflects. A high albedo means a surface reflects most light (like snow); a low albedo means it absorbs most light (comme asphalt).",
+  },
+];
+
+export const planningEventsEN = [
+  {
+    date: "APRIL 4, 2026", events: [
+      { time: "00:32", desc: "OTC-1 BURN" },
+      { time: "02:44", desc: "NASA Conference from capsule (SAW CAMERA \"SELFIE\")" },
+      { time: "05:00", desc: "LUNAR FLYBY CABIN CONFIGURATION" },
+      { time: "06:59", desc: "CSA Conference from capsule" },
+      { time: "09:54", desc: "Astronaut end of day" },
+      { time: "18:24", desc: "Astronaut wake up" },
+      { time: "20:49", desc: "NASA Conference from capsule" },
+      { time: "22:34", desc: "NASA Conference from capsule" },
+      { time: "23:15", desc: "Conference from Houston" }
+    ]
+  },
+  {
+    date: "APRIL 5, 2026", events: [
+      { time: "01:32", desc: "OTC-2 BURN" },
+      { time: "02:59", desc: "MANUAL PILOTING DETAILED FLIGHT TEST OBJECTIVE" },
+      { time: "03:29", desc: "LUNAR IMAGING REVIEW FOR FLYBY OPERATIONS" },
+      { time: "06:14", desc: "CSA VIP Call" },
+      { time: "09:09", desc: "Astronaut end of day" },
+      { time: "17:39", desc: "Astronaut wake up" },
+      { time: "20:09", desc: "OCSS SUIT DETAILED FLIGHT TEST OBJECTIVES" },
+      { time: "21:30", desc: "Conference from Houston" }
+    ]
+  },
+  {
+    date: "APRIL 6, 2026", events: [
+      { time: "04:34", desc: "Trajectory Correction 3" },
+      { time: "06:30", desc: "INTEGRITY ENTERS LUNAR SPHERE OF INFLUENCE" },
+      { time: "08:09", desc: "Astronaut end of day" },
+      { time: "16:39", desc: "Astronaut wake up" },
+      { time: "19:45", desc: "INTEGRITY SURPASSES APOLLO 13 DISTANCE RECORD" },
+      { time: "19:59", desc: "CREW RECOGNIZES APOLLO 13 DISTANCE RECORD (AUDIO ONLY)" },
+      { time: "20:04", desc: "CREW CONFIGURES INTEGRITY CABIN FOR FLYBY OPERATIONS" },
+      { time: "20:34", desc: "LUNAR OBSERVATION PERIOD (FLYBY) BEGINS" }
+    ]
+  },
+  {
+    date: "APRIL 7, 2026", events: [
+      { time: "00:36", desc: "PLANNED LOSS OF COMMUNICATION (BEHIND MOON)" },
+      { time: "00:54", desc: "INTEGRITY MAKES CLOSEST APPROACH TO MOON" },
+      { time: "00:58", desc: "INTEGRITY REACHES MAXIMUM DISTANCE FROM EARTH" },
+      { time: "01:16", desc: "PLANNED SIGNAL ACQUISITION WITH INTEGRITY" },
+      { time: "01:24", desc: "CREW INTERIOR VIEWS DURING LUNAR FLYBY" },
+      { time: "03:30", desc: "LUNAR OBSERVATION PERIOD (FLYBY) ENDS" },
+      { time: "07:54", desc: "Astronaut end of day" },
+      { time: "17:24", desc: "Astronaut wake up" },
+      { time: "19:17", desc: "INTEGRITY LEAVES LUNAR SPHERE OF INFLUENCE TOWARD EARTH" },
+      { time: "20:29", desc: "NASA PAO EVENT - VEHICLE-TO-VEHICLE CALL BETWEEN INTEGRITY AND ISS (AUDIO ONLY)" },
+      { time: "20:49", desc: "POST-FLYBY CREW DEBRIEF WITH SCIENCE OFFICIALS" },
+      { time: "21:19", desc: "CREW BEGINS SLEEP PERIOD" }
+    ]
+  },
+  {
+    date: "APRIL 8, 2026", events: [
+      { time: "04:39", desc: "NASA Conference from capsule" },
+      { time: "08:54", desc: "Astronaut end of day" },
+      { time: "17:24", desc: "Astronaut wake up" },
+      { time: "21:30", desc: "Conference from Houston" },
+      { time: "23:09", desc: "CSA Conference from capsule" }
+    ]
+  },
+  {
+    date: "APRIL 9, 2026", events: [
+      { time: "00:04", desc: "RADIATION SHIELDING DEPLOYMENT DEMONSTRATION" },
+      { time: "02:44", desc: "MANUAL PILOTING DETAILED FLIGHT TEST OBJECTIVE" },
+      { time: "08:54", desc: "Astronaut end of day" },
+      { time: "17:24", desc: "Astronaut wake up" },
+      { time: "21:30", desc: "Conference from Houston" },
+      { time: "23:59", desc: "Conference from capsule" }
+    ]
+  },
+  {
+    date: "APRIL 10, 2026", events: [
+      { time: "01:54", desc: "NASA Conference from capsule" },
+      { time: "04:53", desc: "Trajectory Correction RTC-2 BURN" },
+      { time: "08:54", desc: "Astronaut end of day" },
+      { time: "17:24", desc: "Astronaut wake up" },
+      { time: "19:39", desc: "ENTRY CABIN CONFIGURATION BEGINS" },
+      { time: "20:53", desc: "Trajectory Correction RTC-3 BURN" },
+      { time: "21:09", desc: "CREW CONTINUES ENTRY CABIN CONFIGURATION" },
+      { time: "22:54", desc: "CREW BEGINS ENTRY CHECKLIST" }
+    ]
+  },
+  {
+    date: "APRIL 11, 2026", events: [
+      { time: "01:33", desc: "CM AND SM SEPARATION" },
+      { time: "01:36", desc: "CREW MODULE RAISE BURN" },
+      { time: "01:53", desc: "ATMOSPHERIC ENTRY INTERFACE" },
+      { time: "02:06", desc: "SPLASHDOWN" },
+      { time: "02:21", desc: "POWER DOWN" },
+      { time: "03:05", desc: "TARGET TIME FOR CREW EGRESS" },
+      { time: "03:35", desc: "CREW ARRIVAL ON RECOVERY SHIP" },
+      { time: "04:35", desc: "POST-SPLASHDOWN PRESS CONFERENCE (JSC)" }
+    ]
   }
 ];
