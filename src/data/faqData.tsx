@@ -13,7 +13,7 @@ export const basesItems = [
   },
   {
     question: "Est-ce que les astronautes vont marcher sur la Lune cette fois-ci ?",
-    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'alunissage est réservé à la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois)",
+    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'atterrissage (marcher sur le sol lunaire) est réservé à la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois)",
   },
   {
     question: "Pourquoi font-ils simplement le tour de la Lune au lieu de s'y poser directement ?",
@@ -41,7 +41,11 @@ export const basesItems = [
   },
   {
     question: "Les missions Apollo avaient mis un jour de moins à atteindre la Lune. Pourquoi cette capsule plus moderne est \"plus lente\" ?",
-    answer: "La durée du trajet est déterminée par les lois de la mécanique céleste, pas par la technologie du vaisseau. Les temps de trajet sont sensiblement les mêmes. Cependant, Artemis 2 a commencé par faire une orbite de 24h autour de la Terre pour vérifier que tous les systèmes critiques soient opérationnels avant de se lancer vers la Lune.",
+    answer: "La durée du trajet (optimisé pour une consommation minimale de carburant) est déterminée par les lois de la mécanique céleste. Les temps de trajet entre les missions Apollo et Artemis 2 sont sensiblement les mêmes. Cependant, Artemis 2 a commencé sa mission par faire une orbite de 24h autour de la Terre pour (entre autres) vérifier que tout les systèmes critiques soient opérationnels avant de se lancer dans 10 jours d'aller-retour vers la lune.",
+  },
+  {
+    question: "Dangereux la ceinture de Van Allen pour les astronautes ?",
+    answer: "Si on la traverse, on risque des irradiations. Mais pas de risque pour les astronautes de l'ISS qui vole bien plus bas. Et pas de danger pour les astronautes d'Artemis car on la contourne vu que c'est une ceinture et pas une sphère.",
   },
   {
     question: "Est-ce qu'ils vont ramener des cailloux lunaires ?",
@@ -76,7 +80,7 @@ export const basesItems = [
   },
   {
     question: "Pourquoi leur tenue est-elle orange ?",
-    answer: "Pour qu'on puisse les repérer facilement lorsqu'ils atterrissent dans l'eau. Ils possèdent également des petites bouées pour leur sécurité et peuvent activer leur petit radeau personnel. Nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage.",
+    answer: "Pour qu'on puisse les repérer facilement lorsqu'ils atterrissent dans l'eau. Ils possèdent également des petites bouées pour leur sécurité et peuvent activer leur petit radeau personnel. Nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage.\nCette tenue n'est utilisée que pour des moments critique.",
   },
   {
     question: "Pourquoi la capsule n'a pas visé la lune dès le départ ?",
@@ -143,6 +147,18 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
   {
     question: "Comment les astronautes bougent/se dégourdissent ?",
     answer: "Pour Artemis, il y a une sorte de rameur que les astronautes utilisent pour faire 30 min de sport par jour. Pour ce qui est de l'ISS, c'est 2h30 de sport par jour en guise de comparaison.",
+  },
+  {
+    question: "Pourquoi les sièges ne sont-ils pas visibles ?",
+    answer: "Les sièges des astronautes dans la capsule sont repliables tout comme les écrans de commande afin de laisser plus de place aux astronautes pour se déplacer lorsqu'ils ne doivent pas être assis ou s'attacher.",
+  },
+  {
+    question: "Pourquoi les combinaisons sont oranges ? Pourquoi elles ne sont pas portées tout le temps ?",
+    answer: "Les combinaisons servent à protéger temporairement les astronautes d'une potentielle décompression pendant le décollage et l'amerrissage. Elle n'est donc normalement pas portée en orbite. La couleur orange permet de faciliter le repérage des astronautes par les équipes chargées de les retrouver en mer à la fin de la mission ou dans le cas d'une interruption de mission d'urgence au décollage.",
+  },
+  {
+    question: "Comment les astronautes font-ils leurs besoins dans les combinaisons ?",
+    answer: "Pendant qu'ils sont dans leur combinaisons, les astronautes portent des couches.",
   },
 ];
 
@@ -242,18 +258,22 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     question: "Pourquoi certaines photos de la Terre sont-elles beaucoup plus sombres que celles d'Apollo ?",
     answer: (
       <div className="space-y-2">
-        <p>En raison de la position actuelle des astres, le début du voyage vers la Lune s'est déroulé dans l'ombre de la Terre. La face visible par l'équipage, et donc celle sur les photos, est le côté \"nuit\" de la Terre !</p>
-        <p>Eh oui, c'est surprenant, mais il s'agit bien de photos prises de nuit, avec le Soleil derrière la Terre. Plusieurs éléments permettent de distinguer notre planète sur ces clichés : un temps d'exposition élevé, un réglage ISO très élevé (d'où les artefacts numériques), et surtout une source de lumière. Mais laquelle puisque le Soleil est derrière la Terre ? Eh bien... La Pleine Lune ! Elle reflète la lumière du Soleil et permet d'apporter une luminosité suffisante pour ces clichés.</p>
+        <p>Dû à la position des astres actuelle, le début du voyage vers la Lune s'est déroulé dans l'ombre de la Terre. La face visible par l'équipage, et donc celle sur les photos, est le côté \"nuit\" de la Terre !</p>
+        <p>Et oui, c'est surprenant, mais il s'agit bien de photos prises de nuit, avec le Soleil derrière la Terre. Plusieurs éléments permettent de distinguer notre planète sur ces clichés : un temps d'exposition élevé, un réglage ISO très élevé (d'où les artefacts numériques), et surtout une source de lumière. Mais laquelle puisque le Soleil est derrière la Terre ? Et bien... La Pleine Lune ! Qui reflète la lumière du Soleil et permet d'apporter une luminosité suffisante pour ces clichés.</p>
         <p>On peut ainsi distinguer sur cette photo les aurores boréales aux deux pôles, l'atmosphère éclairée par le Soleil sur le pourtour, les étoiles autour, et... les éclairages publics dans les zones habitées du globe, puisqu'il y fait nuit !</p>
       </div>
     ),
+  },
+  {
+    question: "C'est quoi ce soleil fantômatique ?",
+    answer: "Une source de lumière comme le soleil ou la lune provoque sur le capteur photo, un reflet sous la forme d'un halo ou d'un cercle lumineux.",
   },
 ];
 
 export const diversItems: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "Quelle est la peluche que l'on voit de temps en temps ?",
-    answer: "La peluche, Rise, est à la fois la mascotte de la mission mais aussi un témoin d'apesanteur lors des différentes phases de la mission.",
+    answer: "Cette peluche se nomme Rise, et est la mascotte de la mission. Elle sert également de témoin d'apesanteur. Elle représente la célèbre photo du lever de terre prise lors de la mission Apollo 8 : la Lune portant une casquette qui représente la Terre. De plus, elle a en son sein une carte SD qui contient les noms de plus de 5 millions de personnes qui se sont inscrites suite à une initiative de la NASA. Vincent et Kibo ont leur nom à bord ! On peut également apercevoir une autre peluche derrière Jenni Gibbons, l'astronaute qui communique avec l'équipage depuis CAPCOM. Il s'agit d'Artemis, un personnage de la série animée Sailor Moon !",
   },
   {
     question: "Est-ce que l'espace est politique ?",
@@ -266,5 +286,9 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   {
     question: "Quel sera le prochain astronaute européen à voler sur Artemis ?",
     answer: "Le spatial fonctionne sur un système d'échange de services entre agences spatiales : en échange de matériel, les astronautes de l'agence peuvent voler sur les missions. L'ESA n'arriverait qu'en troisième position après les Canadiens et les Japonais. Le vol d'un astronaute européen n'aurait pas lieu avant Artemis IV (Thomas Pesquet étant en reconversion, il ne sera probablement plus astronaute au moment de cette mission).",
+  },
+  {
+    question: "Les fusées polluent énormément, non ?",
+    answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. La base de cap canaveral est également très attentive à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toute les fusées, certaines utilisant du kérosène (p.ex la facon9 de spaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
   },
 ];

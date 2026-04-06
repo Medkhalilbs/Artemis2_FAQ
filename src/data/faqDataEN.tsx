@@ -15,7 +15,7 @@ export const basesItemsEN = [
   },
   {
     question: "Will the astronauts walk on the Moon this time?",
-    answer: "No. They will fly over the far side of the Moon and return to Earth. The lunar landing is reserved for the Artemis 4 mission, scheduled for a few years later. (Subject to changes, the program is heavily revised from month to month)",
+    answer: "No. They will fly over the far side of the Moon and return to Earth. The landing (walking on the lunar soil) is reserved for the Artemis 4 mission, scheduled for a few years later. (Subject to changes, the program is heavily revised from month to month)",
   },
   {
     question: "Why simply fly around the Moon instead of landing directly?",
@@ -43,7 +43,11 @@ export const basesItemsEN = [
   },
   {
     question: "The Apollo missions took a day less to reach the Moon. Why is this modern capsule \"slower\"?",
-    answer: "Trip duration is determined by the laws of celestial mechanics, not by the spacecraft's technology. Travel times are roughly the same. However, Artemis 2 began by orbiting the Earth for 24 hours to ensure all critical systems were operational before initiating the lunar transfer.",
+    answer: "The trip duration (optimized for fuel efficiency) is determined by the laws of celestial mechanics. Travel times are roughly the same. However, Artemis 2 began by orbiting Earth for 24 hours to (among other things) ensure all critical systems were operational before initiating the 10-day trip to the Moon and back.",
+  },
+  {
+    question: "Is the Van Allen radiation belt dangerous for astronauts?",
+    answer: "If crossed directly, there is a risk of radiation exposure. However, there is no risk for ISS astronauts, who fly much lower. For Artemis astronauts, there is also no danger, as the trajectory bypasses it—it is a belt, not a full sphere around Earth.",
   },
   {
     question: "Will they bring back lunar rocks?",
@@ -78,7 +82,7 @@ export const basesItemsEN = [
   },
   {
     question: "Why are their suits orange?",
-    answer: "So they can be easily spotted when they splash down in the water. They also have small life buoys for safety and can activate personal life rafts. We saw them entering the Orion capsule before liftoff.",
+    answer: "So they can be easily spotted when they splash down in the water. They also have small life buoys for safety and can activate personal life rafts. We saw them entering the Orion capsule before liftoff.\nThis suit is only used for critical moments.",
   },
   {
     question: "Why didn't the capsule aim for the Moon right from the start?",
@@ -144,6 +148,18 @@ export const vieABordItemsEN: { question: string; answer: string | React.ReactNo
   {
     question: "How do the astronauts move or stretch?",
     answer: "For Artemis, there is a sort of rowing machine that the astronauts use to exercise 30 minutes a day. On the ISS, they exercise 2.5 hours a day by comparison.",
+  },
+  {
+    question: "Why are the seats not visible?",
+    answer: "The astronaut seats inside the capsule, as well as the command screens, are foldable. This gives the astronauts more space to move around when they don't need to be seated or strapped in.",
+  },
+  {
+    question: "Why are the spacesuits orange? Why aren't they worn all the time?",
+    answer: "The suits are used to temporarily protect the astronauts from decompression during launch and splashdown. Therefore, they are not typically worn in orbit. The orange color makes it easier for recovery teams to spot the astronauts in the ocean at the end of the mission, or in the case of a launch abort.",
+  },
+  {
+    question: "How do astronauts use the bathroom while in their suits?",
+    answer: "While wearing their spacesuits, the astronauts wear adult diapers.",
   },
 ];
 
@@ -244,17 +260,21 @@ export const imagesItemsEN: { question: string; answer: string | React.ReactNode
     answer: (
       <div className="space-y-2">
         <p>Due to current celestial positioning, the beginning of the journey took place in Earth's shadow. The face of Earth visible to the crew is the \"night\" side!</p>
-        <p>Yes, it's surprising, but these are night-time pictures with the Sun behind the Earth. Several things allow us to see our planet on these shots: high exposure time, very high ISO (causing artifacts), and crucially... the Full Moon! It reflects sunlight enough to illuminate Earth for the shot.</p>
+        <p>Yes, it's surprising, but these are night-time pictures with the Sun behind the Earth. Several things allow us to see our planet on these shots: high exposure time, very high ISO (causing artifacts), and crucially... a light source. But which one, since the Sun is behind the Earth? Well... The Full Moon! It reflects sunlight perfectly to illuminate Earth for these shots.</p>
         <p>Hence, you can actually see the auroras at both poles, the atmosphere glowing on the edges, stars, and... public city lights since it's night time!</p>
       </div>
     ),
+  },
+  {
+    question: "What is this ghostly sun?",
+    answer: "A light source like the sun or the moon causes a reflection on the camera sensor in the form of a halo or a luminous circle.",
   },
 ];
 
 export const diversItemsEN: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "What is the plush toy we see from time to time?",
-    answer: "The plush toy, Rise, acts as both the mission mascot and the zero-gravity indicator during various mission phases.",
+    answer: "This plush toy is named Rise, and it serves as the mission's mascot and zero-gravity indicator. It represents the famous Earthrise photo taken during the Apollo 8 mission: the Moon wearing a cap depicting Earth. Furthermore, inside it is an SD card containing the names of over 5 million people who signed up following a NASA initiative. Vincent and Kibo have their names on board! We can also spot another plush toy behind Jenni Gibbons, the astronaut communicating with the crew from CAPCOM. It's Artemis, a character from the animated series Sailor Moon!",
   },
   {
     question: "Is space political?",
@@ -267,5 +287,9 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
   {
     question: "Who will be the next European astronaut to fly on Artemis?",
     answer: "Spaceflight runs on a barter system between agencies. In exchange for hardware, agency astronauts fly. ESA is in third priority behind Canadians and Japanese. A European flight won't happen until Artemis IV at the earliest.",
+  },
+  {
+    question: "Do rockets pollute a lot?",
+    answer: "The SLS rocket uses a core stage powered by hydrogen + oxygen, which primarily emits water vapor (clouds). Once they fall back into the ocean, the boosters and stages become inert and act as an excellent base for reef development, much like shipwrecks. The Cape Canaveral base is also very careful to disturb the local ecosystem as little as possible. However, this isn't true for all rockets, as some use kerosene (e.g., SpaceX's Falcon 9). Energy consumption and pollution due to the production of the rocket and its fuel remain frequent points of criticism.",
   },
 ];
