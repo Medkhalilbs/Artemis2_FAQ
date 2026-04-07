@@ -4,6 +4,6 @@ import "./index.css";
 import ReactGA from "react-ga4";
 
 // Initialize Google Analytics
-ReactGA.initialize("G-T2CSRZX097");
+ReactGA.initialize(import.meta.env.VITE_GA_ID);
 
 createRoot(document.getElementById("root")!).render(<App />);

@@ -1,6 +1,6 @@
 # Artemis II FAQ - Mission Control
 
-An immersive, interactive web platform providing real-time data and detailed answers for the first crewed lunar mission of the Artemis program.
+An immersive, interactive web platform providing detailed answers for the first crewed lunar mission of the Artemis program.
 
 ## 🚀 Key Features
 

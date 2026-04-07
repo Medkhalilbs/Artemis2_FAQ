@@ -51,6 +51,49 @@
     --star-white: 0 0% 95%;
     --glow-blue: 213 100% 65%;
   }
+
+  .light {
+    --background: 222 20% 95%;
+    --foreground: 222 47% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 10%;
+
+    --primary: 213 94% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 20% 90%;
+    --secondary-foreground: 222 47% 15%;
+
+    --muted: 222 20% 90%;
+    --muted-foreground: 222 20% 40%;
+
+    --accent: 28 90% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 20% 85%;
+    --input: 222 20% 85%;
+    --ring: 213 94% 50%;
+
+    --sidebar-background: 222 20% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 213 94% 50%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 222 20% 92%;
+    --sidebar-accent-foreground: 222 47% 15%;
+    --sidebar-border: 222 20% 85%;
+    --sidebar-ring: 213 94% 50%;
+
+    --space-dark: 222 20% 90%;
+    --star-white: 222 47% 10%;
+    --glow-blue: 213 94% 45%;
+  }
 }
 
 @layer base {
@@ -77,7 +120,7 @@
   .bg-glass {
     background: hsl(var(--card) / 0.6);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(var(--border) / 0.5);
+    border: 1px solid hsl(var(--foreground) / 0.1);
   }
 
   .glow-border {

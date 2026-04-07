@@ -9,8 +9,8 @@ const getSections = (lang: string) => [
   { id: "vie-a-bord", label: lang === 'fr' ? "Vie à bord" : "Life aboard", icon: "🛏️" },
   { id: "images", label: lang === 'fr' ? "Images" : "Media", icon: "📷" },
   { id: "divers", label: lang === 'fr' ? "Divers" : "Misc", icon: "❓" },
-  { id: "planning", label: lang === 'fr' ? "Planning" : "Timeline", icon: "📅" },
   { id: "lexique", label: lang === 'fr' ? "Lexique" : "Lexicon", icon: "📖" },
+  { id: "planning", label: lang === 'fr' ? "Planning" : "Timeline", icon: "📅" },
 ];
 
 const SideNav = () => {
