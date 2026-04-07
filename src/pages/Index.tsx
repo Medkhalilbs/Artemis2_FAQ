@@ -8,6 +8,7 @@ import SideNav from "@/components/SideNav";
 import AnimatedSection from "@/components/AnimatedSection";
 import SearchBar from "@/components/SearchBar";
 import OrionSpacecraft from "@/components/OrionSpacecraft";
+import ApolloArtemisComparison from "@/components/ApolloArtemisComparison";
 import OrionModel3D from "@/components/OrionModel3D";
 import StarfieldBackground from "@/components/StarfieldBackground";
 import MissionDashboard from "@/components/MissionDashboard";
@@ -226,6 +227,13 @@ const Index = () => {
           </AnimatedSection>
         )}
 
+        {/* Apollo vs Artemis Comparison - hidden during search */}
+        {!isSearching && (
+          <AnimatedSection>
+            <ApolloArtemisComparison />
+          </AnimatedSection>
+        )}
+
         {(!isSearching || filteredSurvol.length > 0) && (
           <AnimatedSection>
             <FAQSection
@@ -354,15 +362,61 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-12 text-center text-xs text-muted-foreground px-4 bg-muted/30">
-        <div className="max-w-3xl mx-auto space-y-4">
-          <p className="font-bold tracking-widest uppercase">NASA · ARTEMIS II FAQ</p>
-          <p>{language === 'fr' ? 'FAQ non-officielle · Données issues de sources publiques NASA & Stardust' : 'Unofficial FAQ · Data from NASA and Stardust public sources'}</p>
-          <div className="flex justify-center gap-4 text-[10px] uppercase tracking-tighter opacity-50">
-            <span>2026 Artemis Mission Guide</span>
-            <span>·</span>
-            <span>Community Project</span>
+      <footer className="border-t border-border/50 pt-16 pb-10 text-center text-xs text-muted-foreground px-4 bg-muted/30">
+        <div className="max-w-3xl mx-auto space-y-10">
+
+          {/* Community Credits */}
+          <div className="bg-glass rounded-2xl glow-border p-8 text-left">
+            <div className="flex items-center gap-3 mb-6 justify-center">
+              <span className="text-xl">❤️</span>
+              <h3 className="font-heading font-bold text-foreground text-base uppercase tracking-widest">
+                {language === 'fr' ? 'Merci à la communauté Stardust' : 'Thanks to the Stardust Community'}
+              </h3>
+              <span className="text-xl">❤️</span>
+            </div>
+            <p className="text-center text-muted-foreground text-[13px] leading-relaxed mb-6 max-w-xl mx-auto">
+              {language === 'fr'
+                ? 'Ce document a été préparé avec amour par les membres de la communauté Stardust qui ont collecté questions et réponses pour vous.'
+                : 'This document was prepared with love by Stardust community members who collected questions and answers for you.'}
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                "M'ellowdy (Jenny)",
+                "Wendark",
+                "Skøll (RaineyShooter___)",
+                "amathieu",
+                "Louloup",
+                "Roy",
+                "Heycureuil",
+                "Seb",
+                "Formica",
+                "Louane",
+                "Pierro_b",
+                "Khalil_bin",
+                "Pierre-Alexandre",
+                "Vicnet de stardust",
+              ].map((name) => (
+                <span
+                  key={name}
+                  className="inline-block px-3 py-1.5 rounded-full text-[12px] font-medium bg-primary/10 border border-primary/20 text-primary/90 hover:bg-primary/20 transition-colors duration-200"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
+
+          {/* Bottom bar */}
+          <div className="space-y-2">
+            <p className="font-bold tracking-widest uppercase">NASA · ARTEMIS II FAQ</p>
+            <p>{language === 'fr' ? 'FAQ non-officielle · Données issues de sources publiques NASA & Stardust' : 'Unofficial FAQ · Data from NASA and Stardust public sources'}</p>
+            <div className="flex justify-center gap-4 text-[10px] uppercase tracking-tighter opacity-50">
+              <span>2026 Artemis Mission Guide</span>
+              <span>·</span>
+              <span>Community Project</span>
+            </div>
+          </div>
+
         </div>
       </footer>
     </div>
