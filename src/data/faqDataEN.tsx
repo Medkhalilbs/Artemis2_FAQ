@@ -14,6 +14,10 @@ export const basesItemsEN = [
     answer: "In Greek mythology, Artemis is the twin sister of Apollo and the goddess of the Moon. This name symbolizes humanity's return to the Moon with a modern and inclusive approach.",
   },
   {
+    question: "What exactly are Artemis, Orion, and Integrity?",
+    answer: "Artemis is the name of the program, and Artemis II is the name of this specific mission. Orion is the name of the spacecraft model (like a ship model), and Integrity is the name the crew gave to their own spacecraft.",
+  },
+  {
     question: "What is the main goal of this journey?",
     answer: "The objective is to test all the life support systems of the Orion capsule with humans on board. It acts as a dress rehearsal to ensure everything works perfectly before attempting a landing on the following mission.",
   },
@@ -137,8 +141,17 @@ export const basesItemsEN = [
     answer: "The capsule orients, accelerates, and decelerates using its thrusters. Creating a 'thrust' does not require air—this is a common misconception propagated by non-specialized media. The gas jets produced by the engines create, under the effect of expelling the gas, a reaction where the capsule moves in the opposite direction. It is simply the principle of Action/Reaction (in other words, Newton's 3rd Law).",
   },
   {
-    question: "Can the capsule be damaged by asteroids?",
-    answer: "No, you have a better chance of winning the lottery 3 times than Orion being hit by an asteroid.",
+    question: "Is there a risk the Orion spacecraft could be damaged by meteorites?",
+    answer: (
+      <div className="space-y-2">
+        <p>Yes, a risk exists, but it is low and well managed.</p>
+        <p>The Orion spacecraft is designed with multi-layer protective shields capable of absorbing or dispersing the energy of impacts. Large meteorites are extremely rare, and agencies like NASA continuously monitor the space environment to avoid dangerous trajectories.</p>
+      </div>
+    ),
+  },
+  {
+    question: "How is the capsule's temperature managed compared to Apollo? Is there a 'Barbecue Mode' for Artemis II?",
+    answer: "During Apollo missions, astronauts used a maneuver called the 'Barbecue Roll' (or Passive Thermal Control). The spacecraft slowly rotated on its axis to evenly distribute solar heat across its surface, preventing one side from overheating while the other froze. For Artemis II, the Orion capsule does not use this continuous rotation mode. It features a far more modern thermal control system combining advanced insulation, thermal fluid circulation, and radiators. However, Orion can still perform orientation adjustments if needed to optimize solar exposure and maintain a stable temperature on board.",
   },
 ];
 
@@ -304,6 +317,10 @@ export const imagesItemsEN: { question: string; answer: string | React.ReactNode
     ),
   },
   {
+    question: "What is the day/night boundary on a celestial body called? What is the Terminator?",
+    answer: "The terminator is the moving line between the lit and dark sides of a planet or moon — unfortunately nothing to do with the movies. You can see it on Earth by looking at the night side and watching the shadow of night slowly progress.",
+  },
+  {
     question: "What is this ghostly sun?",
     answer: "A light source like the sun or the moon causes a reflection on the camera sensor in the form of a halo or a luminous circle.",
   },
@@ -351,6 +368,23 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
   },
 ];
 
+export const bouclierItemsEN: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Why a radiation shield?",
+    answer: (
+      <div className="space-y-2">
+        <p>In deep space (once you move away from Earth), neither Earth's atmosphere nor its magnetic field shields the crew. Astronauts face radiation (rays and charged particles) primarily from the Sun, but also from the rest of space. The farther from Earth, the higher the exposure risk.</p>
+        <p>The consequences of this radiation include:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>For humans: prolonged exposure to high doses damages the body, notably DNA, and can cause serious illnesses including cancer.</li>
+          <li>For electronics: radiation hitting the wrong component can cause bugs or failures. In severe cases, sensitive components can be permanently damaged.</li>
+        </ul>
+        <p>For Artemis II, the Orion spacecraft already has partial shielding, and the flight plan avoids the densest charged-particle zones (Van Allen Belt). Without a solar flare directed toward Earth, the radiation shield is not strictly necessary. However, since the program aims at deeper space exploration, testing a deployable supplementary shield — which can also cover the windows — is a valuable objective.</p>
+      </div>
+    ),
+  },
+];
+
 export const survolItemsEN: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "Why describe craters in detail when we know the Moon well?",
@@ -369,12 +403,41 @@ export const survolItemsEN: { question: string; answer: string | React.ReactNode
     answer: "Lunar soil (regolith) is fine dust formed by billions of years of impacts. It contains no water and is extremely abrasive—very different from Earth's clay.",
   },
   {
-    question: "How close will the capsule pass to the Moon?",
-    answer: "The closest approach (perilune) is approximately 6,500 km altitude.",
+    question: "How close did the capsule pass to the Moon, and what was the maximum distance from Earth?",
+    answer: (
+      <div className="space-y-2">
+        <p>The closest approach to the Moon was approximately <strong className="text-foreground/80">6,500 km</strong> altitude (reached at MET 5d 0h 25m 34s — 1:02:34 AM French time), with an average flyby distance of around 8,000 km.</p>
+        <p>The maximum distance from Earth was reached at MET 5d 0h 27m 39s (1:04:39 AM French time) for a total of <strong className="text-foreground/80">406,771 km</strong> — or 252,756 miles, a new human distance record.</p>
+      </div>
+    ),
   },
   {
     question: "Why say \"sea\" for places on the Moon?",
     answer: "Early astronomers mistook these dark, lava-filled plains for bodies of water.",
+  },
+];
+
+export const retourItemsEN: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "What problems were found with the Orion heat shield?",
+    answer: (
+      <div className="space-y-2">
+        <p>During the uncrewed test mission (Artemis 1, 2022), engineers inspected the heat shield upon return and found:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>Over a hundred chunks of the heat shield were torn away during atmospheric reentry, which could potentially puncture the drogue parachutes.</li>
+          <li>Corrosion of separation bolts between the capsule and service module on the heat shield could create gaps exposing the capsule exterior, posing a crew survival risk.</li>
+        </ul>
+        <p>To address these issues, the reentry trajectory was adjusted compared to Artemis 1: the atmospheric reentry will be performed at a shallower angle and lower speed.</p>
+      </div>
+    ),
+  },
+  {
+    question: "What will happen to the service module after separation?",
+    answer: "Like the first and second stages of the rocket, the service module will be separated from the capsule close to Earth and will partially burn up in the atmosphere. Any debris that survives reentry will simply fall into the ocean. The European Service Module and capsule separation will occur 20 minutes before reentry.",
+  },
+  {
+    question: "Where will the astronauts splash down? How will they be recovered?",
+    answer: "The astronauts are expected to splash down in the Pacific Ocean off the coast of San Diego shortly after 02:00 AM (French time) on April 11th. They will be retrieved by helicopter and brought aboard a US Navy recovery ship.",
   },
 ];
 
@@ -430,8 +493,8 @@ export const planningEventsEN = [
   {
     date: "APRIL 7, 2026", events: [
       { time: "00:36", desc: "PLANNED LOSS OF COMMUNICATION (BEHIND MOON)" },
-      { time: "00:54", desc: "INTEGRITY MAKES CLOSEST APPROACH TO MOON" },
-      { time: "00:58", desc: "INTEGRITY REACHES MAXIMUM DISTANCE FROM EARTH" },
+      { time: "01:02", desc: "INTEGRITY MAKES CLOSEST APPROACH TO MOON — 6,500 km / 4,067 miles" },
+      { time: "01:04", desc: "INTEGRITY REACHES MAXIMUM DISTANCE FROM EARTH — 406,771 km / 252,756 miles" },
       { time: "01:16", desc: "PLANNED SIGNAL ACQUISITION WITH INTEGRITY" },
       { time: "01:24", desc: "CREW INTERIOR VIEWS DURING LUNAR FLYBY" },
       { time: "03:30", desc: "LUNAR OBSERVATION PERIOD (FLYBY) ENDS" },

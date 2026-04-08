@@ -14,6 +14,10 @@ export const basesItems = [
     answer: "Dans la mythologie grecque, Artémis est la sœur jumelle d'Apollon (Apollo) et la déesse de la Lune. Ce nom symbolise le retour de l'humanité vers la Lune avec une approche moderne et inclusive.",
   },
   {
+    question: "C'est quoi Artemis, Orion et Integrity ?",
+    answer: "Artemis est le nom du programme, et Artemis II est le nom de cette mission. Orion est le nom du modèle de vaisseau (comme un modèle de bateau par exemple), et Integrity est le nom donné par l'équipage à leur vaisseau.",
+  },
+  {
     question: "Quel est le but principal de ce voyage ?",
     answer: "L'objectif est de tester tous les systèmes de survie de la capsule Orion avec des humains à bord. C'est une répétition générale pour s'assurer que tout fonctionne parfaitement avant de tenter un atterrissage lors de la mission suivante.",
   },
@@ -137,8 +141,17 @@ export const basesItems = [
     answer: "La capsule s'oriente, accélère et décélère grâce à ses moteurs. Pour créer une 'poussée' il n'y a pas besoin d'air, il s'agit d'une idée reçue propagée par les médias non spécialisés. Les jets de gaz effectués par les moteurs créent, sous l'effet de l'action d'expulsion du gaz, une réaction de la capsule qui part alors dans le sens opposé à celui de l'expulsion des gaz. Il s'agit simplement du principe d'Action/Réaction (autrement dit, la 3ème loi de Newton).",
   },
   {
-    question: "La capsule peut-elle être endommagée par des astéroïdes ?",
-    answer: "Non, il y a plus de chances de gagner 3 fois au loto que Orion se prenne un astéroïde.",
+    question: "Y a-t-il un risque que le vaisseau Orion soit endommagé par des météorites ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Oui, il existe un risque, mais il est faible et bien maîtrisé.</p>
+        <p>Le vaisseau Orion est conçu avec des boucliers de protection multicouches capables d'absorber ou de disperser l'énergie de ces impacts. Les grosses météorites, elles, sont extrêmement rares, et les agences comme la NASA surveillent en permanence l'environnement spatial pour éviter les trajectoires dangereuses.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Comment la température de la capsule est-elle gérée par rapport aux missions Apollo ? Y a-t-il un « mode barbecue » pour la mission Artemis II ?",
+    answer: "Lors des missions Apollo, les astronautes utilisaient une manœuvre appelée « Barbecue Roll » (ou Passive Thermal Control). Le vaisseau spatial tournait lentement sur lui-même afin de répartir uniformément la chaleur du Soleil sur toute sa surface, évitant ainsi qu'un côté surchauffe tandis que l'autre gèle. Pour la mission Artemis II, la capsule Orion n'utilise pas ce mode de rotation continue. Elle dispose d'un système de contrôle thermique beaucoup plus moderne, combinant isolation avancée, circulation de fluide thermique et radiateurs. Cependant, Orion peut toujours effectuer des ajustements d'orientation si nécessaire pour optimiser l'exposition au Soleil et maintenir une température stable à bord.",
   },
 ];
 
@@ -304,6 +317,10 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     ),
   },
   {
+    question: "Comment s'appelle la frontière jour/nuit sur un astre ? Qu'est-ce que le terminateur ?",
+    answer: "Le terminateur est la frontière jour/nuit sur un astre. Hélas rien à voir avec le cinéma. On peut le voir sur la Terre en regardant du côté nuit et voir l'ombre de la nuit progresser.",
+  },
+  {
     question: "C'est quoi ce soleil fantômatique ?",
     answer: "Une source de lumière comme le soleil ou la lune provoque sur le capteur photo, un reflet sous la forme d'un halo ou d'un cercle lumineux.",
   },
@@ -349,8 +366,25 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
   {
     question: "Les fusées polluent énormément, non ?",
     answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. Le Kennedy Space Center est également très attentif à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toutes les fusées, certaines utilisant du kérosène (p.ex la Falcon 9 de SpaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
-  }
+  },
 ];
+export const bouclierItems: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Pourquoi un bouclier anti-radiations ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Dans l'espace dit lointain (dès qu'on s'éloigne un peu de notre planète), il n'y a plus ni l'atmosphère ni le champ magnétique de la Terre pour nous protéger. Les astronautes sont exposés à des radiations (rayonnement, particules chargées) en provenance principalement du soleil, mais aussi du reste de l'espace. Plus on s'éloigne de la Terre, plus le risque d'exposition est élevé.</p>
+        <p>Les conséquences de ces radiations sont :</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>Pour les humains : une exposition prolongée à des doses élevées endommage le corps, et notamment l'ADN, ce qui peut causer des maladies graves, dont des cancers.</li>
+          <li>Pour l'électronique : un rayonnement qui tombe au mauvais endroit peut causer des bugs, voire des pannes. Dans les cas les plus sévères, les composants sensibles peuvent même griller.</li>
+        </ul>
+        <p>Pour la mission Artemis II, le vaisseau Orion est déjà partiellement protégé, et le plan de vol évite les zones les plus denses en particules chargées (ceinture de Van Allen). Sans éruption solaire dans la direction de la Terre, le bouclier anti-radiations n'est pas nécessaire. Le programme a cependant pour objectif de mener à de l'exploration spatiale plus poussée, d'où le test du bouclier anti-radiations réalisé par l'équipage.</p>
+      </div>
+    ),
+  },
+];
+
 export const survolItems: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "Pourquoi font-ils une description détaillée des cratères alors qu’on connaît bien la Lune ?",
@@ -369,12 +403,41 @@ export const survolItems: { question: string; answer: string | React.ReactNode }
     answer: "Le sol lunaire, appelé régolithe, n’est pas de l’argile. Il s’agit d’une fine poussière formée par des milliards d’années d’impacts de météorites qui ont broyé la roche. Contrairement à l’argile terrestre, il ne contient pas d’eau et ses particules sont très abrasives et irrégulières. En résumé, c’est une sorte de poudre minérale sèche, bien différente des sols que l’on trouve sur Terre.",
   },
   {
-    question: "De combien la capsule va-t-elle passer au plus proche de la Lune ?",
-    answer: "La capsule va passer au plus proche de la Lune avec une altitude d’environ 6 500 km pour une moyenne lors du survol d’environ 8 000 km.",
+    question: "De combien la capsule va-t-elle passer au plus proche de la Lune et quelle sera la distance maximale avec la Terre ?",
+    answer: (
+      <div className="space-y-2">
+        <p>La capsule a passé au plus proche de la Lune avec une altitude d'environ <strong className="text-foreground/80">6 500 km</strong> (atteint à MET 5j 0h 25min 34s — 1h02min34 heure française), pour une moyenne lors du survol d'environ 8 000 km.</p>
+        <p>La distance maximale avec la Terre a été franchie à MET 5j 0h 27min 39s (1h04min39 heure française) pour un total de <strong className="text-foreground/80">406 771 km</strong> — soit 252 756 miles, un nouveau record humain.</p>
+      </div>
+    ),
   },
   {
     question: "Pourquoi dit-on \"mer\" pour nommer certains endroits de la lune ?",
     answer: "Parce qu'avant, on les a confondus avec des mers car ces zones paraissent plus sombres.",
+  },
+];
+
+export const retourItems: { question: string; answer: string | React.ReactNode }[] = [
+  {
+    question: "Quels problèmes ont été constatés sur le bouclier thermique d'Orion ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Lors de la mission de test sans équipage (Artémis 1, 2022), les ingénieurs ont inspecté au retour l'état du bouclier thermique et ont constaté :</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>Plus d'une centaine de morceaux du bouclier ont été arrachés lors de la rentrée atmosphérique, ce qui pourrait percer les parachutes de freinage.</li>
+          <li>La corrosion des boulons de séparation entre la capsule et le module de service sur le bouclier thermique pourrait créer des interstices atteignant l'extérieur de la capsule.</li>
+        </ul>
+        <p>Afin de régler ces problèmes, la trajectoire a été modifiée par rapport à Artémis 1 : la rentrée atmosphérique se fera à un angle et une vitesse moins forte.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Que deviendra le module de service après sa séparation avec la capsule ?",
+    answer: "Comme pour le premier et le second étage de la fusée, le module de service sera séparé de la capsule proche de la Terre et brûlera en partie dans l'atmosphère. Les débris qui survivront à la rentrée atmosphérique tomberont simplement dans l'océan. La séparation aura lieu 20 minutes avant la rentrée.",
+  },
+  {
+    question: "Où les astronautes amerriront-ils ? Comment seront-ils récupérés ?",
+    answer: "Les astronautes devraient amerrir dans l'océan Pacifique au large de San Diego un peu après 02h00 (heure France métropolitaine) le 11 Avril. Ils seront récupérés par hélicoptère pour être amenés sur un porte-hélicoptère militaire des USA.",
   },
 ];
 
@@ -430,11 +493,11 @@ export const planningEvents = [
   {
     date: "7 AVRIL 2026", events: [
       { time: "00:36", desc: "PERTE DE COMMUNICATION PRÉVUE (DERRIÈRE LA LUNE)" },
-      { time: "00:54", desc: "INTEGRITY EFFECTUE SON APPROCHE LA PLUS PROCHE DE LA LUNE" },
-      { time: "00:58", desc: "INTEGRITY ATTEINT SA DISTANCE MAXIMALE DE LA TERRE" },
+      { time: "01:02", desc: "INTEGRITY EFFECTUE SON APPROCHE LA PLUS PROCHE DE LA LUNE — 6 500 km / 4 067 miles" },
+      { time: "01:04", desc: "INTEGRITY ATTEINT SA DISTANCE MAXIMALE DE LA TERRE — 406 771 km / 252 756 miles" },
       { time: "01:16", desc: "ACQUISITION DE SIGNAL PRÉVUE AVEC INTEGRITY" },
       { time: "01:24", desc: "VUES INTÉRIEURES DE L'ÉQUIPAGE PENDANT LE SURVOL LUNAIRE" },
-      { time: "01:30", desc: "PÉRIODE D'OBSERVATION LUNAIRE (SURVOL) SE TERMINE" },
+      { time: "03:30", desc: "PÉRIODE D'OBSERVATION LUNAIRE (SURVOL) SE TERMINE" },
       { time: "07:54", desc: "Fin de journée des astronautes" },
       { time: "17:24", desc: "Réveil des astronautes" },
       { time: "19:17", desc: "INTEGRITY QUITTE LA SPHÈRE D'INFLUENCE LUNAIRE ET SE DIRIGE VERS LA TERRE" },

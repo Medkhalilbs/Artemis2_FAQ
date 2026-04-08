@@ -21,8 +21,8 @@ import christinaPortrait from "@/assets/christina-koch.webp";
 import jeremyPortrait from "@/assets/jeremy-hansen.webp";
 import { Globe, Book, Landmark, Moon, Sun } from "lucide-react";
 
-import { basesItems, vieABordItems, imagesItems, diversItems, survolItems, lexiqueItems } from "@/data/faqData";
-import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN, survolItemsEN, lexiqueItemsEN } from "@/data/faqDataEN";
+import { basesItems, vieABordItems, imagesItems, diversItems, survolItems, bouclierItems, retourItems, lexiqueItems } from "@/data/faqData";
+import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN, survolItemsEN, bouclierItemsEN, retourItemsEN, lexiqueItemsEN } from "@/data/faqDataEN";
 
 const getCrewMembers = (lang: string) => [
   {
@@ -124,6 +124,8 @@ const Index = () => {
   const filteredImages = useMemo(() => filterItems(language === 'fr' ? imagesItems : imagesItemsEN, search), [search, language]);
   const filteredDivers = useMemo(() => filterItems(language === 'fr' ? diversItems : diversItemsEN, search), [search, language]);
   const filteredSurvol = useMemo(() => filterItems(language === 'fr' ? survolItems : survolItemsEN, search), [search, language]);
+  const filteredBouclier = useMemo(() => filterItems(language === 'fr' ? bouclierItems : bouclierItemsEN, search), [search, language]);
+  const filteredRetour = useMemo(() => filterItems(language === 'fr' ? retourItems : retourItemsEN, search), [search, language]);
   const filteredLexique = useMemo(() => filterItems(language === 'fr' ? lexiqueItems : lexiqueItemsEN, search), [search, language]);
   const isSearching = search.trim().length > 0;
   const crewMembers = getCrewMembers(language);
@@ -133,6 +135,8 @@ const Index = () => {
       return [
         { label: "Bases", id: "bases" },
         { label: "Survol", id: "survol" },
+        { label: "Bouclier", id: "bouclier" },
+        { label: "Retour", id: "retour" },
         { label: "Équipage", id: "equipage" },
         { label: "Vie à bord", id: "vie-a-bord" },
         { label: "Media", id: "images" },
@@ -143,6 +147,8 @@ const Index = () => {
     return [
       { label: "Basics", id: "bases" },
       { label: "Flyby", id: "survol" },
+      { label: "Radiation", id: "bouclier" },
+      { label: "Return", id: "retour" },
       { label: "Crew", id: "equipage" },
       { label: "Life", id: "vie-a-bord" },
       { label: "Media", id: "images" },
@@ -241,6 +247,28 @@ const Index = () => {
               title={language === 'fr' ? "Le survol de la Lune (6-7 avril)" : "Lunar Flyby (April 6-7)"}
               icon={<Moon size={20} />}
               items={isSearching ? filteredSurvol : (language === 'fr' ? survolItems : survolItemsEN)}
+            />
+          </AnimatedSection>
+        )}
+
+        {(!isSearching || filteredBouclier.length > 0) && (
+          <AnimatedSection>
+            <FAQSection
+              id="bouclier"
+              title={language === 'fr' ? "Le bouclier anti-radiations (8-9 avril)" : "Radiation Shield (April 8-9)"}
+              icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+              items={isSearching ? filteredBouclier : (language === 'fr' ? bouclierItems : bouclierItemsEN)}
+            />
+          </AnimatedSection>
+        )}
+
+        {(!isSearching || filteredRetour.length > 0) && (
+          <AnimatedSection>
+            <FAQSection
+              id="retour"
+              title={language === 'fr' ? "Retour sur la Terre (10-11 avril)" : "Return to Earth (April 10-11)"}
+              icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l9 9 9-9M12 3v18" /></svg>}
+              items={isSearching ? filteredRetour : (language === 'fr' ? retourItems : retourItemsEN)}
             />
           </AnimatedSection>
         )}
@@ -353,7 +381,7 @@ const Index = () => {
         )}
 
         {/* No results */}
-        {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && filteredSurvol.length === 0 && filteredLexique.length === 0 && (
+        {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && filteredSurvol.length === 0 && filteredBouclier.length === 0 && filteredRetour.length === 0 && filteredLexique.length === 0 && (
           <div className="text-center py-12 text-muted-foreground bg-secondary/10 rounded-2xl border border-dashed border-white/10">
             <p className="text-lg">{language === 'fr' ? `Aucune question trouvée pour « ${search} »` : `No answers found for "${search}"`}</p>
             <p className="text-sm mt-2">{language === 'fr' ? "Essayez d'autres termes de recherche" : "Try different keywords"}</p>
