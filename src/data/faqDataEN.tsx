@@ -10,7 +10,7 @@ export const basesItemsEN = [
     answer: "The trajectories are different because Artemis I orbited the Moon before returning to Earth, whereas Artemis II is a simple flyby of the Moon followed by an immediate return to Earth.",
   },
   {
-    question: "Why is it called \"Artemis\" and what is the link with the \"Apollo\" missions?",
+    question: "Why is it called \"Artemis\" and what is the link with the \"Apollo\" missions of the 60s?",
     answer: "In Greek mythology, Artemis is the twin sister of Apollo and the goddess of the Moon. This name symbolizes humanity's return to the Moon with a modern and inclusive approach.",
   },
   {
@@ -439,6 +439,20 @@ export const retourItemsEN: { question: string; answer: string | React.ReactNode
     question: "Where will the astronauts splash down? How will they be recovered?",
     answer: "The astronauts are expected to splash down in the Pacific Ocean off the coast of San Diego shortly after 02:00 AM (French time) on April 11th. They will be retrieved by helicopter and brought aboard a US Navy recovery ship.",
   },
+  {
+    question: "Press conference information (Night of April 8-9)",
+    answer: (
+      <div className="space-y-2">
+        <p>NASA shared crucial technical details for the return:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li><strong>Entry speed:</strong> 38,377 km/h.</li>
+          <li><strong>G-forces:</strong> Peaks at 3.9G on normal trajectory, up to 7.5G in case of emergency trajectory.</li>
+          <li><strong>Fuel:</strong> The spacecraft is currently 50% full.</li>
+          <li><strong>Egress sequence:</strong> Christina Koch will exit first, followed by Victor Glover, Jeremy Hansen, and finally Reid Wiseman.</li>
+        </ul>
+      </div>
+    ),
+  },
 ];
 
 export const lexiqueItemsEN: { question: string; answer: string | React.ReactNode }[] = [
@@ -450,6 +464,26 @@ export const lexiqueItemsEN: { question: string; answer: string | React.ReactNod
     question: "Albedo",
     answer: "Albedo is a measure of how much light a surface reflects. A high albedo means a surface reflects most light (like snow); a low albedo means it absorbs most light (comme asphalt).",
   },
+  {
+    question: "Landing (Atterrir) and not Moon-landing (Alunir) !!!!!!!!!",
+    answer: "We say \"landing\" (atterrir) as soon as we land on a solid surface, regardless of the celestial body. The term \"alunir\" is a slightly obsolete French specificity. Astronauts and pilots use \"landing\" for all planetary surfaces.",
+  },
+];
+
+export const momentsClesEN = [
+  { met: "00:00:00", label: "SLS Rocket Liftoff", link: "https://www.youtube.com/live/-F9jJPtkVAg?si=g-B7p62pFjxVfDZw&t=15937" },
+  { met: "00:03:22", label: "Second Stage Separation (ICPS)", link: "https://www.youtube.com/live/K_0yFJhNFWk?si=-lcwWfdvFwYCxBE9&t=5832" },
+  { met: "00:03:24", label: "Maneuvers around ICPS", link: "https://www.youtube.com/live/K_0yFJhNFWk?si=53QWtmwUBap8HI_g&t=5918" },
+  { met: "01:01:15", label: "Trans-Lunar Injection (TLI)", link: "https://youtu.be/D5mjObehN8o?t=21959" },
+  { met: "02:00:37", label: "Crew relaxation moment", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
+  { met: "04:19:21", label: "Distance record broken (Apollo 13)", link: "https://youtu.be/-TxtYUdOPOw?t=13339" },
+  { met: "04:19:23", label: "Naming of craters (Integrity & Carroll)", link: "https://youtu.be/-TxtYUdOPOw?t=13439" },
+];
+
+export const ressourcesExtraEN = [
+  { label: "WikiArchives Space", url: "https://www.wikiarchives.space", desc: "All HD photos and videos from the mission" },
+  { label: "NASA Flight Path", url: "https://svs.gsfc.nasa.gov/20412/", desc: "Real-time 3D trajectory" },
+  { label: "Artemis II Spotify", url: "https://open.spotify.com/playlist/0WO94bzZeuUun777vv6UJu", desc: "Wake-Up Songs playlist" },
 ];
 
 export const planningEventsEN = [

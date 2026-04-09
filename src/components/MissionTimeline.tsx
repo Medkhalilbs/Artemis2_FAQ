@@ -49,10 +49,10 @@ const getTimelineData = (lang: string): TimelineDay[] => [
   {
     date: lang === 'fr' ? "7 Avril 2026" : "April 7, 2026",
     events: [
-      { time: "00:36", label: lang === 'fr' ? "PERTE DE COMMUNICATION (DERRIÈRE LA LUNE)" : "LOSS OF SIGNAL (BEHIND THE MOON)", highlight: true },
-      { time: "00:54", label: lang === 'fr' ? "APPROCHE MINIMALE DE LA LUNE 🌕" : "CLOSEST APPROACH OVER THE MOON 🌕", highlight: true },
-      { time: "00:58", label: lang === 'fr' ? "DISTANCE MAXIMALE DE LA TERRE" : "MAXIMUM DISTANCE FROM EARTH", highlight: true },
-      { time: "01:16", label: lang === 'fr' ? "ACQUISITION DU SIGNAL" : "ACQUISITION OF SIGNAL" },
+      { time: "00:36", label: lang === 'fr' ? "PERTE DE COMMUNICATION PLANIFIÉE (DERRIÈRE LA LUNE)" : "PLANNED LOSS OF COMMUNICATION (BEHIND MOON)", highlight: true },
+      { time: "00:54", label: lang === 'fr' ? "APPROCHE MINIMALE DE LA LUNE (6 500 km) 🌕" : "CLOSEST APPROACH OVER THE MOON (6,500 km) 🌕", highlight: true },
+      { time: "00:58", label: lang === 'fr' ? "DISTANCE MAXIMALE DE LA TERRE (406 771 km)" : "MAXIMUM DISTANCE FROM EARTH (406,771 km)", highlight: true },
+      { time: "01:16", label: lang === 'fr' ? "ACQUISITION DU SIGNAL PRÉVUE" : "PLANNED SIGNAL ACQUISITION" },
       { time: "01:24", label: lang === 'fr' ? "VUES INTÉRIEURES DE L'ÉQUIPAGE" : "CREW INTERIOR VIEWS" },
       { time: "03:30", label: lang === 'fr' ? "FIN DE L'OBSERVATION LUNAIRE" : "LUNAR OBSERVATION ENDS" },
       { time: "07:54", label: lang === 'fr' ? "Fin de journée des astronautes 🌙" : "Crew sleep period begins 🌙" },

@@ -1,33 +1,35 @@
-import { Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 
 interface SearchBarProps {
-  value: string;
-  onChange: (value: string) => void;
+  onClick: () => void;
 }
 
-const SearchBar = ({ value, onChange }: SearchBarProps) => {
+const SearchBar = ({ onClick }: SearchBarProps) => {
   const { language } = useLanguage();
   return (
-    <div className="relative max-w-xl mx-auto">
-      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-      <input
-        type="text"
-        placeholder={language === 'fr' ? "Rechercher une question..." : "Search a question..."}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full pl-11 pr-10 py-3 rounded-xl bg-glass border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-      />
-      {value && (
-        <button
-          onClick={() => onChange("")}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-secondary/50 text-muted-foreground"
-        >
-          <X className="w-4 h-4" />
-        </button>
-      )}
-    </div>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="relative max-w-xl mx-auto group"
+    >
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-glow-blue rounded-xl blur opacity-20 group-hover:opacity-50 transition duration-500"></div>
+      <button
+        onClick={onClick}
+        className="relative flex items-center w-full pl-12 pr-4 py-4 rounded-xl bg-background/80 backdrop-blur-sm border border-white/10 text-foreground shadow-xl transition-all hover:bg-background/95 hover:border-primary/50 text-left"
+      >
+        <Search className="absolute left-4 w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+        <span className="text-muted-foreground flex-1 text-base">
+          {language === 'fr' ? "Rechercher une question, concept..." : "Search a question, concept..."}
+        </span>
+        <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-white/10 bg-background/50 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest shadow-sm pointer-events-none">
+          <span className="text-xs">Ctrl</span> F
+        </kbd>
+      </button>
+    </motion.div>
   );
 };
 
 export default SearchBar;
+

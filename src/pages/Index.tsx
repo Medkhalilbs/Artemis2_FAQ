@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroImage from "@/assets/hero-space.jpg";
 import FAQSection from "@/components/FAQSection";
@@ -12,14 +12,17 @@ import ApolloArtemisComparison from "@/components/ApolloArtemisComparison";
 import OrionModel3D from "@/components/OrionModel3D";
 import StarfieldBackground from "@/components/StarfieldBackground";
 import MissionDashboard from "@/components/MissionDashboard";
-import PlanningSection from "@/components/PlanningSection";
+import MomentsCles from "@/components/MomentsCles";
+import ResourcesGrid from "@/components/ResourcesGrid";
 import ThemeToggle from "@/components/ThemeToggle";
 import videoFile from "@/assets/artemis2_full_2160p60.mp4";
 import reidPortrait from "@/assets/Reid-Wiseman-in-2026.webp";
 import victorPortrait from "@/assets/nasa-astronaut-victor-glover-.webp";
 import christinaPortrait from "@/assets/christina-koch.webp";
 import jeremyPortrait from "@/assets/jeremy-hansen.webp";
-import { Globe, Book, Landmark, Moon, Sun } from "lucide-react";
+import { Globe, Book, Landmark, Moon, X, Share2, BookOpen } from "lucide-react";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import CommandPalette from "@/components/CommandPalette";
 
 import { basesItems, vieABordItems, imagesItems, diversItems, survolItems, bouclierItems, retourItems, lexiqueItems } from "@/data/faqData";
 import { basesItemsEN, vieABordItemsEN, imagesItemsEN, diversItemsEN, survolItemsEN, bouclierItemsEN, retourItemsEN, lexiqueItemsEN } from "@/data/faqDataEN";
@@ -94,71 +97,80 @@ const homeIcon = (
   </svg>
 );
 
-function extractText(node: React.ReactNode): string {
-  if (typeof node === "string") return node;
-  if (typeof node === "number") return String(node);
-  if (!node) return "";
-  if (Array.isArray(node)) return node.map(extractText).join(" ");
-  if (typeof node === "object" && "props" in node) {
-    return extractText((node as React.ReactElement).props.children);
-  }
-  return "";
-}
+// Volumetric Background Lighting
+const VolumetricLighting = () => {
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
-function filterItems(items: { question: string; answer: string | React.ReactNode }[], query: string) {
-  if (!query.trim()) return items;
-  const q = query.toLowerCase();
-  return items.filter(
-    (item) =>
-      item.question.toLowerCase().includes(q) ||
-      extractText(item.answer).toLowerCase().includes(q)
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Calculate normalized percentages based on viewport sizes
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <div 
+      className="pointer-events-none fixed inset-0 z-0 opacity-[0.12] transition-opacity duration-1000 mix-blend-screen"
+      style={{
+        background: `radial-gradient(circle 800px at ${mousePos.x}% ${mousePos.y}%, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0) 80%)`
+      }}
+    />
   );
-}
+};
+
+// Deep Space Procedural Noise
+const DeepSpaceNoise = () => (
+  <svg className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-overlay">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+  </svg>
+);
 
 const Index = () => {
   const { language, toggleLanguage } = useLanguage();
-  const [search, setSearch] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  const filteredBases = useMemo(() => filterItems(language === 'fr' ? basesItems : basesItemsEN, search), [search, language]);
-  const filteredVie = useMemo(() => filterItems(language === 'fr' ? vieABordItems : vieABordItemsEN, search), [search, language]);
-  const filteredImages = useMemo(() => filterItems(language === 'fr' ? imagesItems : imagesItemsEN, search), [search, language]);
-  const filteredDivers = useMemo(() => filterItems(language === 'fr' ? diversItems : diversItemsEN, search), [search, language]);
-  const filteredSurvol = useMemo(() => filterItems(language === 'fr' ? survolItems : survolItemsEN, search), [search, language]);
-  const filteredBouclier = useMemo(() => filterItems(language === 'fr' ? bouclierItems : bouclierItemsEN, search), [search, language]);
-  const filteredRetour = useMemo(() => filterItems(language === 'fr' ? retourItems : retourItemsEN, search), [search, language]);
-  const filteredLexique = useMemo(() => filterItems(language === 'fr' ? lexiqueItems : lexiqueItemsEN, search), [search, language]);
-  const isSearching = search.trim().length > 0;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const crewMembers = getCrewMembers(language);
-
-  const menuItems = useMemo(() => {
-    if (language === 'fr') {
-      return [
-        { label: "Bases", id: "bases" },
-        { label: "Survol", id: "survol" },
-        { label: "Bouclier", id: "bouclier" },
-        { label: "Retour", id: "retour" },
-        { label: "Équipage", id: "equipage" },
-        { label: "Vie à bord", id: "vie-a-bord" },
-        { label: "Media", id: "images" },
-        { label: "Planning", id: "planning" },
-        { label: "Lexique", id: "lexique" },
-      ];
-    }
-    return [
-      { label: "Basics", id: "bases" },
-      { label: "Flyby", id: "survol" },
-      { label: "Radiation", id: "bouclier" },
-      { label: "Return", id: "retour" },
-      { label: "Crew", id: "equipage" },
-      { label: "Life", id: "vie-a-bord" },
-      { label: "Media", id: "images" },
-      { label: "Schedule", id: "planning" },
-      { label: "Lexicon", id: "lexique" },
-    ];
-  }, [language]);
 
   return (
     <div className="min-h-screen text-foreground relative bg-background">
+      <VolumetricLighting />
+      <DeepSpaceNoise />
+
+      {/* Global Command Palette */}
+      <CommandPalette open={searchOpen} onOpenChange={setSearchOpen} />
+
+      {/* Animated Scroll Trajectory Line */}
+      <motion.div 
+        className="fixed top-0 left-0 bottom-0 w-1 bg-primary z-50 shadow-[0_0_15px_rgba(var(--primary),1)] origin-top hidden lg:block"
+        style={{ scaleY }}
+      />
+      
       <SideNav />
 
       {/* Theme & Language Toggles */}
@@ -196,18 +208,18 @@ const Index = () => {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {(language === 'fr'
-              ? ["Les bases", "Modèle 3D", "Vaisseau", "Équipage", "Vie à bord", "Images", "Divers", "Planning"]
-              : ["Basics", "3D Model", "Spacecraft", "Crew", "Life aboard", "Media", "Misc", "Timeline"]
+              ? ["Les bases", "Vaisseau", "Équipage", "Images", "Moments Clés", "Planning"]
+              : ["Basics", "Spacecraft", "Crew", "Media", "Key Moments", "Timeline"]
             ).map((label, i) => {
-              const ids = ["bases", "modele-3d", "vaisseau", "equipage", "vie-a-bord", "images", "divers", "planning"];
+              const ids = ["bases", "vaisseau", "equipage", "images", "moments-cles", "planning"];
               return (
-                <button
+               <button
                   key={label}
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById(ids[i])?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="px-4 py-2 rounded-full text-sm font-medium bg-secondary/60 text-secondary-foreground hover:bg-primary/20 hover:text-primary transition-colors border border-border/50"
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold bg-secondary/40 backdrop-blur-md text-secondary-foreground hover:bg-primary/20 hover:text-primary hover:scale-105 hover:shadow-[0_0_20px_rgba(var(--primary),0.4)] transition-all duration-300 border border-white/10"
                 >
                   {label}
                 </button>
@@ -218,175 +230,140 @@ const Index = () => {
       </header>
 
       {/* Mission Dashboard Live */}
-      {!isSearching && <MissionDashboard />}
+      <MissionDashboard />
 
       {/* Content */}
-      <main className="max-w-3xl mx-auto px-6 py-16 space-y-20">
+      <main className="relative max-w-3xl mx-auto px-6 py-16 space-y-20 z-10">
         {/* Search */}
         <AnimatedSection>
-          <SearchBar value={search} onChange={setSearch} />
+          <SearchBar onClick={() => setSearchOpen(true)} />
         </AnimatedSection>
 
-        {(!isSearching || filteredBases.length > 0) && (
-          <AnimatedSection>
-            <FAQSection id="bases" title={language === 'fr' ? "Les bases de la mission" : "Mission Basics"} icon={rocketIcon} items={isSearching ? filteredBases : (language === 'fr' ? basesItems : basesItemsEN)} />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection id="bases" title={language === 'fr' ? "Les bases de la mission" : "Mission Basics"} icon={rocketIcon} items={language === 'fr' ? basesItems : basesItemsEN} />
+        </AnimatedSection>
 
-        {/* Apollo vs Artemis Comparison - hidden during search */}
-        {!isSearching && (
-          <AnimatedSection>
-            <ApolloArtemisComparison />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <ApolloArtemisComparison />
+        </AnimatedSection>
 
-        {(!isSearching || filteredSurvol.length > 0) && (
-          <AnimatedSection>
-            <FAQSection
-              id="survol"
-              title={language === 'fr' ? "Le survol de la Lune (6-7 avril)" : "Lunar Flyby (April 6-7)"}
-              icon={<Moon size={20} />}
-              items={isSearching ? filteredSurvol : (language === 'fr' ? survolItems : survolItemsEN)}
-            />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection
+            id="survol"
+            title={language === 'fr' ? "Le survol de la Lune (6-7 avril)" : "Lunar Flyby (April 6-7)"}
+            icon={<Moon size={20} />}
+            items={language === 'fr' ? survolItems : survolItemsEN}
+          />
+        </AnimatedSection>
 
-        {(!isSearching || filteredBouclier.length > 0) && (
-          <AnimatedSection>
-            <FAQSection
-              id="bouclier"
-              title={language === 'fr' ? "Le bouclier anti-radiations (8-9 avril)" : "Radiation Shield (April 8-9)"}
-              icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
-              items={isSearching ? filteredBouclier : (language === 'fr' ? bouclierItems : bouclierItemsEN)}
-            />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection
+            id="bouclier"
+            title={language === 'fr' ? "Le bouclier anti-radiations (8-9 avril)" : "Radiation Shield (April 8-9)"}
+            icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+            items={language === 'fr' ? bouclierItems : bouclierItemsEN}
+          />
+        </AnimatedSection>
 
-        {(!isSearching || filteredRetour.length > 0) && (
-          <AnimatedSection>
-            <FAQSection
-              id="retour"
-              title={language === 'fr' ? "Retour sur la Terre (10-11 avril)" : "Return to Earth (April 10-11)"}
-              icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l9 9 9-9M12 3v18" /></svg>}
-              items={isSearching ? filteredRetour : (language === 'fr' ? retourItems : retourItemsEN)}
-            />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection
+            id="retour"
+            title={language === 'fr' ? "Retour sur la Terre (10-11 avril)" : "Return to Earth (April 10-11)"}
+            icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l9 9 9-9M12 3v18" /></svg>}
+            items={language === 'fr' ? retourItems : retourItemsEN}
+          />
+        </AnimatedSection>
 
         {/* Orbit Map */}
-        {!isSearching && (
-          <AnimatedSection className="my-16">
-            <div className="bg-glass rounded-xl p-1 glow-border shadow-2xl">
-              <div className="px-5 py-4 border-b border-white/5 bg-white/5">
-                <h3 className="text-xl font-heading font-bold text-foreground">{language === 'fr' ? 'Vidéo de la Mission' : 'Mission Video Feed'}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{language === 'fr' ? 'Artemis II — Images officielles de la NASA (Haute Résolution)' : 'Artemis II — Official NASA Feed (High Resolution)'}</p>
-              </div>
-              <div className="w-full rounded-b-xl overflow-hidden pointer-events-auto bg-black">
-                <video
-                  src={videoFile}
-                  controls
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-auto aspect-video object-cover"
-                />
-              </div>
+        <AnimatedSection className="my-16">
+          <div className="bg-glass rounded-xl p-1 glow-border shadow-2xl">
+            <div className="px-5 py-4 border-b border-white/5 bg-white/5">
+              <h3 className="text-xl font-heading font-bold text-foreground">{language === 'fr' ? 'Vidéo de la Mission' : 'Mission Video Feed'}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{language === 'fr' ? 'Artemis II — Images officielles de la NASA (Haute Résolution)' : 'Artemis II — Official NASA Feed (High Resolution)'}</p>
             </div>
-          </AnimatedSection>
-        )}
+            <div className="w-full rounded-b-xl overflow-hidden pointer-events-auto bg-black">
+              <video
+                src={videoFile}
+                controls
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto aspect-video object-cover"
+              />
+            </div>
+          </div>
+        </AnimatedSection>
 
         {/* 3D Model */}
-        {!isSearching && (
-          <AnimatedSection>
-            <OrionModel3D />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <OrionModel3D />
+        </AnimatedSection>
 
-        {/* Orion Spacecraft - hidden during search */}
-        {!isSearching && (
-          <AnimatedSection>
-            <OrionSpacecraft />
-          </AnimatedSection>
-        )}
+        {/* Orion Spacecraft */}
+        <AnimatedSection>
+          <OrionSpacecraft />
+        </AnimatedSection>
 
-        {/* Crew Section - hidden during search */}
-        {!isSearching && (
-          <AnimatedSection>
-            <section id="equipage" className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
-                  {language === 'fr' ? "Équipage" : "Crew"}
-                </h2>
+        {/* Crew Section */}
+        <AnimatedSection>
+          <section id="equipage" className="scroll-mt-24">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {crewMembers.map((member) => (
-                  <CrewCard key={member.name} member={member} />
-                ))}
-              </div>
-            </section>
-          </AnimatedSection>
-        )}
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+                {language === 'fr' ? "Équipage" : "Crew"}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {crewMembers.map((member) => (
+                <CrewCard key={member.name} member={member} />
+              ))}
+            </div>
+          </section>
+        </AnimatedSection>
 
-        {(!isSearching || filteredVie.length > 0) && (
-          <AnimatedSection>
-            <FAQSection id="vie-a-bord" title={language === 'fr' ? "Vie à bord" : "Life Aboard"} icon={homeIcon} items={isSearching ? filteredVie : (language === 'fr' ? vieABordItems : vieABordItemsEN)} />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection id="vie-a-bord" title={language === 'fr' ? "Vie à bord" : "Life Aboard"} icon={homeIcon} items={language === 'fr' ? vieABordItems : vieABordItemsEN} />
+        </AnimatedSection>
 
-        {(!isSearching || filteredImages.length > 0) && (
-          <AnimatedSection>
-            <FAQSection id="images" title={language === 'fr' ? "Images & Son" : "Media"} icon={cameraIcon} items={isSearching ? filteredImages : (language === 'fr' ? imagesItems : imagesItemsEN)} />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection id="images" title={language === 'fr' ? "Images & Son" : "Media"} icon={cameraIcon} items={language === 'fr' ? imagesItems : imagesItemsEN} />
+        </AnimatedSection>
 
-        {(!isSearching || filteredDivers.length > 0) && (
-          <AnimatedSection>
-            <FAQSection id="divers" title={language === 'fr' ? "Divers" : "Miscellaneous"} icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} items={isSearching ? filteredDivers : (language === 'fr' ? diversItems : diversItemsEN)} />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <FAQSection id="divers" title={language === 'fr' ? "Divers" : "Miscellaneous"} icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} items={language === 'fr' ? diversItems : diversItemsEN} />
+        </AnimatedSection>
 
-        {/* {!isSearching && (
-          <AnimatedSection>
-            <PlanningSection language={language} />
-          </AnimatedSection>
-        )} */}
+        <AnimatedSection>
+          <FAQSection
+            id="lexique"
+            title={language === 'fr' ? "Lexique" : "Lexicon"}
+            icon={<Book size={20} />}
+            items={language === 'fr' ? lexiqueItems : lexiqueItemsEN}
+          />
+        </AnimatedSection>
 
-        {(!isSearching || filteredLexique.length > 0) && (
-          <AnimatedSection>
-            <FAQSection
-              id="lexique"
-              title={language === 'fr' ? "Lexique" : "Lexicon"}
-              icon={<Book size={20} />}
-              items={isSearching ? filteredLexique : (language === 'fr' ? lexiqueItems : lexiqueItemsEN)}
-            />
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <MomentsCles />
+        </AnimatedSection>
 
-        {!isSearching && (
-          <AnimatedSection>
-            <section className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6 font-heading font-bold text-2xl md:text-3xl">
-                <Landmark size={24} className="text-primary" />
-                <h2>{language === 'fr' ? 'Chronologie Globale' : 'Global Timeline'}</h2>
-              </div>
-              <MissionTimeline />
-            </section>
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <ResourcesGrid />
+        </AnimatedSection>
 
-        {/* No results */}
-        {isSearching && filteredBases.length === 0 && filteredVie.length === 0 && filteredImages.length === 0 && filteredDivers.length === 0 && filteredSurvol.length === 0 && filteredBouclier.length === 0 && filteredRetour.length === 0 && filteredLexique.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground bg-secondary/10 rounded-2xl border border-dashed border-white/10">
-            <p className="text-lg">{language === 'fr' ? `Aucune question trouvée pour « ${search} »` : `No answers found for "${search}"`}</p>
-            <p className="text-sm mt-2">{language === 'fr' ? "Essayez d'autres termes de recherche" : "Try different keywords"}</p>
-          </div>
-        )}
+        <AnimatedSection>
+          <section id="planning" className="scroll-mt-24">
+            <div className="flex items-center gap-3 mb-6 font-heading font-bold text-2xl md:text-3xl">
+              <Landmark size={24} className="text-primary" />
+              <h2>{language === 'fr' ? 'Chronologie Globale' : 'Global Timeline'}</h2>
+            </div>
+            <MissionTimeline />
+          </section>
+        </AnimatedSection>
       </main>
 
       {/* Footer */}
@@ -414,19 +391,25 @@ const Index = () => {
                 "Skøll (RaineyShooter___)",
                 "amathieu",
                 "Louloup",
-                "Roy",
                 "Heycureuil",
-                "Seb",
                 "Formica",
                 "Louane",
                 "Pierro_b",
                 "Khalil_bin",
                 "Pierre-Alexandre",
                 "Vicnet de stardust",
+                "Loutre",
+                "Tid0",
+                "L’Ours Bruns",
+                "Zoro",
+                "Athessis",
+                "Vulcain",
+                "G-X",
+                "Jean-Guilhem",
               ].map((name) => (
                 <span
                   key={name}
-                  className="inline-block px-3 py-1.5 rounded-full text-[12px] font-medium bg-primary/10 border border-primary/20 text-primary/90 hover:bg-primary/20 transition-colors duration-200"
+                  className="inline-block px-3 py-1.5 rounded-full text-[12px] font-medium bg-primary/10 border border-primary/20 text-primary/90 hover:bg-primary/20 hover:scale-105 transition-all duration-200"
                 >
                   {name}
                 </span>

@@ -379,9 +379,22 @@ function OrionScene() {
   const serviceTex = useServiceTexture();
   const solarTex = useSolarTexture();
 
+  const targetRef = useRef({ rot: 0, pitch: 0, y: 0 });
+
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.12) * 0.3;
+      const scrollY = window.scrollY || 0;
+      const scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = scrollY / scrollMax;
+
+      targetRef.current.rot = progress * Math.PI * 6; // Spin 3 times down the page
+      targetRef.current.pitch = (progress - 0.5) * 0.8;
+      targetRef.current.y = -progress * 2;
+
+      // Smoothly interpolate towards the target positions based on scroll
+      groupRef.current.rotation.y += (targetRef.current.rot + Math.sin(state.clock.elapsedTime * 0.12) * 0.3 - groupRef.current.rotation.y) * 0.08;
+      groupRef.current.rotation.x += (targetRef.current.pitch - groupRef.current.rotation.x) * 0.08;
+      groupRef.current.position.y += (targetRef.current.y - groupRef.current.position.y) * 0.08;
     }
   });
 

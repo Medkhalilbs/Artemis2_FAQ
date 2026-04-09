@@ -10,8 +10,8 @@ export const basesItems = [
     answer: "Les trajectoires sont différentes vu que lors d'Artémis I la capsule a fait une orbite autour de la lune avant de revenir sur Terre alors que lors de cette mission (Artémis II), il y a un simple survol de la lune puis un retour sur Terre.",
   },
   {
-    question: "Pourquoi l'appelle-t-on \"Artemis\" et quel est le lien avec les missions \"Apollo\" ?",
-    answer: "Dans la mythologie grecque, Artémis est la sœur jumelle d'Apollon (Apollo) et la déesse de la Lune. Ce nom symbolise le retour de l'humanité vers la Lune avec une approche moderne et inclusive.",
+    question: "Pourquoi l'appelle-t-on \"Artemis\" et quel est le lien avec les missions \"Apollo\" des années 60 ?",
+    answer: "Dans la mythologie grecque, Artemis est la sœur jumelle d'Apollon (Apollo) et la déesse de la Lune. Ce nom symbolise le retour de l'humanité vers la Lune avec une approche moderne et inclusive.",
   },
   {
     question: "C'est quoi Artemis, Orion et Integrity ?",
@@ -450,6 +450,26 @@ export const lexiqueItems: { question: string; answer: string | React.ReactNode 
     question: "Albédo",
     answer: "L'albédo est une mesure comprise entre 1 et 0 et sans unité permettant de mesurer la réflectivité d'un objet par rapport à la lumière qu'elle reçoit. Par exemple, une surface blanche a un plus grand albédo qu'une surface noire.",
   },
+  {
+    question: "Atterrir/Atterrissage et non Alunir/Alunissage !!!!!!!!!",
+    answer: "On dit atterrir dès qu’on se pose sur une surface solide, quel que soit l'astre. Le terme \"alunir\" est une spécificité française un peu désuète. Les astronautes et pilotes utilisent \"atterrissage\" pour toutes les surfaces planétaires.",
+  },
+];
+
+export const momentsCles = [
+  { met: "00:00:00", label: "Décollage de la fusée SLS", link: "https://www.youtube.com/live/-F9jJPtkVAg?si=g-B7p62pFjxVfDZw&t=15937" },
+  { met: "00:03:22", label: "Séparation du deuxième étage (ICPS)", link: "https://www.youtube.com/live/K_0yFJhNFWk?si=-lcwWfdvFwYCxBE9&t=5832" },
+  { met: "00:03:24", label: "Manœuvres autour de l'ICPS", link: "https://www.youtube.com/live/K_0yFJhNFWk?si=53QWtmwUBap8HI_g&t=5918" },
+  { met: "01:01:15", label: "Injection Translunaire (TLI)", link: "https://youtu.be/D5mjObehN8o?t=21959" },
+  { met: "02:00:37", label: "Moment de détente de l'équipage", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
+  { met: "04:19:21", label: "Record de distance battu (Apollo 13)", link: "https://youtu.be/-TxtYUdOPOw?t=13339" },
+  { met: "04:19:23", label: "Nommage de cratères (Integrity & Carroll)", link: "https://youtu.be/-TxtYUdOPOw?t=13439" },
+];
+
+export const ressourcesExtra = [
+  { label: "WikiArchives Space", url: "https://www.wikiarchives.space", desc: "Toutes les photos et vidéos HD de la mission" },
+  { label: "NASA Flight Path", url: "https://svs.gsfc.nasa.gov/20412/", desc: "Trajectoire 3D en temps réel" },
+  { label: "Artemis II Spotify", url: "https://open.spotify.com/playlist/0WO94bzZeuUun777vv6UJu", desc: "Playlist des Wake-Up Songs" },
 ];
 
 export const planningEvents = [
