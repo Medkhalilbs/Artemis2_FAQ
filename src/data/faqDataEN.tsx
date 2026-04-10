@@ -391,7 +391,8 @@ export const bouclierItemsEN: { question: string; answer: string | React.ReactNo
           <li>For humans: prolonged exposure to high doses damages the body, notably DNA, and can cause serious illnesses including cancer.</li>
           <li>For electronics: radiation hitting the wrong component can cause bugs or failures. In severe cases, sensitive components can be permanently damaged.</li>
         </ul>
-        <p>For Artemis II, the Orion spacecraft already has partial shielding, and the flight plan avoids the densest charged-particle zones (Van Allen Belt). Without a solar flare directed toward Earth, the radiation shield is not strictly necessary. However, since the program aims at deeper space exploration, testing a deployable supplementary shield — which can also cover the windows — is a valuable objective.</p>
+        <p>For Artemis II, the Orion spacecraft already has partial shielding, and the flight plan avoids the densest charged-particle zones (Van Allen Belt). Without a solar flare directed toward Earth, the radiation shield is not strictly necessary. However, since the program aims at deeper space exploration, testing a deployable supplementary shield is a valuable objective for future long-duration missions toward the Moon and eventually Mars.</p>
+        <p>For the Orion capsule, the procedure involves emptying a storage bay that is equipped with extra protection. An astronaut can take shelter inside. Since they are in microgravity, to prevent a CO₂ pocket from stagnating around the sheltered astronaut, the umbilical cord of their suit is used to create air circulation. The test was completed without incident.</p>
       </div>
     ),
   },
@@ -407,8 +408,18 @@ export const survolItemsEN: { question: string; answer: string | React.ReactNode
     answer: "They broke the record because they are on an orbit around the moon that is much farther out than the trajectories used for Apollo landings.",
   },
   {
-    question: "What are the craters on the Moon?",
-    answer: "Lunar craters are holes formed by meteorite or asteroid impacts. Without an atmosphere to burn them up or wind/rain to erode them, impacts remain visible for billions of years.",
+    question: "What are the craters on the Moon? How many have been catalogued?",
+    answer: (
+      <div className="space-y-2">
+        <p>Lunar craters are holes formed by meteorite, asteroid, or comet impacts. Since the Moon has no atmosphere to burn objects up and no wind or rain to erode them, impacts remain visible for millions or even billions of years.</p>
+        <p>Maps obtained through space missions show:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>More than 1.3 million craters greater than 1 km in diameter on the Moon,</li>
+          <li>A large portion is on the far side, which has fewer lunar seas (smooth zones).</li>
+        </ul>
+        <p>This data comes primarily from observations by NASA's Lunar Reconnaissance Orbiter mission.</p>
+      </div>
+    ),
   },
   {
     question: "What type of soil is on the Moon? Is it like clay?",
@@ -456,26 +467,44 @@ export const retourItemsEN: { question: string; answer: string | React.ReactNode
     answer: "The astronauts are expected to splash down in the Pacific Ocean off the coast of San Diego shortly after 02:00 AM (French time) on April 11th. They will be retrieved by helicopter and brought aboard a US Navy recovery ship.",
   },
   {
-    question: "Press conference information (Night of April 8-9)",
+    question: "NASA press conference information (Night of April 8–9):",
     answer: (
       <div className="space-y-2">
-        <p>NASA shared crucial technical details for the return:</p>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-          <li><strong>Entry speed:</strong> 38,377 km/h.</li>
-          <li><strong>G-forces:</strong> Peaks at 3.9G on normal trajectory, up to 7.5G in case of emergency trajectory.</li>
-          <li><strong>Fuel:</strong> The spacecraft is currently 50% full.</li>
-          <li><strong>Egress sequence:</strong> Christina Koch will exit first, followed by Victor Glover, Jeremy Hansen, and finally Reid Wiseman.</li>
+          <li>Atmospheric entry speed: 38,377 km/h (10.7 km/s), equivalent to 31.3× the speed of sound at sea level! The Apollo 10 record (39,897 km/h, 11.1 km/s, 32.6× the speed of sound) will not be broken;</li>
+          <li>Conditions at splashdown: winds at 10 knots and waves of ~4 feet / ~1.2 m;</li>
+          <li>Spacecraft fuel: 50% remaining;</li>
+          <li>Separation between Orion and the European Service Module (ESM): 42 minutes before splashdown;</li>
+          <li>Start of the reentry phase at 122 km altitude;</li>
+          <li>G-forces on the astronauts: on the nominal trajectory, peaks of 3.9G; in case of a contingency trajectory, peaks of up to 7.5G.</li>
         </ul>
+        <p>Reminder: Splashdown was planned for ~02:06 AM French time.</p>
       </div>
     ),
   },
   {
     question: "Does the capsule bounce to aim for splashdown?",
-    answer: "No. The capsule performs a 'skip entry' (or lofted entry): it enters the atmosphere to burn off speed, using the atmosphere to brake, climbs back up slightly before doing its final descent. This allows it to fly further and target the splashdown zone precisely.",
+    answer: (
+      <div className="space-y-2">
+        <p>Yes, but differently from Artemis I.</p>
+        <p>For Artemis I, the capsule bounced to lose speed, exited the atmosphere, then fell back in (Skip Entry).</p>
+        <p>Due to the problems identified with the heat shield, reentry for Artemis II will be slightly different. There is still a bounce, but without exiting the atmosphere (Lofted Entry Sequence). The goal is to reduce the duration of exposure to extreme temperatures, at the cost of a higher peak temperature reached.</p>
+      </div>
+    ),
   },
   {
     question: "Why not do one more orbit to slow down?",
-    answer: "Given the speed at which it arrives, it could not enter orbit around Earth. It would either crash or bounce off the atmosphere and head back into deep space. The only way is to brake through the atmosphere (aerobraking) to shed speed before deploying the parachutes.",
+    answer: (
+      <div className="space-y-2">
+        <p>Because:</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>To enter another orbit, you must first slow down in space (otherwise, the spacecraft would head back toward the Moon);</li>
+          <li>Once on that orbit, you are not slowing down any further;</li>
+          <li>Orbital speed would still be very high (~28,000 km/h).</li>
+        </ul>
+        <p>Slowing down to enter that orbit would require a large amount of fuel (significant delta-v, comparable to the trans-lunar injection burn), meaning a much larger spacecraft and therefore a much larger rocket. It is therefore more efficient to reenter the atmosphere directly.</p>
+      </div>
+    ),
   },
   {
     question: "In what order will they exit? Who recovers them? And what about the capsule?",
@@ -506,6 +535,12 @@ export const momentsClesEN = [
   { met: "02:00:37", label: "Crew relaxation moment", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
   { met: "04:19:21", label: "Distance record broken (Apollo 13)", link: "https://youtu.be/-TxtYUdOPOw?t=13339" },
   { met: "04:19:23", label: "Naming of craters (Integrity & Carroll)", link: "https://youtu.be/-TxtYUdOPOw?t=13439" },
+  { met: "05:00:25", label: "Closest approach to the Moon (6,500 km)", link: "https://www.youtube.com/live/pK-hXpE63jI?si=pUu0-XN7l5z6tY_U&t=3750" },
+  { met: "05:01:16", label: "First Earthrise images", link: "https://www.youtube.com/live/pK-hXpE63jI?si=x_V9k7p2_z6vU_X-&t=4500" },
+  { met: "07:00:45", label: "Canada event", link: "https://www.youtube.com/live/L-SGXxhStAc?si=EddAPw80QK0CDoqm&t=15683" },
+  { met: "07:03:45", label: "Victor's show", link: "https://www.youtube.com/live/L-SGXxhStAc?si=J1JCN0cM50bjOt6J&t=25879" },
+  { met: "07:18:24", label: "First wake-up on the return journey", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
+  { met: "08:23:12", label: "A memorable Earthrise", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=21000" },
 ];
 
 export const ressourcesExtraEN = [
