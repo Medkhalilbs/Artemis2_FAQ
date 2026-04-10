@@ -96,28 +96,44 @@ export function interpolateNow(data: TelemetryPoint[]): TelemetryPoint {
 
 export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
 
-    if (Date.now() > new Date('2026-04-11T02:00:00Z').getTime()) {
+    const nowMs = Date.now();
+    // NASA definitively ends the Artemis II ephemeris tracker near 23:54:22 UTC
+    const MISSION_FINAL_EPOCH = new Date('2026-04-10T23:54:22Z').getTime();
+
+    // If the 24-hour start window has fully passed the end of the mission,
+    // we cannot fetch live tracking anymore. Trigger fallback gracefully.
+    if (nowMs - 24 * 3600 * 1000 >= MISSION_FINAL_EPOCH) {
         throw new Error('Mission complete — using static data');
     }
-    const now = new Date();
-    // Fetch a 48-hour window surrounding current time
-    const start = new Date(now.getTime() - 24 * 3600 * 1000);
-    const end = new Date(now.getTime() + 24 * 3600 * 1000);
 
-    const fmtDate = (d: Date) => d.toISOString().replace(/T.*/, '');
+    const startMs = nowMs - 24 * 3600 * 1000;
+    // Strictly cap the stop time so we never ask NASA for future points past splashdown
+    const endMs = Math.min(nowMs + 2 * 3600 * 1000, MISSION_FINAL_EPOCH);
 
-    // COMMAND='301' (Moon) used as proxy for Artemis flight path demonstration
+    const start = new Date(startMs);
+    const end = new Date(endMs);
+
+    // Format matching NASA Horizons exactly (YYYY-MM-DD HH:MM)
+    const fmtDate = (d: Date) => {
+        const yyyy = d.getUTCFullYear();
+        const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+        const dd = String(d.getUTCDate()).padStart(2, '0');
+        const hh = String(d.getUTCHours()).padStart(2, '0');
+        const min = String(d.getUTCMinutes()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+    };
+
     const params = new URLSearchParams({
         format: 'json',
         COMMAND: "-1024",
-        OBJ_DATA: "'NO'",
-        MAKE_EPHEM: "'YES'",
-        EPHEM_TYPE: "'VECTOR'",
-        CENTER: "500%40399",
+        OBJ_DATA: "NO",
+        MAKE_EPHEM: "YES",
+        EPHEM_TYPE: "VECTORS",
+        CENTER: "500@399",
         START_TIME: `'${fmtDate(start)}'`,
         STOP_TIME: `'${fmtDate(end)}'`,
-        STEP_SIZE: "'1 h'",
-        CSV_FORMAT: "'YES'"
+        STEP_SIZE: "1h",
+        CSV_FORMAT: "YES"
     });
 
     const response = await fetch(`${PROXY_URL}?${params.toString()}`);
@@ -152,7 +168,8 @@ export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
         const vy = parseFloat(parts[6]);
         const vz = parseFloat(parts[7]);
 
-        const dist_earth_km = parseFloat(parts[9]);
+        const RG_AU = parseFloat(parts[9]);
+        const dist_earth_km = RG_AU * 149_597_870.7;  // AU → km
         const dist_earth_radii = dist_earth_km / 6378.14;
 
         const speed_kms = Math.sqrt(vx * vx + vy * vy + vz * vz);
@@ -160,7 +177,14 @@ export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
 
         const dist_moon_km = Math.sqrt(Math.pow(x - moonX, 2) + Math.pow(y - moonY, 2) + Math.pow(z, 2));
 
-        const dateObj = new Date(dateStr);
+        const MONTH_MAP: Record<string, string> = {
+            Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+            Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+        };
+        const [datePart, timePart] = dateStr.trim().split(' ');
+        const [yr, mon, dy] = datePart.split('-');
+        const isoStr = `${yr}-${MONTH_MAP[mon] ?? mon}-${dy}T${timePart.replace(/\.\d+$/, '')}Z`;
+        const dateObj = new Date(isoStr);
         const met_hours = (dateObj.getTime() - LAUNCH_DATE) / (1000 * 60 * 60);
 
         points.push({

@@ -18,9 +18,6 @@ import {
     Legend,
     ResponsiveContainer,
     ReferenceLine,
-    defs,
-    linearGradient,
-    stop,
 } from "recharts";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
