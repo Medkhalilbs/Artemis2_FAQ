@@ -14,16 +14,16 @@ export const basesItems = [
     answer: "Dans la mythologie grecque, Artemis est la sœur jumelle d'Apollon (Apollo) et la déesse de la Lune. Ce nom symbolise le retour de l'humanité vers la Lune avec une approche moderne et inclusive.",
   },
   {
-    question: "C'est quoi Artemis, Orion et Integrity ?",
-    answer: "Artemis est le nom du programme, et Artemis II est le nom de cette mission. Orion est le nom du modèle de vaisseau (comme un modèle de bateau par exemple), et Integrity est le nom donné par l'équipage à leur vaisseau.",
+    question: "C’est quoi Artemis, Orion et Integrity ?",
+    answer: "Artemis est le nom du programme, et Artemis II est le nom de cette mission. Orion est le nom du modèle de vaisseau (comme un modèle de bateau par exemple), et Integrity est le nom donné par l’équipage à leur vaisseau.",
   },
   {
     question: "Quel est le but principal de ce voyage ?",
-    answer: "L'objectif est de tester tous les systèmes de survie de la capsule Orion avec des humains à bord. C'est une répétition générale pour s'assurer que tout fonctionne parfaitement avant de tenter un atterrissage lors de la mission suivante.",
+    answer: "L'objectif est de tester tous les systèmes de survie de la capsule Orion avec des humains à bord. C'est une répétition générale pour s'assurer que tout fonctionne parfaitement avant de tenter un atterrissage lors d’une prochaine mission. En effet, on sait déjà très bien faire le trajet, et calculer les trajectoires orbitales, mais les technologies ayant beaucoup évolué depuis le programme Apollo, il y a beaucoup à (ré-)apprendre. C’est un peu comme emmener une nouvelle voiture sur un circuit d’essai.",
   },
   {
     question: "Est-ce que les astronautes vont marcher sur la Lune cette fois-ci ?",
-    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'atterrissage (marcher sur le sol lunaire) est pour l’instant planifié pour la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois)",
+    answer: "Non. Ils vont survoler la face cachée de la Lune et revenir vers la Terre. L'atterrissage (marcher sur le sol lunaire) est pour l’instant planifié pour la mission Artemis 4, prévue quelques années plus tard. (sujet à changements, le programme est fortement remanié de mois en mois).",
   },
   {
     question: "Pourquoi font-ils simplement le tour de la Lune au lieu de s'y poser directement ?",
@@ -47,11 +47,17 @@ export const basesItems = [
   },
   {
     question: "Pourquoi ils ne remettent pas un coup de moteur pour y arriver plus vite ?",
-    answer: "Même si un voyage plus rapide serait possible, il consommerait plus de carburant et nécessiterait de freiner à l'arrivée, ce qui serait dangereux en cas de problème moteur. Dans tous les cas, même si le choix avait été fait d'aller plus vite, ils auraient seulement fait une poussée initiale plus forte. Des poussées subséquentes seraient inhérentement moins efficientes.",
+    answer: "Même si un voyage plus rapide serait possible, il consommerait beaucoup plus de carburant (et donc plus cher à lancer car il faudrait une fusée encore plus grande), et nécessiterait en plus de freiner à l'arrivée, ce qui serait dangereux en cas de problème moteurs (qui servent aussi de frein, dans l'espace). Dans tous les cas, même si le choix avait été fait d'aller plus vite, ils auraient seulement fait une poussée initiale plus forte. Des poussées subséquentes seraient moins efficientes du fait des principes de la mécanique orbitale.",
   },
   {
     question: "Quels sont les plus grands risques de la mission ? Est-il possible que ça se passe mal ?",
-    answer: "Le plus grand risque était le décollage, et celui-ci s'est déroulé parfaitement ! Concernant les problèmes qu'ils pourraient rencontrer, tous les systèmes du vaisseau sont redondants (en double voire en triple), ce qui permet de pallier toute défaillance technique. C'est d'ailleurs grâce à cela que l'équipage d'Apollo 13 a pu rentrer sain et sauf ! En plus de la redondance, le vaisseau est sur une trajectoire de retour libre : même si tous les moteurs tombent en panne, il reviendra sur Terre. Enfin, il reste une dernière phase critique : la rentrée atmosphérique. Le vaisseau sera protégé par un bouclier thermique, puis la descente se fera sous parachutes, pour amerrir dans l'océan Pacifique.",
+    answer: (
+      <div className="space-y-2">
+        <p>Le plus grand risque était le décollage, et celui-ci s'est déroulé parfaitement !</p>
+        <p>Concernant les problèmes qu'ils pourraient rencontrer avant de rentrer, tous les systèmes du vaisseau sont redondants (en double voire en triple), ce qui permet de pallier toute défaillance technique. En plus de la redondance, le vaisseau est sur une trajectoire de retour libre : même si tous les moteurs tombent en panne, il reviendra sur Terre. C'est d'ailleurs grâce à ces deux sécurités que l'équipage d'Apollo 13 avait pu rentrer sain et sauf !</p>
+        <p>Enfin, il reste une dernière phase critique : la rentrée atmosphérique au retour sur Terre. Le vaisseau aura pris énormément de vitesse puisqu'il sera - littéralement - tombé depuis la Lune ! Lors de la rentrée, la capsule aura largué le module de service, et sera protégée par un bouclier thermique. Une fois la capsule suffisamment freinée par l'atmosphère, le reste de la descente se fera sous parachutes, pour enfin amerrir dans l'océan Pacifique, au large de la côte Ouest des USA.</p>
+      </div>
+    ),
   },
   {
     question: "Les missions Apollo avaient mis un jour de moins à atteindre la Lune. Pourquoi cette capsule plus moderne est \"plus lente\" ?",
@@ -69,7 +75,7 @@ export const basesItems = [
     question: "Quels sont les problèmes rencontrés depuis le début de la mission ?",
     answer: (
       <div className="space-y-2">
-        <p>Aucun problème majeur ne s'est produit depuis le début de la mission. Globalement, le module de service (européen) est de très bonne qualité selon la NASA (mieux qu'espéré). Quelques petits soucis ont été constatés :</p>
+        <p>Aucun problème majeur ne s'est produit depuis le début de la mission. Globalement le module de service (européen) est de très bonne qualité selon la NASA (mieux qu'espéré). Quelques petits soucis ont été rencontrés :</p>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
           <li>Après le décollage le 02 avril, au moment d'ouvrir les cylindres d'eau, la vanne principale ne s'est pas ouverte. Ce problème a été résolu à distance par Houston en réinitialisant la vanne d'ouverture. Au cas où, les astronautes ont rempli des poches d'eau.</li>
           <li>L'évacuation des toilettes n'a pas fonctionné de suite car la buse d'évacuation était bouchée par les éjectats qui se cristallisaient. La zone d'évacuation a été tournée vers le soleil, ce qui a permis de déboucher la buse.</li>
@@ -83,18 +89,14 @@ export const basesItems = [
     question: "Quelles agences sont impliquées dans la mission ?",
     answer: (
       <div className="space-y-2">
-        <p>Les astronautes sont de la NASA (USA) et de la CSA (Canada). Bien que le programme soit administré par la NASA, d'autres agences sont impliquées telles que la CSA et l'ESA. Divers prestataires externes ont développé des parties du vaisseau : Lockheed Martin (capsule), Airbus (module de service), Boeing (premier étage).</p>
-        <p>Blue Origin et SpaceX sont mandatés pour un atterrisseur lunaire (encore à l'étape de conception, avec 5 ans de retard) pour une future mission, mais n'ont pas d'équipement sur Artemis 2.</p>
+        <p>Les astronautes sont de la NASA (USA) et CSA (Canada). Bien que le programme soit administré par la NASA, d'autres agences sont impliquées telles que la CSA et l'ESA. Divers prestataires externes ont développé des parties du vaisseau, tels que Lockheed Martin (capsule), Airbus (module de service), Boeing (premier étage).</p>
+        <p>Blue Origin et SpaceX sont mandatés pour un atterrisseur lunaire (qui en est encore à l'étape de conception, avec 5 ans de retard), pour une future mission, mais n'ont pas d'équipement sur Artemis 2.</p>
       </div>
     ),
   },
   {
     question: "Est-ce qu'on peut voir Artemis depuis la Terre ?",
-    answer: "Non, même avec un télescope.",
-  },
-  {
-    question: "Pourquoi leur tenue est-elle orange ?",
-    answer: "Pour qu'on puisse les repérer facilement lorsqu'ils atterrissent dans l'eau. Ils possèdent également des petites bouées pour leur sécurité et peuvent activer leur petit radeau personnel. Nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage.\nCette tenue n'est utilisée que pour des moments critique.",
+    answer: "Non, même avec un télescope. Ou en tout cas pas plus que quelques pixels, et seulement quand le vaisseau est suffisamment proche de la terre et éclairé par le soleil. Et avec un très bon télescope.",
   },
   {
     question: "Pourquoi la capsule n'a pas visé la lune dès le départ ?",
@@ -114,10 +116,6 @@ export const basesItems = [
         <li>Par... les maths ! Et oui, la mécanique orbitale est quelque chose de très bien maîtrisé, et on est capable de calculer avec précision la position de la capsule à un instant donné, juste en connaissant sa vitesse à un autre endroit et un autre instant.</li>
       </ul>
     ),
-  },
-  {
-    question: "Comment va se passer la coupure de communication avec Orion ?",
-    answer: "Quand Orion passera derrière la Lune, la capsule sera coupée des communications avec Houston pour la raison suivante : il y aura la Lune entre elle et la Terre. Les communications se faisant par ondes radios, il est en effet nécessaire d’avoir une ligne de vue. Il y aura donc approximativement 40 minutes, voire 1h, de coupure.",
   },
   {
     question: "Pourquoi les panneaux solaires sont-ils mobiles ?",
@@ -141,27 +139,28 @@ export const basesItems = [
     answer: "La capsule s'oriente, accélère et décélère grâce à ses moteurs. Pour créer une 'poussée' il n'y a pas besoin d'air, il s'agit d'une idée reçue propagée par les médias non spécialisés. Les jets de gaz effectués par les moteurs créent, sous l'effet de l'action d'expulsion du gaz, une réaction de la capsule qui part alors dans le sens opposé à celui de l'expulsion des gaz. Il s'agit simplement du principe d'Action/Réaction (autrement dit, la 3ème loi de Newton).",
   },
   {
-    question: "Y a-t-il un risque que le vaisseau Orion soit endommagé par des météorites ?",
+    question: "Y a-t-il un risque que le vaisseau Orion soit endommagé par des météorites ? Par des débris ? Des satellites ?",
     answer: (
       <div className="space-y-2">
-        <p>Oui, il existe un risque, mais il est faible et bien maîtrisé.</p>
-        <p>Le vaisseau Orion est conçu avec des boucliers de protection multicouches capables d'absorber ou de disperser l'énergie de ces impacts. Les grosses météorites, elles, sont extrêmement rares, et les agences comme la NASA surveillent en permanence l'environnement spatial pour éviter les trajectoires dangereuses.</p>
+        <p>Concernant les débris et les satellites, leurs orbites sont connues, et le plan de vol prévoit de les éviter avec une marge largement suffisante, que ce soit au lancement ou lors de la rentrée.</p>
+        <p>Concernant les micrométéorites, oui il existe un risque, mais il est faible et bien maîtrisé.</p>
+        <p>Le vaisseau Orion est conçu avec des boucliers de protection multicouches capables d’absorber ou de disperser l’énergie de ces impacts. Les grosses météorites, elles, sont extrêmement rares, et les agences comme la NASA surveillent en permanence l’environnement spatial pour éviter les trajectoires dangereuses.</p>
       </div>
     ),
   },
   {
-    question: "Comment la température de la capsule est-elle gérée par rapport aux missions Apollo ? Y a-t-il un « mode barbecue » pour la mission Artemis II ?",
-    answer: "Lors des missions Apollo, les astronautes utilisaient une manœuvre appelée « Barbecue Roll » (ou Passive Thermal Control). Le vaisseau spatial tournait lentement sur lui-même afin de répartir uniformément la chaleur du Soleil sur toute sa surface, évitant ainsi qu'un côté surchauffe tandis que l'autre gèle. Pour la mission Artemis II, la capsule Orion n'utilise pas ce mode de rotation continue. Elle dispose d'un système de contrôle thermique beaucoup plus moderne, combinant isolation avancée, circulation de fluide thermique et radiateurs. Cependant, Orion peut toujours effectuer des ajustements d'orientation si nécessaire pour optimiser l'exposition au Soleil et maintenir une température stable à bord.",
+    question: "Comment la température de la capsule est-elle gérée par rapport aux missions Apollo ? Y a-t-il un « mode barbecue » pour la mission Artemis II comme celui utilisé pendant les missions Apollo ?",
+    answer: "Lors des missions Apollo, les astronautes utilisaient une manœuvre appelée « Barbecue Roll » (ou Passive Thermal Control). Le vaisseau spatial tournait lentement sur lui-même afin de répartir uniformément la chaleur du Soleil sur toute sa surface, évitant ainsi qu'un côté surchauffe tandis que l'autre gèle. Pour la mission Artemis II, la capsule Orion n'utilise pas ce mode de rotation continue. Elle dispose d'un système de contrôle thermique beaucoup plus moderne, combinant isolation avancée, circulation de fluide thermique et radiateurs. Ces technologies permettent de gérer la température du vaisseau sans devoir le faire tourner en permanence. Cependant, Orion peut toujours effectuer des ajustements d'orientation si nécessaire pour optimiser l'exposition au Soleil et maintenir une température stable à bord.",
   },
 ];
 
 export const vieABordItems: { question: string; answer: string | React.ReactNode }[] = [
   {
-    question: "Comment font-ils pour manger, dormir et se laver ?",
+    question: "Comment font-ils pour manger, dormir et se laver dans un espace si restreint ?",
     answer: "Ils mangent des aliments lyophilisés ou sous vide. Pour dormir, ils s'attachent dans des sacs de couchage pour ne pas flotter. Pour l'hygiène, ils utilisent des lingettes humides et du shampoing sans rinçage, car l'eau ne s'écoule pas en apesanteur.",
   },
   {
-    question: "Quelle est la taille de la capsule ?",
+    question: "Quelle est la taille de la capsule et de quel espace disposent-ils réellement ?",
     answer: (
       <div className="space-y-2">
         <p>Il faut distinguer deux mesures :</p>
@@ -177,7 +176,7 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
   },
   {
     question: "Comment font-ils leurs besoins ?",
-    answer: "Ils utilisent un WC spécial spécialement conçu pour l'espace. Les différents « déchets » sont collectés : les liquides sont éjectés régulièrement dans l'espace (visible sur le live !), tandis que les déchets solides sont stockés afin d'être évacués une fois rentré sur Terre.",
+    answer: "Ils utilisent un WC spécialement conçu pour l'espace. Les différents \"déchets\" sont collectés, les liquides étant éjectés régulièrement dans l’espace (visible sur le live !), tandis que les déchets solides sont stockés afin d'être évacués une fois de retour sur Terre. C’est la première utilisation de cet équipement sur une mission de ce type : lors du programme Apollo, il n’y avait pas de toilettes !",
   },
   {
     question: "Ils dorment tous en même temps ?",
@@ -188,13 +187,13 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
     answer: (
       <div className="space-y-2">
         <p>La mission étant dirigée par la NASA, les astronautes sont calés sur le rythme américain. Ils dorment tous en même temps, pendant que Houston surveille que tout va bien : en cas d'urgence, ils peuvent déclencher les alarmes et réveiller en sursaut les quatre astronautes.</p>
-        <p>Quand il est l'heure de se réveiller, la tradition veut que Houston passe une musique à la radio, choisie selon l'occasion par les équipes au sol ou les familles des astronautes. Pour leur premier réveil sur cette mission, la musique était <em>"Green Light"</em> par John Legend — choix de circonstance sachant que ce jour-là a eu lieu la poussée pour partir vers la Lune.</p>
+        <p>Quand il est l'heure de se réveiller, la tradition veut que Houston passe une musique à la radio, choisie selon l'occasion par les équipes au sol ou les familles des astronautes. Pour leur premier réveil sur cette mission, la musique était <em className="text-foreground/80">"Green Light"</em> par John Legend — choix de circonstance sachant que ce jour-là a eu lieu la poussée pour partir vers la Lune.</p>
       </div>
     ),
   },
   {
     question: "Comment les astronautes bougent/se dégourdissent ?",
-    answer: "Pour Artemis, il y a une sorte de rameur que les astronautes utilisent pour faire 30 min de sport par jour. Pour ce qui est de l'ISS, c'est 2h30 de sport par jour en guise de comparaison.",
+    answer: "Pour Artemis II, il y a une sorte de rameur (Flywheel, made in Canada) que les astronautes utilisent pour faire 30 min de sport par jour. Pour ce qui est de l'ISS, c'est 2h30 de sport par jour en guise de comparaison. Pour un trajet de seulement 10 jours, ne pas faire de sport n’aurait pas d’impact physiologique sur les astronautes. L’objectif à long terme du programme Artemis étant cependant de permettre l’exploration plus lointaine (Mars), il est nécessaire dès maintenant de tester des équipements sportifs plus compacts que ceux de l’ISS.",
   },
   {
     question: "Pourquoi les sièges ne sont-ils pas visibles ?",
@@ -206,7 +205,7 @@ export const vieABordItems: { question: string; answer: string | React.ReactNode
   },
   {
     question: "Pourquoi les combinaisons sont oranges ? Pourquoi elles ne sont pas portées tout le temps ?",
-    answer: "Les combinaisons servent à protéger temporairement les astronautes d'une potentielle décompression pendant le décollage et l'amerrissage. Elle n'est donc normalement pas portée en orbite. La couleur orange permet de faciliter le repérage des astronautes par les équipes chargées de les retrouver en mer à la fin de la mission ou dans le cas d'une interruption de mission d'urgence au décollage.",
+    answer: "Les combinaisons servent à protéger temporairement les astronautes d'une potentielle décompression pendant le décollage et l'amerrissage. Elle n'est donc normalement pas portée en orbite. La couleur orange permet de faciliter le repérage des astronautes par les équipes chargées de les retrouver en mer à la fin de la mission ou dans le cas d'une interruption de mission d'urgence au décollage. Les combinaisons sont également équipées de petites bouées pour leur sécurité : nous avons pu les voir lors de leur entrée dans la capsule Orion avant le décollage (“boudins” bleus attachés à la combinaison).",
   },
   {
     question: "Comment les astronautes font-ils leurs besoins dans les combinaisons ?",
@@ -221,7 +220,7 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
   },
   {
     question: "Pourquoi je ne vois pas d'étoiles ?",
-    answer: "Le Soleil illumine ce que filme la caméra. Tout comme il est impossible de filmer les étoiles la nuit sous un lampadaire, la caméra d'Orion ne \"perçoit\" pas les étoiles.",
+    answer: "Le Soleil illumine ce que filme la caméra. Les capteurs des caméras sont encore bien moins performants que l'œil humain, qui est en permanence en train de s'adapter aux changements de luminosité. Tout comme il est impossible de filmer les étoiles la nuit sous un lampadaire, la caméra d'Orion ne \"perçoit\" pas les étoiles. Pour voir les étoiles, il faudrait augmenter énormément la luminosité : le module et la Lune deviendraient aveuglants. Ce phénomène existe sur toutes les images depuis les tout débuts de l'exploration spatiale.",
   },
   {
     question: "Pourquoi parfois on ne voit ni la Terre, ni la Lune ?",
@@ -232,8 +231,8 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     answer: "La caméra est fixée à l'extrémité d'un panneau solaire (amovible) sensible aux mouvements résiduels des astronautes dans la capsule.",
   },
   {
-    question: "Pourquoi la capsule ne pointe pas toujours vers l'avant ?",
-    answer: "Vu que le trajet est fait moteur éteint et qu'il n'y a pas d'air, une fois lancée sur sa trajectoire la capsule peut être dans n'importe quelle orientation. Elle est régulièrement réorientée pour filmer différentes choses ou choisir quelle partie du vaisseau est exposée au Soleil.",
+    question: "Pourquoi la capsule ne pointe pas (toujours) vers l'avant ?",
+    answer: "Vu que le trajet est fait moteur éteint et qu'il n'y a pas d'air (donc pas de contraintes aérodynamiques), une fois lancée sur sa trajectoire la capsule peut être dans n'importe quelle orientation. Dans la pratique, elle est régulièrement réorientée pour filmer différentes choses ou choisir quelle partie du vaisseau est exposée à la lumière du soleil.",
   },
   {
     question: "Pourquoi on dirait qu'on n'avance pas ?",
@@ -245,11 +244,11 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
   },
   {
     question: "Pourquoi n'y a-t-il pas de belles images de la Terre/Lune ?",
-    answer: "C'est la NASA qui choisit toutes les images qu'elle veut bien diffuser. Toutes les images et vidéos prises pendant la mission sont enregistrées en 4K dans la capsule et seront certainement rendues publiques après la fin de la mission.",
+    answer: "C'est la NASA qui choisit toutes les images qu'elle veut bien diffuser. À la dernière mise à jour de cette réponse, 15 photos officielles montrant la Terre ont été publiées, et 6 photos montrant la Lune. À savoir que toutes les images et vidéos prises pendant la mission sont enregistrées en 4K dans la capsule et seront certainement rendues publiques après la fin de la mission.",
   },
   {
     question: "Pourquoi les images mettent-elles du temps à nous arriver ?",
-    answer: "La capsule se trouve loin de la Terre. Même à la vitesse de la lumière, les signaux mettent un peu plus d'une seconde pour arriver. La priorité sur la bande passante est réservée aux données les plus importantes : les communications et les valeurs des milliers de capteurs qui équipent la capsule et le module de service.",
+    answer: "La capsule se trouve loin de la Terre. Même à la vitesse de la lumière, les signaux radio mettent un peu plus d'une seconde pour arriver. De plus, s'il faut traiter de gros fichiers vidéo haute définition, le transfert peut prendre plusieurs minutes. La priorité sur la bande passante est réservée aux données les plus importantes : les communications et les valeurs des milliers de capteurs qui équipent la capsule et le module de service.",
   },
   {
     question: "Qui filme la capsule de l'extérieur ?",
@@ -267,9 +266,9 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     question: "Quelles sont les caméras portatives utilisées par l'équipage ?",
     answer: (
       <div className="space-y-2">
-        <p>Deux <strong className="text-foreground/80">Nikon D5</strong> (reflex numérique professionnel) équipés d'objectifs grand-angle et longue portée. Choisi pour sa haute plage dynamique, sa résistance aux radiations et sa plage ISO jusqu'à 3 280 000.</p>
-        <p>Un <strong className="text-foreground/80">Nikon Z9</strong> (hybride) — une première pour ce modèle dans l'espace.</p>
-        <p>Des <strong className="text-foreground/80">GoPro portatives</strong> pour un documentaire National Geographic intitulé <em>Return to the Moon</em>. Leur contenu ne sera pas transmis en direct mais ramené après l'amerrissage.</p>
+        <p>Deux <strong className="text-foreground/80">Nikon D5</strong> (reflex numérique professionnel) sont disponibles dans la cabine, équipées d'objectifs grand-angle et longue portée. Le choix du D5, sorti en 2016, s'explique par sa haute plage dynamique pour gérer le contraste extrême entre surfaces éclairées et ombres profondes, sa résistance aux radiations, et sa plage ISO étendue jusqu'à 3 280 000.</p>
+        <p>Un <strong className="text-foreground/80">Nikon Z9</strong> (hybride) a également été embarqué, une première pour ce modèle dans l'espace. Il est également prévu d'être utilisé sur Artemis 3.</p>
+        <p>Des <strong className="text-foreground/80">caméras GoPro portatives</strong> sont aussi embarquées, opérées par l'équipage pour un documentaire National Geographic intitulé <em>Return to the Moon</em>. Leur contenu ne sera pas transmis en direct mais ramené à bord après l'amerrissage.</p>
       </div>
     ),
   },
@@ -282,8 +281,8 @@ export const imagesItems: { question: string; answer: string | React.ReactNode }
     answer: "Le système de communication laser O2O transmet des vidéos 4K depuis les caméras d'Orion à un débit pouvant atteindre 260 mégabits par seconde.",
   },
   {
-    question: "Pourquoi est-ce qu'on entend un bruit blanc pendant que personne ne parle ?",
-    answer: "Le bruit blanc vient de la non-communication entre les astronautes et le mission control de Houston. On ne les entend pas quand ils parlent entre eux.",
+    question: "Pourquoi on entend un bruit blanc quand personne ne parle ?",
+    answer: "Un bruit blanc se fait entendre lors des intervalles entre les communications des astronautes et du contrôle de mission.",
   },
   {
     question: "Qui parle à la radio ?",
@@ -367,6 +366,25 @@ export const diversItems: { question: string; answer: string | React.ReactNode }
     question: "Les fusées polluent énormément, non ?",
     answer: "La SLS utilise un premier étage avec un carburant hydrogène+oxygène qui relâche principalement de la vapeur d'eau (des nuages). Une fois retombés dans l'océan, les boosters et étages sont inertes et forment de bonnes bases pour le développement de récifs, comme les épaves de bateaux. Le Kennedy Space Center est également très attentif à perturber le moins possible l'écosystème local. Ce n'est cependant pas le cas de toutes les fusées, certaines utilisant du kérosène (p.ex la Falcon 9 de SpaceX). L'énergie et la pollution due à la production de la fusée elle-même et de son carburant reste un point critiquable.",
   },
+  {
+    question: "Quelles sont les musiques de réveil (Wake-Up Songs) ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Détail des musiques (tiré de l'Artemis Tracker de artemis.cdnspace.ca) :</p>
+        <ul className="list-none space-y-2 text-muted-foreground">
+          <li><strong>JV09 - Lonesome Drifter (Charley Crockett) :</strong> Another drifting theme as Orion continues its long coast back to Earth.</li>
+          <li><strong>JV08 - Under Pressure (Queen & David Bowie, 1981) :</strong> Demandée par Jeremy Hansen - A nod to the cabin depressurization and repressurization test scheduled for the day. Accompanied by a special message from the Canadian Space Agency.</li>
+          <li><strong>JV07 - Tokyo Drifting (Denzel Curry & Glass Animals, 2020) :</strong> Demandée par Reid Wiseman - A fitting choice as the crew drifted away from the Moon on the return leg.</li>
+          <li><strong>JV06 - Good Morning (Mandisa & TobyMac) :</strong> Demandée par Victor Glover - Woke the crew on lunar flyby day. Accompanied by a congratulatory message from the late Jim Lovell (Apollo 8/13), who congratulated the crew on breaking his distance record and expressed pride in passing the torch to Artemis II.</li>
+          <li><strong>JV05 - Working Class Heroes (CeeLo Green) :</strong> Accompanied by a special wake-up message from Apollo 16 moonwalker Charlie Duke.</li>
+          <li><strong>JV04 - Pink Pony Club (Chappell Roan, 2020) :</strong> Demandée par Reid Wiseman - Mission control famously cut the audio after 'heels' — Commander Wiseman quipped 'We were all eagerly awaiting the chorus.'</li>
+          <li><strong>JV03 - In a Daydream (Freddy Jones Band, 1992) :</strong> Classic 90s rock to start the first full day of deep space cruise.</li>
+          <li><strong>JV02 - Sleepyhead (Young and Sick) :</strong> Demandée par Christina Koch - Early morning wake-up call to end the first sleep period.</li>
+          <li><strong>JV02 - Green Light (John Legend feat. André 3000, 2024) :</strong> Played as the crew prepared for the historic Trans-Lunar Injection burn.</li>
+        </ul>
+      </div>
+    ),
+  },
 ];
 export const bouclierItems: { question: string; answer: string | React.ReactNode }[] = [
   {
@@ -379,7 +397,9 @@ export const bouclierItems: { question: string; answer: string | React.ReactNode
           <li>Pour les humains : une exposition prolongée à des doses élevées endommage le corps, et notamment l'ADN, ce qui peut causer des maladies graves, dont des cancers.</li>
           <li>Pour l'électronique : un rayonnement qui tombe au mauvais endroit peut causer des bugs, voire des pannes. Dans les cas les plus sévères, les composants sensibles peuvent même griller.</li>
         </ul>
-        <p>Pour la mission Artemis II, le vaisseau Orion est déjà partiellement protégé, et le plan de vol évite les zones les plus denses en particules chargées (ceinture de Van Allen). Sans éruption solaire dans la direction de la Terre, le bouclier anti-radiations n'est pas nécessaire. Le programme a cependant pour objectif de mener à de l'exploration spatiale plus poussée, d'où le test du bouclier anti-radiations réalisé par l'équipage.</p>
+        <p>Pour la mission Artemis II, le vaisseau Orion est déjà partiellement protégé, et le plan de vol évite les zones les plus denses en particules chargées (ceinture de Van Allen). Sans éruption solaire dans la direction de la Terre, le bouclier anti-radiations n'est pas nécessaire.</p>
+        <p>Le programme a cependant pour objectif de mener à de l'exploration spatiale plus poussée, avec d'autres missions vers la Lune, et à terme vers Mars. Dans ce contexte, une protection supplémentaire temporaire, peut être nécessaire, d’où le test du bouclier anti-radiations réalisé par l'équipage.</p>
+        <p>Pour la capsule Orion, il s’agit de vider une baie de stockage, qui est équipée de protections supplémentaires. L’astronaute peut alors s’y abriter. Étant en apesanteur, pour éviter qu’une poche de CO2 se forme et stagne au niveau de l’astronaute abrité, le cordon ombilical de sa combinaison est utilisé pour créer une circulation d’air. Le test s’est déroulé sans encombre.</p>
       </div>
     ),
   },
@@ -395,25 +415,39 @@ export const survolItems: { question: string; answer: string | React.ReactNode }
     answer: "Ils ont battu le record parce qu'ils sont sur une orbite autour de la lune bien plus éloignée que les trajectoires permettant aux missions Apollos d'atterrir sur la Lune.",
   },
   {
-    question: "C’est quoi les cratères sur la Lune ?",
-    answer: "Les cratères lunaires sont des trous formés par des impacts de météorites, astéroïdes ou comètes. Comme la Lune n’a ni atmosphère (donc rien pour brûler les objets) ni vent ou pluie, les impacts restent visibles pendant des millions, voire des milliards d’années.",
+    question: "C’est quoi les cratères sur la Lune ? Combien sont recensées ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Les cratères lunaires sont des trous formés par des impacts de météorites, astéroïdes ou comètes. Comme la Lune n’a ni atmosphère (donc rien pour brûler les objets) ni vent ou pluie, les impacts restent visibles pendant des millions, voire des milliards d’années.</p>
+        <p>Combien de cratères lunaires sont recensées ?</p>
+        <p>Les cartes obtenues grâce aux missions spatiales montrent :</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>plus de 1,3 million de cratères de plus de 1 km de diamètre sur la Lune,</li>
+          <li>une grande partie se trouve sur la face cachée, qui possède moins de mers lunaires (zones lisses),</li>
+        </ul>
+        <p>Ces données proviennent notamment des observations de la mission Lunar Reconnaissance Orbiter de la NASA.</p>
+      </div>
+    ),
   },
   {
     question: "Quel est le type de sol présent sur la Lune ? Peut-on le comparer à de l’argile ?",
-    answer: "Le sol lunaire, appelé régolithe, n’est pas de l’argile. Il s’agit d’une fine poussière formée par des milliards d’années d’impacts de météorites qui ont broyé la roche. Contrairement à l’argile terrestre, il ne contient pas d’eau et ses particules sont très abrasives et irrégulières. En résumé, c’est une sorte de poudre minérale sèche, bien différente des sols que l’on trouve sur Terre.",
+    answer: "Le sol lunaire, appelé régolithe, n’est pas de l’argile. Il s’agit d’une fine poussière formée par des milliards d’années d’impacts de météorites qui ont broyé la roche. Contrairement à l’argile terrestre, il ne contient pas d’eau et ses particules sont très abrasives et irrégulières. En résumé, c’est une sorte de poudre minérale sèche, très fine, et bien différente des sols que l’on trouve sur Terre.",
   },
   {
     question: "De combien la capsule va-t-elle passer au plus proche de la Lune et quelle sera la distance maximale avec la Terre ?",
     answer: (
       <div className="space-y-2">
-        <p>La capsule a passé au plus proche de la Lune avec une altitude d'environ <strong className="text-foreground/80">6 500 km</strong> (atteint à MET 5j 0h 25min 34s — 1h02min34 heure française), pour une moyenne lors du survol d'environ 8 000 km.</p>
-        <p>La distance maximale avec la Terre a été franchie à MET 5j 0h 27min 39s (1h04min39 heure française) pour un total de <strong className="text-foreground/80">406 771 km</strong> — soit 252 756 miles, un nouveau record humain.</p>
+        <p>La capsule va passer au plus proche de la Lune avec une altitude d’environ 6 500 km (atteint à 5j 0h 25min 34s en temps de mission, 1h02min34s heure française) pour une moyenne lors du survol d’environ 8 000 km. La distance maximale avec la terre sera franchie à 5j 0h 27min 39s (1h04min39s heure française) en temps de mission pour un total de 406 771 km.</p>
       </div>
     ),
   },
   {
     question: "Pourquoi dit-on \"mer\" pour nommer certains endroits de la lune ?",
-    answer: "Parce qu'avant, on les a confondus avec des mers car ces zones paraissent plus sombres.",
+    answer: "Parce qu'avant (dans l’Antiquité notamment), on les a confondus avec des mers (d’eau) car ces zones paraissent plus sombres.",
+  },
+  {
+    question: "Comment va se passer la coupure de communication avec Orion ?",
+    answer: "Quand Orion passera derrière la Lune, la capsule sera coupée des communications avec Houston pour la raison suivante : il y aura la Lune entre elle et la Terre. Les communications se faisant par ondes radios, il est en effet nécessaire d’avoir une ligne de vue. Il y aura donc approximativement 40 minutes, voire 1h, de coupure.",
   },
 ];
 
@@ -437,7 +471,51 @@ export const retourItems: { question: string; answer: string | React.ReactNode }
   },
   {
     question: "Où les astronautes amerriront-ils ? Comment seront-ils récupérés ?",
-    answer: "Les astronautes devraient amerrir dans l'océan Pacifique au large de San Diego un peu après 02h00 (heure France métropolitaine) le 11 Avril. Ils seront récupérés par hélicoptère pour être amenés sur un porte-hélicoptère militaire des USA.",
+    answer: "Les astronautes devraient amerrir dans l'océan pacifique au large de San Diego un peu après 02h00 (heure France métropolitaine) le 11 Avril. Ils seront récupérés par hélicoptère pour être amenés sur un porte-hélicoptère militaire des USA.",
+  },
+  {
+    question: "Informations données par la NASA suite à la conférence de presse de la nuit du 8 au 9 avril :",
+    answer: (
+      <div className="space-y-2">
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>Entrée dans l’atmosphère avec une vitesse de 38 377 km/h (10,7 km/s), soit l’équivalent de 31,3 fois la vitesse du son au niveau du sol ! Mais non, le record d’apollo 10 (39 897 km/h, 11,1 km/s, 32,6 fois la vitesse du son au niveau du sol) ne sera pas battu ;</li>
+          <li>Vents et vague au moment de l’amerrissage : 10 noeuds (Vent) et 4 pieds/± 1.2m (Vagues) ;</li>
+          <li>Carburant du vaisseaux : rempli à 50% ;</li>
+          <li>Séparation entre Orion et le Module de Service Européen (ESM) : 42 min avant l’amerrissage ;</li>
+          <li>Début de la phase de rentrée à 122 km d’altitude ;</li>
+          <li>Pour ce qui est des efforts que vont subir les astronautes (nombre de G), il y a deux cas : Si la capsule suit la trajectoire nominale (= celle qui est prévue), il y aura des pics à 3,9G ; Si la capsule est contrainte pour X ou Y raisons de prendre une trajectoire de secours, les astronautes peuvent subir des pics jusqu’à 7,5G</li>
+        </ul>
+        <p>Pour rappel : Amerrissage prévu vers 2h06 heure française.</p>
+      </div>
+    ),
+  },
+  {
+    question: "La capsule rebondit-elle pour viser l’amerrissage ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Oui, mais différemment d’Artemis I.</p>
+        <p>Pour Artemis I, la capsule a rebondi pour perdre de la vitesse, est ressortie de l’atmosphère, puis est retombée (Skip Entry).</p>
+        <p>Du fait des problèmes identifiés sur le bouclier thermique, la rentrée pour Artemis II sera légèrement différente. Il y a toujours un rebond, mais sans sortir de l’atmosphère (Lofted Entry Sequence). Le but est de réduire la durée d’exposition aux températures élevées, en contrepartie d’une température maximale atteinte plus élevée.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Pourquoi ne pas faire une orbite de plus pour ralentir ?",
+    answer: (
+      <div className="space-y-2">
+        <p>Parce que :</p>
+        <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+          <li>pour faire une orbite de plus, il faut d’abord ralentir dans l’espace (sinon, le vaisseau repart vers la Lune) ;</li>
+          <li>une fois sur cette orbite, on ne ralentit pas plus ;</li>
+          <li>la vitesse orbitale resterait très élevée (~28 000 km/h).</li>
+        </ul>
+        <p>Ralentir pour se placer sur cette orbite demanderait beaucoup de carburant (delta-v important, autant que l’insertion sur la trajectoire vers la Lune), donc un vaisseau beaucoup plus gros, et donc une fusée encore plus grosse. On préfère donc rentrer directement dans l’atmosphère.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Dans quel ordre vont-ils sortir ? Qui les récupère ? Et la capsule ?",
+    answer: "Toujours d’après les infos de la NASA lors de la conférence de presse de la nuit du 8 au 9 avril : Il est prévu (sauf urgence médicale) que Christina Koch sorte la première, suivie de Victor Glover, puis Jeremy Hansen et enfin Reid Wiseman. Ils seront récupérés par la marine américaine tandis que la capsule sera récupérée par un hélicoptère puis transportée par un porte-hélicoptère.",
   },
 ];
 
@@ -448,7 +526,7 @@ export const lexiqueItems: { question: string; answer: string | React.ReactNode 
   },
   {
     question: "Albédo",
-    answer: "L'albédo est une mesure comprise entre 1 et 0 et sans unité permettant de mesurer la réflectivité d'un objet par rapport à la lumière qu'elle reçoit. Par exemple, une surface blanche a un plus grand albédo qu'une surface noire.",
+    answer: "L'albédo est une mesure comprise entre 1 et 0 et sans unité permettant de mesurer la réflectivité de la surface d'un objet par rapport à la lumière qu'elle reçoit. Par exemple, une surface blanche a une plus grande albédo qu'une surface noire. On peut cependant entendre des valeurs supérieures à 1 dans les communications : l’albédo mesuré est l'albédo dit “géométrique”, qui tient également compte de la direction de la réflexion. Un albédo géométrique supérieur à 1 indique que la surface réfléchit plus de lumière dans la direction de la source de lumière.",
   },
   {
     question: "Atterrir/Atterrissage et non Alunir/Alunissage !!!!!!!!!",
@@ -464,6 +542,12 @@ export const momentsCles = [
   { met: "02:00:37", label: "Moment de détente de l'équipage", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
   { met: "04:19:21", label: "Record de distance battu (Apollo 13)", link: "https://youtu.be/-TxtYUdOPOw?t=13339" },
   { met: "04:19:23", label: "Nommage de cratères (Integrity & Carroll)", link: "https://youtu.be/-TxtYUdOPOw?t=13439" },
+  { met: "05:00:25", label: "Survol au plus proche de la Lune (6500 km)", link: "https://www.youtube.com/live/pK-hXpE63jI?si=pUu0-XN7l5z6tY_U&t=3750" },
+  { met: "05:01:16", label: "Premières images de Levers de Terre", link: "https://www.youtube.com/live/pK-hXpE63jI?si=x_V9k7p2_z6vU_X-&t=4500" },
+  { met: "07:00:45", label: "Event avec le Canada", link: "https://www.youtube.com/live/L-SGXxhStAc?si=EddAPw80QK0CDoqm&t=15683" },
+  { met: "07:03:45", label: "Le show de Victor", link: "https://www.youtube.com/live/L-SGXxhStAc?si=J1JCN0cM50bjOt6J&t=25879" },
+  { met: "07:18:24", label: "Premier réveil sur le chemin du retour", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=19059" },
+  { met: "08:23:12", label: "Un lever de Terre mémorable", link: "https://www.youtube.com/live/pJBMGpt6n90?si=tNQ_cBFKvXUDukKz&t=21000" },
 ];
 
 export const ressourcesExtra = [

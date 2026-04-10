@@ -90,11 +90,7 @@ export const basesItemsEN = [
   },
   {
     question: "Can we see Artemis from Earth?",
-    answer: "No, not even with a telescope.",
-  },
-  {
-    question: "Why are their suits orange?",
-    answer: "So they can be easily spotted when they splash down in the water. They also have small life buoys for safety and can activate personal life rafts. We saw them entering the Orion capsule before liftoff.\nThis suit is only used for critical moments.",
+    answer: "No, not even with a telescope. Or at least no more than a few pixels, and only when the spacecraft is close enough to Earth and illuminated by the sun. And with a very good telescope.",
   },
   {
     question: "Why didn't the capsule aim for the Moon right from the start?",
@@ -115,10 +111,7 @@ export const basesItemsEN = [
       </ul>
     ),
   },
-  {
-    question: "How will the communications blackout with Orion play out?",
-    answer: "When Orion passes behind the Moon, the capsule will be cut off from Houston because the Moon will be between it and Earth. Since communications happen via radio waves, a line of sight is necessary. There will be roughly 40 minutes to an hour of blackout.",
-  },
+
   {
     question: "Why are the solar arrays mobile?",
     answer: (
@@ -366,6 +359,25 @@ export const diversItemsEN: { question: string; answer: string | React.ReactNode
     question: "Do rockets pollute a lot?",
     answer: "The SLS rocket core stage uses hydrogen + oxygen, emitting primarily water vapor. Boosters fall into the ocean and often form foundations for reefs. While production and toxic fuel in some components are concerns, modern space programs are increasingly attentive to environmental impact.",
   },
+  {
+    question: "What are the astronauts' Wake-Up Songs?",
+    answer: (
+      <div className="space-y-2">
+        <p>Details from the Artemis Tracker (artemis.cdnspace.ca):</p>
+        <ul className="list-none space-y-2 text-muted-foreground">
+          <li><strong>FD09 - Lonesome Drifter (Charley Crockett):</strong> Another drifting theme as Orion continues its long coast back to Earth.</li>
+          <li><strong>FD08 - Under Pressure (Queen &amp; David Bowie, 1981):</strong> Requested by Jeremy Hansen - A nod to the cabin depressurization and repressurization test scheduled for the day. Accompanied by a special message from the Canadian Space Agency.</li>
+          <li><strong>FD07 - Tokyo Drifting (Denzel Curry &amp; Glass Animals, 2020):</strong> Requested by Reid Wiseman - A fitting choice as the crew drifted away from the Moon on the return leg.</li>
+          <li><strong>FD06 - Good Morning (Mandisa &amp; TobyMac):</strong> Requested by Victor Glover - Woke the crew on lunar flyby day. Accompanied by a congratulatory message from Jim Lovell (Apollo 8/13), who congratulated the crew on breaking his distance record.</li>
+          <li><strong>FD05 - Working Class Heroes (CeeLo Green):</strong> Accompanied by a special wake-up message from Apollo 16 moonwalker Charlie Duke.</li>
+          <li><strong>FD04 - Pink Pony Club (Chappell Roan, 2020):</strong> Requested by Reid Wiseman - Mission control famously cut the audio after 'heels' — Commander Wiseman quipped 'We were all eagerly awaiting the chorus.'</li>
+          <li><strong>FD03 - In a Daydream (Freddy Jones Band, 1992):</strong> Classic 90s rock to start the first full day of deep space cruise.</li>
+          <li><strong>FD02 - Sleepyhead (Young and Sick):</strong> Requested by Christina Koch - Early morning wake-up call to end the first sleep period.</li>
+          <li><strong>FD02 - Green Light (John Legend feat. André 3000, 2024):</strong> Played as the crew prepared for the historic Trans-Lunar Injection burn.</li>
+        </ul>
+      </div>
+    ),
+  },
 ];
 
 export const bouclierItemsEN: { question: string; answer: string | React.ReactNode }[] = [
@@ -415,6 +427,10 @@ export const survolItemsEN: { question: string; answer: string | React.ReactNode
     question: "Why say \"sea\" for places on the Moon?",
     answer: "Early astronomers mistook these dark, lava-filled plains for bodies of water.",
   },
+  {
+    question: "How will the communications blackout with Orion play out?",
+    answer: "When Orion passes behind the Moon, the capsule will be cut off from Houston because the Moon will be between it and Earth. Since communications happen via radio waves, a line of sight is necessary. There will be roughly 40 minutes to an hour of blackout.",
+  },
 ];
 
 export const retourItemsEN: { question: string; answer: string | React.ReactNode }[] = [
@@ -452,6 +468,18 @@ export const retourItemsEN: { question: string; answer: string | React.ReactNode
         </ul>
       </div>
     ),
+  },
+  {
+    question: "Does the capsule bounce to aim for splashdown?",
+    answer: "No. The capsule performs a 'skip entry' (or lofted entry): it enters the atmosphere to burn off speed, using the atmosphere to brake, climbs back up slightly before doing its final descent. This allows it to fly further and target the splashdown zone precisely.",
+  },
+  {
+    question: "Why not do one more orbit to slow down?",
+    answer: "Given the speed at which it arrives, it could not enter orbit around Earth. It would either crash or bounce off the atmosphere and head back into deep space. The only way is to brake through the atmosphere (aerobraking) to shed speed before deploying the parachutes.",
+  },
+  {
+    question: "In what order will they exit? Who recovers them? And what about the capsule?",
+    answer: "They will be retrieved by Navy divers in small zodiac boats and brought onto the USS John P. Murtha (a U.S. Navy transport ship). They will exit the capsule through the top hatch since they are floating on water. First Christina Koch, then Victor Glover, followed by Jeremy Hansen and finally Reid Wiseman, the commander. There is an active debate on whether they should exit while still wearing their orange suits or in a different outfit. The capsule itself will be hauled into the flooded well deck of the ship and then brought back to land.",
   },
 ];
 
