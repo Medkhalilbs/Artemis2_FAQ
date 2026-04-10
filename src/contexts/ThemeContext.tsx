@@ -18,9 +18,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
-    if (theme === "light") {
-      root.classList.add("light");
-    }
+    root.classList.add(theme); // adds "dark" or "light" — required for Tailwind dark: utilities
     localStorage.setItem("theme", theme);
   }, [theme]);
 
