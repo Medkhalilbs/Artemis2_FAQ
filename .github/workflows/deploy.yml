@@ -15,10 +15,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - run: npm ci
 
-      - run: npm run build
+      - name: Build
+        run: npm run build
+        env:
+          VITE_GA_ID: ${{ secrets.VITE_GA_ID }} 
+
 
       - name: Add CNAME
         run: echo "artemis2.bindev.site" > dist/CNAME

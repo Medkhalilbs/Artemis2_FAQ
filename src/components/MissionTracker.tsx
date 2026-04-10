@@ -8,7 +8,7 @@ import { useState, useEffect, useMemo } from "react";
  * Closest approach: April 7, ~00:54 Paris → ~22:54 UTC April 6
  * Splashdown: April 11, ~02:06 Paris → ~00:06 UTC April 11
  */
-const LAUNCH_UTC = new Date("2026-04-02T18:00:00Z").getTime();
+const LAUNCH_UTC = new Date("2026-04-02T02:00:00Z").getTime(); // ✅ séparation ICCS réelle
 const EARTH_MOON_KM = 384_400;
 
 interface Waypoint {
@@ -17,32 +17,25 @@ interface Waypoint {
   speedKmh: number;
   phase: string;
 }
-
 const waypoints: Waypoint[] = [
-  { hoursFromLaunch: 0, distanceKm: 0, speedKmh: 28_000, phase: "Décollage 🚀" },
-  { hoursFromLaunch: 2, distanceKm: 1_800, speedKmh: 32_000, phase: "Orbite terrestre" },
-  { hoursFromLaunch: 24, distanceKm: 6_000, speedKmh: 34_000, phase: "Orbite terrestre (vérifications)" },
-  { hoursFromLaunch: 26, distanceKm: 15_000, speedKmh: 37_000, phase: "Injection translunaire (TLI) 🔥" },
-  { hoursFromLaunch: 36, distanceKm: 80_000, speedKmh: 12_000, phase: "Transit Terre → Lune" },
-  { hoursFromLaunch: 48, distanceKm: 140_000, speedKmh: 7_500, phase: "Transit Terre → Lune" },
-  { hoursFromLaunch: 60, distanceKm: 190_000, speedKmh: 5_500, phase: "Transit Terre → Lune" },
-  { hoursFromLaunch: 72, distanceKm: 240_000, speedKmh: 4_200, phase: "Transit Terre → Lune" },
-  { hoursFromLaunch: 84, distanceKm: 290_000, speedKmh: 3_500, phase: "Transit Terre → Lune" },
-  { hoursFromLaunch: 90, distanceKm: 330_000, speedKmh: 3_200, phase: "Sphère d'influence lunaire 🌑" },
-  { hoursFromLaunch: 96, distanceKm: 370_000, speedKmh: 3_800, phase: "Approche lunaire" },
-  { hoursFromLaunch: 100, distanceKm: 395_000, speedKmh: 5_200, phase: "Record Apollo 13 battu ! 🏆" },
-  { hoursFromLaunch: 103, distanceKm: 410_000, speedKmh: 7_500, phase: "Survol face cachée 🌑" },
-  { hoursFromLaunch: 104, distanceKm: 400_000, speedKmh: 8_200, phase: "Distance maximale de la Terre" },
-  { hoursFromLaunch: 105, distanceKm: 385_000, speedKmh: 7_000, phase: "Retour vers la Terre 🌍" },
-  { hoursFromLaunch: 115, distanceKm: 340_000, speedKmh: 4_000, phase: "Transit Lune → Terre" },
-  { hoursFromLaunch: 130, distanceKm: 280_000, speedKmh: 3_600, phase: "Transit Lune → Terre" },
-  { hoursFromLaunch: 150, distanceKm: 210_000, speedKmh: 4_200, phase: "Transit Lune → Terre" },
-  { hoursFromLaunch: 170, distanceKm: 140_000, speedKmh: 5_500, phase: "Transit Lune → Terre" },
-  { hoursFromLaunch: 190, distanceKm: 70_000, speedKmh: 9_000, phase: "Approche terrestre" },
-  { hoursFromLaunch: 198, distanceKm: 20_000, speedKmh: 28_000, phase: "Rentrée atmosphérique 🔥" },
-  { hoursFromLaunch: 200, distanceKm: 400, speedKmh: 35_000, phase: "Rentrée atmosphérique 🔥" },
-  { hoursFromLaunch: 201, distanceKm: 50, speedKmh: 500, phase: "Sous parachutes 🪂" },
-  { hoursFromLaunch: 201.5, distanceKm: 0, speedKmh: 30, phase: "Amerrissage ! 🌊" },
+  { hoursFromLaunch: 0, distanceKm: 7_675, speedKmh: 14_219, phase: "Séparation ICCS 🚀" },
+  { hoursFromLaunch: 7.5, distanceKm: 19_637, speedKmh: 27_719, phase: "Injection translunaire (TLI) 🔥" },
+  { hoursFromLaunch: 12, distanceKm: 33_000, speedKmh: 18_500, phase: "Transit Terre → Lune" },
+  { hoursFromLaunch: 25.4, distanceKm: 55_000, speedKmh: 36_385, phase: "Vitesse maximale ⚡" },
+  { hoursFromLaunch: 48, distanceKm: 140_000, speedKmh: 6_552, phase: "Transit Terre → Lune" },
+  { hoursFromLaunch: 72, distanceKm: 242_000, speedKmh: 5_292, phase: "Transit Terre → Lune" },
+  { hoursFromLaunch: 96, distanceKm: 347_000, speedKmh: 3_600, phase: "Approche sphère lunaire 🌑" },
+  { hoursFromLaunch: 110, distanceKm: 393_000, speedKmh: 1_800, phase: "Approche maximale" },
+  { hoursFromLaunch: 120.4, distanceKm: 413_140, speedKmh: 1_489, phase: "Distance max · Survol Lune 🌕" },
+  { hoursFromLaunch: 130, distanceKm: 388_000, speedKmh: 2_500, phase: "Retour vers la Terre 🌍" },
+  { hoursFromLaunch: 150, distanceKm: 320_000, speedKmh: 3_800, phase: "Transit Lune → Terre" },
+  { hoursFromLaunch: 170, distanceKm: 240_000, speedKmh: 5_200, phase: "Transit Lune → Terre" },
+  { hoursFromLaunch: 190, distanceKm: 150_000, speedKmh: 7_800, phase: "Transit Lune → Terre" },
+  { hoursFromLaunch: 194.5, distanceKm: 120_000, speedKmh: 9_200, phase: "Burn de retour RTC-3 🔥" },
+  { hoursFromLaunch: 205, distanceKm: 50_000, speedKmh: 22_000, phase: "Approche terrestre" },
+  { hoursFromLaunch: 212, distanceKm: 15_000, speedKmh: 36_000, phase: "Rentrée atmosphérique 🔥" },
+  { hoursFromLaunch: 214, distanceKm: 400, speedKmh: 2_000, phase: "Sous parachutes 🪂" },
+  { hoursFromLaunch: 215.0, distanceKm: 0, speedKmh: 30, phase: "Amerrissage ! 🌊" },
 ];
 
 function lerp(a: number, b: number, t: number) {
@@ -95,7 +88,7 @@ function getPositionAtTime(now: number) {
   const phase = t > 0.5 ? wp2.phase : wp1.phase;
 
   // Progress as fraction of max distance for visual
-  const maxDist = 410_000;
+  const maxDist = 413_140;  // ✅ valeur réelle JPL
   const progress = Math.min(distanceKm / maxDist, 1);
 
   return {
@@ -143,8 +136,8 @@ const MissionTracker = () => {
   const trackProgress = data.missionActive
     ? data.progress
     : data.beforeLaunch
-    ? 0
-    : 0;
+      ? 0
+      : 0;
 
   return (
     <section id="tracker" className="scroll-mt-24">
@@ -171,8 +164,8 @@ const MissionTracker = () => {
             {data.beforeLaunch
               ? `T- ${formatCountdown(countdown)}`
               : data.missionActive
-              ? `T+ ${formatCountdown(data.hoursElapsed * 3600 * 1000)}`
-              : "Mission complétée"}
+                ? `T+ ${formatCountdown(data.hoursElapsed * 3600 * 1000)}`
+                : "Mission complétée"}
           </span>
         </div>
 
