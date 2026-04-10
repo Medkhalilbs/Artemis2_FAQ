@@ -557,9 +557,13 @@ export interface LiveTelemetryResult {
     isError: boolean;
     lastRefresh: Date | null;
     error: Error | null;
+    effectivePoint: TelemetryPoint | null;
+    missionComplete: boolean;
 }
 
 export function useLiveTelemetry(): LiveTelemetryResult {
+    const missionComplete = Date.now() > new Date('2026-04-11T02:00:00Z').getTime();
+
     const {
         data,
         isLoading,
@@ -573,6 +577,7 @@ export function useLiveTelemetry(): LiveTelemetryResult {
         retry: 2,
         retryDelay: 5000,
         staleTime: 1_800_000,
+        enabled: !missionComplete,
     });
 
     let currentLivePoint: TelemetryPoint | null = null;
@@ -584,12 +589,16 @@ export function useLiveTelemetry(): LiveTelemetryResult {
         }
     }
 
+    const { currentPoint } = useStaticTelemetry();
+
     return {
         liveData: data ?? null,
         currentLivePoint,
+        effectivePoint: currentLivePoint ?? currentPoint,
         isLive: !isError && !isLoading && data != null && data.length > 0,
         isLoading,
         isError,
+        missionComplete,
         lastRefresh: dataUpdatedAt ? new Date(dataUpdatedAt) : null,
         error: error ?? null,
     };

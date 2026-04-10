@@ -40,7 +40,7 @@ export const MISSION_PHASES: MissionPhase[] = [
 
 export const PROXY_URL = "https://artemis-worker.medkhalilbs.workers.dev/";
 
-const LAUNCH_DATE = new Date("2026-04-01T22:35:00Z").getTime();
+export const LAUNCH_DATE = new Date("2026-04-02T02:00:00Z").getTime();
 
 export function getCurrentMET(): number {
     const now = new Date().getTime();
@@ -95,6 +95,10 @@ export function interpolateNow(data: TelemetryPoint[]): TelemetryPoint {
 }
 
 export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
+
+    if (Date.now() > new Date('2026-04-11T02:00:00Z').getTime()) {
+        throw new Error('Mission complete — using static data');
+    }
     const now = new Date();
     // Fetch a 48-hour window surrounding current time
     const start = new Date(now.getTime() - 24 * 3600 * 1000);
@@ -105,11 +109,11 @@ export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
     // COMMAND='301' (Moon) used as proxy for Artemis flight path demonstration
     const params = new URLSearchParams({
         format: 'json',
-        COMMAND: "'301'",
+        COMMAND: "-1024",
         OBJ_DATA: "'NO'",
         MAKE_EPHEM: "'YES'",
         EPHEM_TYPE: "'VECTOR'",
-        CENTER: "'500@399'",
+        CENTER: "500%40399",
         START_TIME: `'${fmtDate(start)}'`,
         STOP_TIME: `'${fmtDate(end)}'`,
         STEP_SIZE: "'1 h'",
@@ -118,14 +122,14 @@ export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
 
     const response = await fetch(`${PROXY_URL}?${params.toString()}`);
     if (!response.ok) throw new Error("Failed to fetch live telemetry from proxy");
-    
+
     const json = await response.json();
     if (json.error) throw new Error(json.error);
-    
+
     const lines = json.result.split(/\r?\n/);
     const startIdx = lines.findIndex((l: string) => l.includes('$$SOE'));
     const endIdx = lines.findIndex((l: string) => l.includes('$$EOE'));
-    
+
     if (startIdx === -1 || endIdx === -1) throw new Error("No ephemeris data found in response");
 
     const moonX = -320000;
@@ -137,23 +141,23 @@ export async function fetchLiveWindow(): Promise<TelemetryPoint[]> {
         if (!line) continue;
         const parts = line.split(',').map((s: string) => s.trim());
         if (parts.length < 8) continue;
-        
+
         // JDTDB, Calendar Date (TDB), X, Y, Z, VX, VY, VZ, LT, RG, RR
-        const dateStr = parts[1].replace('A.D. ', '').replace(' TDB', ''); 
-        
+        const dateStr = parts[1].replace('A.D. ', '').replace(' TDB', '');
+
         const x = parseFloat(parts[2]);
         const y = parseFloat(parts[3]);
         const z = parseFloat(parts[4]);
         const vx = parseFloat(parts[5]);
         const vy = parseFloat(parts[6]);
         const vz = parseFloat(parts[7]);
-        
+
         const dist_earth_km = parseFloat(parts[9]);
         const dist_earth_radii = dist_earth_km / 6378.14;
-        
-        const speed_kms = Math.sqrt(vx*vx + vy*vy + vz*vz);
+
+        const speed_kms = Math.sqrt(vx * vx + vy * vy + vz * vz);
         const speed_kmh = speed_kms * 3600;
-        
+
         const dist_moon_km = Math.sqrt(Math.pow(x - moonX, 2) + Math.pow(y - moonY, 2) + Math.pow(z, 2));
 
         const dateObj = new Date(dateStr);

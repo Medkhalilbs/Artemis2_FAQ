@@ -22,6 +22,7 @@ import {
     linearGradient,
     stop,
 } from "recharts";
+import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useStaticTelemetry, useLiveTelemetry } from "../hooks/useHorizons";
 import {
@@ -284,14 +285,7 @@ export default function Telemetry() {
                         {liveError && (
                             <div className="text-accent text-xs">Données statiques</div>
                         )}
-                        <a
-                            href={PROXY_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted-foreground/60 text-xs hover:text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] transition-colors"
-                        >
-                            {PROXY_URL.replace("https://", "")}
-                        </a>
+
                     </div>
                 </div>
 
@@ -366,8 +360,8 @@ export default function Telemetry() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold tracking-widest transition-all duration-200 ${activeTab === tab.id
-                                    ? "bg-primary/20 hover:bg-primary/30 text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] border border-primary/50"
-                                    : "text-muted-foreground/80 hover:text-foreground/90 hover:bg-muted/50"
+                                ? "bg-primary/20 hover:bg-primary/30 text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] border border-primary/50"
+                                : "text-muted-foreground/80 hover:text-foreground/90 hover:bg-muted/50"
                                 }`}
                         >
                             <span>{tab.icon}</span>
@@ -829,10 +823,10 @@ export default function Telemetry() {
                                                 <tr
                                                     key={pt.datetime}
                                                     className={`border-b border-border/30 transition-colors ${isCurrent
-                                                            ? "bg-primary/20 hover:bg-primary/30 border-primary/50"
-                                                            : globalIdx % 2 === 0
-                                                                ? "bg-card/60 backdrop-blur-md"
-                                                                : "bg-muted/30 backdrop-blur-md"
+                                                        ? "bg-primary/20 hover:bg-primary/30 border-primary/50"
+                                                        : globalIdx % 2 === 0
+                                                            ? "bg-card/60 backdrop-blur-md"
+                                                            : "bg-muted/30 backdrop-blur-md"
                                                         }`}
                                                 >
                                                     <td className="px-3 py-2 text-foreground/90 whitespace-nowrap tabular-nums">
@@ -892,8 +886,8 @@ export default function Telemetry() {
                                                 key={pageNum}
                                                 onClick={() => setPage(pageNum)}
                                                 className={`px-3 py-1.5 rounded-lg text-xs transition-colors ${pageNum === page
-                                                        ? "bg-primary/20 hover:bg-primary/30 text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] border border-primary/50"
-                                                        : "bg-muted/50 text-muted-foreground hover:bg-gray-700"
+                                                    ? "bg-primary/20 hover:bg-primary/30 text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] border border-primary/50"
+                                                    : "bg-muted/50 text-muted-foreground hover:bg-gray-700"
                                                     }`}
                                             >
                                                 {pageNum + 1}
@@ -921,14 +915,6 @@ export default function Telemetry() {
                     <p className="text-muted-foreground/60 text-xs">
                         Dernière mise à jour: {fmtUTC(nowUTC)}
                     </p>
-                    <a
-                        href={`${PROXY_URL}/?format=json&COMMAND=-1024&EPHEM_TYPE=VECTORS&CENTER=500%40399&START_TIME=2026-04-10&STOP_TIME=2026-04-11&STEP_SIZE=1h`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] hover:text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] text-xs transition-colors underline underline-offset-2"
-                    >
-                        Accès direct API Horizons →
-                    </a>
                 </footer>
             </main>
         </div>
