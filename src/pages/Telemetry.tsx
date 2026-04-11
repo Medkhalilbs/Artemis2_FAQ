@@ -1,7 +1,6 @@
-// ============================================================
+
 // Telemetry.tsx
-// Artemis II — Mission Control Dashboard
-// ============================================================
+// Artemis II — Mission Control Dashboard
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
@@ -20,6 +19,7 @@ import {
     ReferenceLine,
 } from "recharts";
 import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useStaticTelemetry, useLiveTelemetry } from "../hooks/useHorizons";
 import {
@@ -226,16 +226,25 @@ export default function Telemetry() {
     return (
         <div className="min-h-screen bg-background text-foreground font-mono">
 
-            {/* ── STICKY HEADER ──────────────────────────────────── */}
+            {}
             <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50 backdrop-blur-md border-b border-border/40">
                 <div className="max-w-screen-2xl mx-auto px-4 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
 
-                    {/* Logo */}
-                    <div className="flex items-center gap-3">
-                        <span className="text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] text-2xl font-bold tracking-widest">◈</span>
-                        <div>
-                            <div className="text-foreground font-bold text-lg tracking-wider">ARTEMIS II</div>
-                            <div className="text-muted-foreground text-xs tracking-widest">MISSION CONTROL</div>
+                    {/* Back & Logo */}
+                    <div className="flex items-center gap-4">
+                        <Link 
+                            to="/" 
+                            className="flex items-center justify-center p-2 rounded-full bg-muted/40 hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 border border-transparent hover:border-primary/30"
+                            title="Retour à l'accueil"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </Link>
+                        <div className="flex items-center gap-3">
+                            <span className="text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)] text-2xl font-bold tracking-widest">◈</span>
+                            <div>
+                                <div className="text-foreground font-bold text-lg tracking-wider">ARTEMIS II</div>
+                                <div className="text-muted-foreground text-xs tracking-widest">MISSION CONTROL</div>
+                            </div>
                         </div>
                     </div>
 
@@ -297,7 +306,7 @@ export default function Telemetry() {
 
             <main className="max-w-screen-2xl mx-auto px-4 py-6 space-y-6">
 
-                {/* ── KPI CARDS ────────────────────────────────────── */}
+                {}
                 <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
 
                     {/* Distance Terre */}
@@ -350,7 +359,7 @@ export default function Telemetry() {
                     </div>
                 </section>
 
-                {/* ── TAB NAVIGATION ───────────────────────────────── */}
+                {}
                 <nav className="flex gap-1 bg-card/40 backdrop-blur-xl border border-border/40 shadow-[0_4px_30px_rgb(0,0,0,0.1)] transition-all duration-300 hover:shadow-lg hover:bg-card/60 rounded-xl p-1">
                     {TABS.map((tab) => (
                         <button
@@ -367,7 +376,7 @@ export default function Telemetry() {
                     ))}
                 </nav>
 
-                {/* ── TAB 1: DISTANCES ─────────────────────────────── */}
+                {}
                 {activeTab === "distances" && (
                     <section className="space-y-6">
                         <div className="bg-card/40 backdrop-blur-xl border border-border/40 shadow-[0_4px_30px_rgb(0,0,0,0.1)] transition-all duration-300 hover:shadow-lg hover:bg-card/60 rounded-xl p-4">
@@ -461,7 +470,7 @@ export default function Telemetry() {
                     </section>
                 )}
 
-                {/* ── TAB 2: VITESSE ───────────────────────────────── */}
+                {}
                 {activeTab === "vitesse" && (
                     <section className="space-y-6">
                         <div className="bg-card/40 backdrop-blur-xl border border-border/40 shadow-[0_4px_30px_rgb(0,0,0,0.1)] transition-all duration-300 hover:shadow-lg hover:bg-card/60 rounded-xl p-4">
@@ -579,7 +588,7 @@ export default function Telemetry() {
                     </section>
                 )}
 
-                {/* ── TAB 3: TRAJECTOIRE ───────────────────────────── */}
+                {}
                 {activeTab === "trajectoire" && (
                     <section className="space-y-6">
                         <div className="bg-card/40 backdrop-blur-xl border border-border/40 shadow-[0_4px_30px_rgb(0,0,0,0.1)] transition-all duration-300 hover:shadow-lg hover:bg-card/60 rounded-xl p-4">
@@ -743,7 +752,7 @@ export default function Telemetry() {
                     </section>
                 )}
 
-                {/* ── TAB 4: DONNÉES ───────────────────────────────── */}
+                {}
                 {activeTab === "donnees" && (
                     <section className="space-y-4">
 
@@ -904,7 +913,7 @@ export default function Telemetry() {
                     </section>
                 )}
 
-                {/* ── FOOTER ───────────────────────────────────────── */}
+                {}
                 <footer className="border-t border-border/40 pt-6 pb-4 text-center space-y-2">
                     <p className="text-muted-foreground/80 text-xs">
                         Source: NASA/JPL Horizons API · Proxy: Cloudflare Workers · Données toutes les 30 min

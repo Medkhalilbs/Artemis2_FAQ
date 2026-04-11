@@ -59,8 +59,6 @@ const partColors: Record<string, string> = {
   solar: "#1e3a5f",
 };
 
-/* ── Procedural textures ─────────────────────────────── */
-
 function useCrewTexture() {
   return useMemo(() => {
     const canvas = document.createElement("canvas");
@@ -129,7 +127,11 @@ function useHeatshieldTexture() {
           const angle = (Math.PI / 3) * k - Math.PI / 6;
           const px = ox + 7 * Math.cos(angle);
           const py = oy + 7 * Math.sin(angle);
-          k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+          if (k === 0) {
+            ctx.moveTo(px, py);
+          } else {
+            ctx.lineTo(px, py);
+          }
         }
         ctx.closePath();
         ctx.stroke();
@@ -214,8 +216,6 @@ function useSolarTexture() {
     return tex;
   }, []);
 }
-
-/* ── Interactive Part ─────────────────────────────── */
 
 function InteractivePart({
   geometry,
@@ -314,8 +314,6 @@ function InteractivePart({
   );
 }
 
-/* ── Solar Panel ─────────────────────────────── */
-
 function SolarPanel({ position, rotation, activePart, setActivePart, solarTex }: {
   position: [number, number, number];
   rotation: [number, number, number];
@@ -356,8 +354,6 @@ function SolarPanel({ position, rotation, activePart, setActivePart, solarTex }:
   );
 }
 
-/* ── Engine Exhaust Glow ─────────────────────────────── */
-
 function EngineGlow() {
   const ref = useRef<THREE.PointLight>(null);
   useFrame((state) => {
@@ -367,8 +363,6 @@ function EngineGlow() {
   });
   return <pointLight ref={ref} position={[0, -6.8, 0]} color="#ff6a00" intensity={0.3} distance={5} />;
 }
-
-/* ── Main Scene ─────────────────────────────── */
 
 function OrionScene() {
   const [activePart, setActivePart] = useState<string | null>(null);
@@ -533,8 +527,6 @@ function OrionScene() {
     </>
   );
 }
-
-/* ── Component ─────────────────────────────── */
 
 const OrionModel3D = () => {
   const { language } = useLanguage();

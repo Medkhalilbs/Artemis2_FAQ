@@ -1,7 +1,6 @@
-// ============================================================
+
 // useHorizons.ts
-// Artemis II — React Query hooks for telemetry data
-// ============================================================
+// Artemis II — React Query hooks for telemetry data
 
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";

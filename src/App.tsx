@@ -1,7 +1,6 @@
-// ============================================================
+
 // App.tsx
-// Artemis II — Root application with routing and floating Live button
-// ============================================================
+// Artemis II — Root application with routing and floating Live button
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";

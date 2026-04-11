@@ -41,9 +41,6 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ─────────────────────────────────────────────────────────
-   Types
-───────────────────────────────────────────────────────── */
 interface FAQItem {
   question: string;
   answer: string | React.ReactNode;
@@ -57,9 +54,6 @@ interface FAQSectionProps {
   searchQuery?: string;
 }
 
-/* ─────────────────────────────────────────────────────────
-   Highlight helper
-───────────────────────────────────────────────────────── */
 function highlightQuery(
   node: React.ReactNode,
   query?: string
@@ -97,9 +91,6 @@ function highlightQuery(
   return node;
 }
 
-/* ─────────────────────────────────────────────────────────
-   Reading time helper (~200 wpm)
-───────────────────────────────────────────────────────── */
 function getReadingTime(answer: string | React.ReactNode): string {
   let text = "";
   if (typeof answer === "string") {
@@ -111,7 +102,7 @@ function getReadingTime(answer: string | React.ReactNode): string {
       if (typeof node === "number") return String(node);
       if (Array.isArray(node)) return node.map(extract).join(" ");
       if (React.isValidElement(node))
-        return extract((node.props as any).children);
+        return extract((node.props as { children?: React.ReactNode }).children);
       return "";
     };
     text = extract(answer);
@@ -121,19 +112,13 @@ function getReadingTime(answer: string | React.ReactNode): string {
   return mins === 1 ? "~1 min read" : `~${mins} min read`;
 }
 
-/* ─────────────────────────────────────────────────────────
-   Font size config
-───────────────────────────────────────────────────────── */
 const FONT_SIZES = [
-  { label: "XS", prose: "prose-sm",   bodySize: "text-sm",   lineH: "leading-relaxed" },
-  { label: "S",  prose: "prose-base", bodySize: "text-base",  lineH: "leading-loose"   },
-  { label: "M",  prose: "prose-lg",   bodySize: "text-lg",   lineH: "leading-[1.85]"  },
-  { label: "L",  prose: "prose-xl",   bodySize: "text-xl",   lineH: "leading-[1.9]"   },
+  { label: "XS", prose: "prose-sm", bodySize: "text-sm", lineH: "leading-relaxed" },
+  { label: "S", prose: "prose-base", bodySize: "text-base", lineH: "leading-loose" },
+  { label: "M", prose: "prose-lg", bodySize: "text-lg", lineH: "leading-[1.85]" },
+  { label: "L", prose: "prose-xl", bodySize: "text-xl", lineH: "leading-[1.9]" },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   Icon tooltip wrapper
-───────────────────────────────────────────────────────── */
 function ToolBtn({
   onClick,
   label,
@@ -156,8 +141,8 @@ function ToolBtn({
   const cls = danger
     ? `${base} bg-red-50 border-red-200 text-red-400 hover:bg-red-100 hover:text-red-500 hover:border-red-300 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400/70 dark:hover:bg-red-500/20 dark:hover:text-red-400 dark:hover:border-red-500/40`
     : active
-    ? `${base} bg-blue-100 border-blue-300 text-blue-600 shadow-[0_0_12px_rgba(59,130,246,0.25)] dark:bg-blue-500/20 dark:border-blue-400/50 dark:text-blue-400 dark:shadow-[0_0_12px_rgba(59,130,246,0.2)]`
-    : `${base} bg-slate-100 border-slate-200 text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 dark:hover:border-blue-600/40`;
+      ? `${base} bg-blue-100 border-blue-300 text-blue-600 shadow-[0_0_12px_rgba(59,130,246,0.25)] dark:bg-blue-500/20 dark:border-blue-400/50 dark:text-blue-400 dark:shadow-[0_0_12px_rgba(59,130,246,0.2)]`
+      : `${base} bg-slate-100 border-slate-200 text-slate-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-blue-900/30 dark:hover:text-blue-400 dark:hover:border-blue-600/40`;
   return (
     <button onClick={onClick} aria-label={label} title={title ?? label} disabled={disabled} className={cls}>
       {children}
@@ -168,14 +153,8 @@ function ToolBtn({
   );
 }
 
-/* ─────────────────────────────────────────────────────────
-   Slide direction type
-───────────────────────────────────────────────────────── */
 type Dir = "left" | "right" | "none";
 
-/* ─────────────────────────────────────────────────────────
-   Main component
-───────────────────────────────────────────────────────── */
 const FAQSection = ({ title, icon, items, id, searchQuery = "" }: FAQSectionProps) => {
   const [activeLectureIndex, setActiveLectureIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<Dir>("none");
@@ -189,9 +168,9 @@ const FAQSection = ({ title, icon, items, id, searchQuery = "" }: FAQSectionProp
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
 
-  const listRef   = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const autoRef   = useRef<ReturnType<typeof setInterval> | null>(null);
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const listSearchRef = useRef<HTMLInputElement>(null);
 
   const fs = FONT_SIZES[fontSizeIdx];
@@ -530,18 +509,16 @@ const FAQSection = ({ title, icon, items, id, searchQuery = "" }: FAQSectionProp
                                   setActiveLectureIndex(i);
                                   setShowList(false);
                                 }}
-                                className={`w-full text-left px-3 py-2.5 rounded-xl text-[13px] leading-snug transition-all duration-200 flex items-start gap-3 ${
-                                  i === activeLectureIndex
+                                className={`w-full text-left px-3 py-2.5 rounded-xl text-[13px] leading-snug transition-all duration-200 flex items-start gap-3 ${i === activeLectureIndex
                                     ? "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 font-semibold"
                                     : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-slate-100"
-                                }`}
+                                  }`}
                               >
                                 <span
-                                  className={`tabular-nums text-[11px] font-mono mt-0.5 shrink-0 ${
-                                    i === activeLectureIndex
+                                  className={`tabular-nums text-[11px] font-mono mt-0.5 shrink-0 ${i === activeLectureIndex
                                       ? "text-blue-500 dark:text-blue-400"
                                       : "text-slate-400 dark:text-slate-600"
-                                  }`}
+                                    }`}
                                 >
                                   {String(i + 1).padStart(2, "0")}
                                 </span>
@@ -611,10 +588,10 @@ const FAQSection = ({ title, icon, items, id, searchQuery = "" }: FAQSectionProp
                 >
                   <div className="flex flex-wrap gap-x-6 gap-y-1 px-7 py-3 text-[11px] text-slate-500 dark:text-slate-500 font-mono">
                     {[
-                      ["← / →",   "Previous / Next"],
-                      ["Home",    "First question"],
-                      ["End",     "Last question"],
-                      ["Esc",     "Close"],
+                      ["← / →", "Previous / Next"],
+                      ["Home", "First question"],
+                      ["End", "Last question"],
+                      ["Esc", "Close"],
                     ].map(([key, desc]) => (
                       <span key={key} className="flex items-center gap-1.5">
                         <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300">

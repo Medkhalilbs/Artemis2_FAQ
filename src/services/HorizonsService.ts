@@ -1,7 +1,6 @@
-// ============================================================
+
 // HorizonsService.ts
 // Artemis II — Data fetching and interpolations
-// ============================================================
 
 export interface TelemetryPoint {
     datetime: string;
