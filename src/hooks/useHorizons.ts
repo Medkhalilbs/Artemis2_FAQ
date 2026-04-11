@@ -3,6 +3,7 @@
 // Artemis II — React Query hooks for telemetry data
 // ============================================================
 
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
     type TelemetryPoint,
@@ -517,15 +518,55 @@ export function useStaticTelemetry(): StaticTelemetryResult {
     const missionProgress = Math.min(1, Math.max(0, metNow / MISSION_DURATION_HOURS));
     const isComplete = metNow >= MISSION_DURATION_HOURS;
 
+    const [dataset, setDataset] = useState<TelemetryPoint[]>(STATIC_DATA);
+
+    useEffect(() => {
+        fetch("/artemis2_trajectory.csv")
+            .then((r) => {
+                if (!r.ok) throw new Error("CSV not found");
+                return r.text();
+            })
+            .then((csv) => {
+                const lines = csv.split(/\r?\n/);
+                const points: TelemetryPoint[] = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    const parts = line.split(",");
+                    if (parts.length < 14) continue;
+                    points.push({
+                        datetime: parts[0],
+                        met_hours: parseFloat(parts[1]),
+                        met_label: parts[2],
+                        x: parseFloat(parts[3]),
+                        y: parseFloat(parts[4]),
+                        z: parseFloat(parts[5]),
+                        vx: parseFloat(parts[6]),
+                        vy: parseFloat(parts[7]),
+                        vz: parseFloat(parts[8]),
+                        dist_earth_km: parseFloat(parts[9]),
+                        dist_earth_radii: parseFloat(parts[10]),
+                        dist_moon_km: parseFloat(parts[11]),
+                        speed_kms: parseFloat(parts[12]),
+                        speed_kmh: parseFloat(parts[13]),
+                    });
+                }
+                if (points.length > 0) {
+                    setDataset(points);
+                }
+            })
+            .catch((e) => console.error("Failed to load CSV, using static 30 points fallback:", e));
+    }, []);
+
     let currentPoint: TelemetryPoint | null = null;
     let currentIndex = 0;
 
-    if (STATIC_DATA.length > 0) {
+    if (dataset.length > 0) {
         try {
-            currentPoint = interpolateNow(STATIC_DATA);
+            currentPoint = interpolateNow(dataset);
             // Find nearest index for row highlighting
             let minDiff = Infinity;
-            STATIC_DATA.forEach((pt, idx) => {
+            dataset.forEach((pt, idx) => {
                 const diff = Math.abs(pt.met_hours - metNow);
                 if (diff < minDiff) {
                     minDiff = diff;
@@ -533,13 +574,13 @@ export function useStaticTelemetry(): StaticTelemetryResult {
                 }
             });
         } catch {
-            currentPoint = STATIC_DATA[0];
+            currentPoint = dataset[0];
             currentIndex = 0;
         }
     }
 
     return {
-        data: STATIC_DATA,
+        data: dataset,
         currentPoint,
         currentIndex,
         missionProgress,
